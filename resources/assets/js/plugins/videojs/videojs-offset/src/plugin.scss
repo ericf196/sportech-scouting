@@ -1,0 +1,9 @@
+// Sass for videojs-dncoffset
+
+.video-js {
+
+  // This class is added to the video.js element by the plugin by default.
+  &.vjs-dncoffset {
+    display: block;
+  }
+}

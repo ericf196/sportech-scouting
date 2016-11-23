@@ -1,0 +1,14 @@
+{
+  "name": "videojs-dncoffset",
+  "author": "Pedro Gorrin &lt;pedro.gorrin@ngncloud.com&gt;",
+  "license": "MIT",
+  "main": [
+    "dist/videojs-dncoffset.css",
+    "dist/videojs-dncoffset.min.js"
+  ],
+  "keywords": [
+    "videojs",
+    "videojs-plugin"
+  ]
+}
+

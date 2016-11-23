@@ -1,0 +1,34 @@
+// Fonts
+//@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+// Variables
+@import "variables";
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "libs/vis/vis.min";
+@import "libs/vis/vis-timeline-graph2d.min";
+@import "libs/videojs/video-js";
+@import "components/forms/actionForm";
+@import "components/navbars/navbarXs";
+
+.main-content {
+  margin-top: 50px;
+  padding-top: 20px;
+}
+
+.btn-action {
+  line-height: 1 !important;
+}
+
+.action-link {
+  padding: 0;
+  line-height: 17px;
+  color: black;
+}
+
+.input-group-addon {
+  color: #555 !important;
+}
+
+input {
+  color: #555 !important;
+}
