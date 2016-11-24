@@ -75,6 +75,18 @@
                                         10 s
                                     </button>
                                 </li>
+                                <li>
+                                    <button href="#" id="moveTl" class="btn btn-link" v-on:click="moveTl"><i
+                                                class="fa fa-fast-forward"></i>
+                                       move Tl
+                                    </button>
+                                </li>
+                                <li>
+                                    <button href="#" id="moveTl" class="btn btn-link" v-on:click="toogleTl"><i
+                                                class="fa fa-fast-forward"></i>
+                                        toogle Tl
+                                    </button>
+                                </li>
                             </ul>
 
                         </div><!-- /.navbar-collapse -->
@@ -98,21 +110,21 @@
 
 </div>
 @include('layouts.footer.footer')
-<script id="action-dropdown" type="text/template">
-    <div class="btn-group btn-action">
-        <button type="button" class="btn btn-link action-link dropdown-toggle" data-toggle="dropdown"
+<script id="touch-dropdown" type="text/template">
+    <div class="btn-group btn-touch">
+        <button type="button" class="btn btn-link touch-link dropdown-toggle" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-gear"></i>
         </button>
         <ul class="dropdown-menu">
             <li>
-                <a href="#" class="editAction">Edit</a>
+                <a href="#" class="editTouch">Edit</a>
             </li>
             <li>
-                <a href="#" class="addSubAction">Add SubAction</a>
+                <a href="#" class="addSubTouch">Add SubTouch</a>
             </li>
             <li>
-                <a href="#" class="loopVideo">Loop this action</a>
+                <a href="#" class="loopVideo">Loop this touch</a>
             </li>
         </ul>
     </div>
@@ -135,10 +147,10 @@
         </div><!-- /.navbar-collapse -->
     </nav>
 </script>
-<script id="action-inspector-toolbar" type="text/template">
+<script id="touch-inspector-toolbar" type="text/template">
     <nav class="navbar navbar-default navbar-xs" role="navigation">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Action Inspector</a>
+            <a class="navbar-brand" href="#">Touch Inspector</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

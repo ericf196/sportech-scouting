@@ -7,7 +7,7 @@
 @import "libs/vis/vis.min";
 @import "libs/vis/vis-timeline-graph2d.min";
 @import "libs/videojs/video-js";
-@import "components/forms/actionForm";
+@import "components/forms/touchForm";
 @import "components/navbars/navbarXs";
 
 .main-content {
@@ -15,11 +15,11 @@
   padding-top: 20px;
 }
 
-.btn-action {
+.btn-touch {
   line-height: 1 !important;
 }
 
-.action-link {
+.touch-link {
   padding: 0;
   line-height: 17px;
   color: black;

@@ -1,11 +1,6 @@
 export default class Stage {
     setup() {
-        var menu = p.select('#toolbar');
-        var menuEl = p.createDiv(menu.html());
-        var canvaContainer = p.select('#timeline');
-        canvaContainer.child(menuEl);
-        menuEl.position(canvaContainer.position().x, canvaContainer.position().y);
-        menuEl.size(p.width, 30)
+
     }
 
     draw() {

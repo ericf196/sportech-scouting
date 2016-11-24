@@ -3,7 +3,7 @@ import SecondsUtil from '../utils/SecondsUtil'
 import TimeConverter from '../utils/TimeConverter'
 import {getState, dispatch} from 'mockstate';
 
-export default class Action {
+export default class Touch {
     constructor(start, end, text, color) {
         this.state = getState('*');
         var uuid = new UuidUtil();
@@ -27,12 +27,11 @@ export default class Action {
         this.newWidth = 0;
         this.offsetX = 0;
         this.offsetY = 0;
-        this.state.timeline.startY = 30;
         this.limitTextY = 30 + this.state.timeline.startY;
         this.isResizeLeft = false;
         this.isResizeRight = false;
         this.secondsUtil = new SecondsUtil();
-        this.actionMenu = null
+        this.touchMenu = null
     }
 
     draw() {
@@ -40,27 +39,27 @@ export default class Action {
         this.y = this.y ? this.y : this.calculateY();
         this.width = this.calculateWidth();
         this.height = this.calculateHeight();
-        if (!this.actionMenu) {
-            var actionTemplate = p.select('#action-dropdown');
-            this.actionMenu = p.createDiv(actionTemplate.html());
-            this.actionMenu.id('edit-action-' + this.id);
+        if (!this.touchMenu) {
+            var touchTemplate = p.select('#touch-dropdown');
+            this.touchMenu = p.createDiv(touchTemplate.html());
+            this.touchMenu.id('edit-touch-' + this.id);
             var canvaContainer = p.select('#timeline');
-            canvaContainer.child(this.actionMenu);
-            var editBtn = p.select('.editAction', this.actionMenu);
-            var addSubActionBtn = p.select('.addSubAction', this.actionMenu);
-            var loopVideoBtn = p.select('.loopVideo', this.actionMenu);
-            var action = this;
+            canvaContainer.child(this.touchMenu);
+            var editBtn = p.select('.editTouch', this.touchMenu);
+            var addSubTouchBtn = p.select('.addSubTouch', this.touchMenu);
+            var loopVideoBtn = p.select('.loopVideo', this.touchMenu);
+            var touch = this;
             editBtn.mousePressed((event)=> {
-                action.editPressed(action, event)
+                touch.editPressed(touch, event)
             });
         }
-        var actionMenuPosition = this.x + this.width - 11;
-        this.actionMenu.position(actionMenuPosition, this.y);
+        var touchMenuPosition = this.x + this.width - 11;
+        this.touchMenu.position(touchMenuPosition, this.y);
 
-        if (actionMenuPosition - 14 < this.state.timeline.startX || actionMenuPosition > this.state.canvas.width) {
-            this.actionMenu.hide();
+        if (touchMenuPosition - 14 < this.state.timeline.startX || touchMenuPosition > this.state.canvas.width) {
+            this.touchMenu.hide();
         } else {
-            this.actionMenu.show();
+            this.touchMenu.show();
         }
 
         if (this.isSelected) {
@@ -99,10 +98,10 @@ export default class Action {
         }
     }
 
-    editPressed(action, event) {
+    editPressed(touch, event) {
         event.preventDefault();
-        dispatch('setSelectedAction', action);
-        vm.editTouch(event, action);
+        dispatch('setSelectedTouch', touch);
+        vm.editTouch(event, touch);
     }
 
     isMouseOver(x, y) {

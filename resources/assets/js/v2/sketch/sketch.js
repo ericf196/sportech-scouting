@@ -1,7 +1,7 @@
 import Stage from './components/ui/Stage'
 import Timeline from './components/ui/Timeline'
-import ActionManager from './components/actions/ActionManager'
-import ActionInspector from './components/actions/ActionInspector'
+import TouchManager from './components/touches/TouchManager'
+import TouchInspector from './components/touches/TouchInspector'
 import VideoTimeMarker from './components/ui/VideoTimeMarker'
 import {getState, dispatch} from 'mockstate';
 
@@ -17,15 +17,15 @@ export default function sketch(p) {
         state.canvas.instance.parent('timeline');
         var stage = new Stage();
         dispatch('setStage', stage);
-        var timeline = new Timeline();
+        var timeline = new Timeline(230, 120);
         dispatch('setTimeline', timeline);
-        var actionManager = new ActionManager([]);
-        dispatch('setActionManager', actionManager);
+        var touchManager = new TouchManager([]);
+        dispatch('setTouchManager', touchManager);
         var videoTimeMarker = new VideoTimeMarker();
         dispatch('setVideoMarker', videoTimeMarker);
 
-        var actionInspector = new ActionInspector();
-        dispatch('setActionInspector', actionInspector);
+        //var touchInspector = new TouchInspector();
+        //dispatch('setTouchInspector', touchInspector);
 
         state.stage.instance.setup();
         p.colorMode(p.RGB, 255, 255, 255, 100)
@@ -44,8 +44,8 @@ export default function sketch(p) {
     p.draw = function () {
         state.stage.instance.draw();
         state.timeline.instance.draw();
-        state.actionManager.instance.draw();
-        state.actionManager.actionInspector.instance.draw();
+        state.touchManager.instance.draw();
+       // state.touchManager.touchInspector.instance.draw();
     };
 
     function configButtons() {
@@ -73,8 +73,8 @@ export default function sketch(p) {
 
     p.mouseMoved = function () {
         if (state) {
-            if (state.actionManager.instance) {
-                state.actionManager.instance.mouseOverAction(p.mouseX, p.mouseY);
+            if (state.touchManager.instance) {
+                state.touchManager.instance.mouseOverTouch(p.mouseX, p.mouseY);
             }
             state.timeline.instance.mouseOver();
             p.redraw();
@@ -87,20 +87,20 @@ export default function sketch(p) {
     };
 
     p.mousePressed = function () {
-        if (state.actionManager.instance) {
-            state.actionManager.instance.mousePressedAction(p.mouseX, p.mouseY)
+        if (state.touchManager.instance) {
+            state.touchManager.instance.mousePressedTouch(p.mouseX, p.mouseY)
         }
     }
 
     p.mouseReleased = function () {
-        if (state.actionManager.instance) {
-            state.actionManager.instance.endMouseDraggedAction()
+        if (state.touchManager.instance) {
+            state.touchManager.instance.endMouseDraggedTouch()
         }
     };
 
-    function pRemoveAction() {
-        if (state.actionManager.instance.selectedAction) {
-            vm.removeAction(state.actionManager.instance.selectedAction)
+    function pRemoveTouch() {
+        if (state.touchManager.instance.selectedTouch) {
+            vm.removeTouch(state.touchManager.instance.selectedTouch)
         }
     }
 }

@@ -1,6 +1,6 @@
 require('./bootstrap');
 import dncPlayer from './components/global/video/player.vue';
-import Action from './sketch/components/actions/Action';
+import Touch from './sketch/components/touches/Touch';
 import sketch from './sketch/sketch'
 import {setState, setActions, getState, dispatch} from 'mockstate';
 import {actions} from './stores/actions'
@@ -67,20 +67,20 @@ window.vm = new Vue({
                 this.touch.end = Math.floor(this.$refs.player.api().currentTime());
             }
         },
-        editTouch(event, action){
-            this.touch = action;
+        editTouch(event, touch){
+            this.touch = touch;
             this.touch.edit = true;
         },
         saveNewTouch(touch){
-            var act = new Action(touch.start, touch.end, touch.text, touch.color);
-            dispatch('addAction', act);
+            var act = new Touch(touch.start, touch.end, touch.text, touch.color);
+            dispatch('addTouch', act);
             this.resetTouch();
         },
         cancelNewTouch(){
             this.resetTouch();
         },
         saveEditTouch(touch){
-            dispatch('editAction', touch);
+            dispatch('editTouch', touch);
             this.resetTouch();
         },
         cancelEditTouch(){
@@ -119,9 +119,15 @@ window.vm = new Vue({
                 this.$refs.player.api().currentTime(0);
             }
         },
-        removeAction(action){
-            if (action) {
-                dispatch('removeAction', action);
+        moveTl(){
+            dispatch('setTimelineStartY', 30);
+        },
+        toogleTl(){
+            dispatch('setTimelineHide', !getState('timeline').hide);
+        },
+        removeAction(touch){
+            if (touch) {
+                dispatch('removeTouch', touch);
             }
         }
     }

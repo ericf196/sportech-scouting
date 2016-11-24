@@ -1,10 +1,10 @@
 export const state = {
     initialized: false,
-    actionManager: {
+    touchManager: {
         instance: null,
-        actions: [],
-        selectedAction: null,
-        actionInspector: {
+        touches: [],
+        selectedTouch: null,
+        touchInspector: {
             instance: null,
             height: 0,
             width: 0,
@@ -27,6 +27,7 @@ export const state = {
         instance: null,
         width: 0,
         height: 0,
+        hide: false,
         startTime: 0,
         showSeconds: false,
         showSecondsInterval: false,

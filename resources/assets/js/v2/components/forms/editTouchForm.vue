@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form action="" v-on:submit.prevent="onSubmit" class="form-horizontal form-action" v-if="open">
+        <form action="" v-on:submit.prevent="onSubmit" class="form-horizontal form-touch" v-if="open">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group" :class="{'has-error': errors.has('touch.text') }">
@@ -227,16 +227,16 @@
             },
             checkCollide(){
                 var self = this;
-                var actions = _.reject(getState('actionManager').actions, function (o) {
+                var touches = _.reject(getState('touchManager').touches, function (o) {
                     return self.touch.id == o.id;
                 });
-                actions.push(this.touch);
-                var overlap = this.overlap(actions);
+                touches.push(this.touch);
+                var overlap = this.overlap(touches);
                 this.collide = overlap.overlap;
                 this.collideTouches = overlap.ranges;
             },
-            overlap(actions){
-                var sortedRanges = actions.sort((previous, current) => {
+            overlap(touches){
+                var sortedRanges = touches.sort((previous, current) => {
 
                     var previousTime = parseInt(previous.start);
                     var currentTime = parseInt(current.start);
