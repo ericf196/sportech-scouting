@@ -46,7 +46,17 @@
                 fluid: true,
                 source: self.source.sources[0],
                 techOrder: ['youtube'],
-                playbackRates: [0.5, 1, 1.5, 2],
+                playbackRates: [0.25, 0.5, 1, 1.5, 2],
+                plugins: {
+                    abLoopPlugin: {
+                        enabled: false,
+                        loopIfBeforeStart: false, //allow video to play normally before the loop section? defaults to true
+                        looopIfAfterEnd: true, // defaults to true
+                        pauseAfterLooping: false,       //if true, after looping video will pause. Defaults to false
+                        pauseBeforeLooping: false,      //if true, before looping video will pause. Defaults to false
+                        createButtons: false,  //defaults to true
+                    }
+                }
             };
             if (this.offset.start) {
                 config.plugins.dncoffset = {
@@ -56,10 +66,12 @@
             }
             this.player = videojs(this.$refs.player, config)
             dispatch('setPlayer', this.player);
+            this.player.playbackRate(1);
 
         },
         methods: {
-            api(){
+            api()
+            {
                 return this.player
             }
         }

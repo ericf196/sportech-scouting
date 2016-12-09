@@ -27,7 +27,13 @@ elixir((mix) => {
     mix.less('adminlte/skins/skin-blue.less', pathCss);
     mix.less('adminlte/skins/skin-black.less', pathCss);
     mix.sass('app.scss');
-    mix.webpack('/v2/app.js', require(webpackConfig), pathJs);
+    mix.webpack('/v3/app.js', require(webpackConfig), pathJs);
     mix.copy('node_modules/p5/lib/p5.min.js', pathJs + '/p5js/p5.min.js')
     mix.copy('node_modules/p5/lib/addons/p5.dom.js', pathJs + '/p5js/addons/p5.dom.js')
+    mix.scripts(['vendor/adminLte.js'], 'public/vendor/adminLte/adminLte.js')
+    mix.copy('node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js', 'public/vendor/bootstrap/bootstrap.min.js');
+    mix.copy('node_modules/videojs-externals/dist/videojs-externals.min.js', 'public/vendor/videojs/libs/videojs-externals.min.js');
+    mix.copy('node_modules/projectorjs/dist/js/projector.min.js', 'public/vendor/videojs/libs/projectorjs/projector.min.js');
+    mix.copy('node_modules/projectorjs/dist/css/projectorjs.min.css', 'public/vendor/videojs/libs/projectorjs/projectorjs.min.css');
+
 });

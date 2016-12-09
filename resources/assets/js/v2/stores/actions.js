@@ -28,7 +28,7 @@ export const actions = {
     setWidth(state, width){
         state.canvas.width = width;
         dispatch('setTimelineWidth', width);
-        dispatch('setTouchInspectorWidth', width);
+        dispatch('setInspectorWidth', width);
         return width;
     },
     setHeight(state, height){
@@ -144,25 +144,6 @@ export const actions = {
         state.touchManager.selectedTouch = touch;
         return touch;
     },
-    setTouchInspector(state, touchInspector){
-        state.touchManager.touchInspector.instance = touchInspector;
-        return touchInspector;
-    },
-    setTouchInspectorWidth(state, width){
-        state.touchManager.touchInspector.width = width;
-        return width;
-    },
-    setTouchInspectorHeight(state, height){
-        state.touchManager.touchInspector.height = height;
-        return height;
-    },
-    setTouchInspectorStartY(state, startY){
-        state.touchManager.touchInspector.startY = startY;
-        dispatch('setTouchInspectorTimelineStartY', startY + 151 + 50);
-        dispatch('setTouchInspectorHeight', startY + 300 - 4 - 50);
-        dispatch('setTouchInspectorTimelineEndY', startY + 300 - 4);
-        return startY;
-    },
     addTouch(state, touch){
         state.touchManager.touches.push(touch);
         return touch;
@@ -180,54 +161,92 @@ export const actions = {
     removeTouch(state, touch){
         var touchIndex = state.touchManager.touches.indexOf(touch);
         if (touchIndex > -1) {
-            state.touchManager.touches[touchIndex].touchMenu.remove();
+            if (state.touchManager.touches[touchIndex].touchMenu) {
+                state.touchManager.touches[touchIndex].touchMenu.remove();
+            }
             state.touchManager.touches.splice(touchIndex, 1);
         }
         return touch;
     },
 
-    setTouchInspectorTimelineStartTime(state, startTime){
-        state.touchManager.touchInspector.timeline.startTime = startTime;
+
+    //inspector
+    setInspector(state, inspector){
+        state.touchManager.inspector.instance = inspector;
+        return inspector;
+    },
+    setInspectorWidth(state, width){
+        state.touchManager.inspector.timeline.width = width;
+        return width;
+    },
+    setInspectorHeight(state, height){
+        state.touchManager.inspector.timeline.height = height;
+        dispatch('setInspectorEndY', state.touchManager.inspector.timeline.startY + height);
+
+        return height;
+    },
+    setInspectorCanvas(state, canvas){
+        state.touchManager.inspector.canvas.instance = canvas;
+        return canvas;
+    },
+    setInspectorCanvasWidth(state, width){
+        state.touchManager.inspector.canvas.width = width;
+        return width;
+    },
+    setInspectorCanvasHeight(state, height){
+        state.touchManager.inspector.canvas.height = height;
+        return height;
+    },
+    setInspectorStage(state, stage){
+        state.touchManager.inspector.stage.instance = stage;
+        return stage;
+    },
+    setInspectorTimeline(state, timeline){
+        state.touchManager.inspector.timeline.instance = timeline;
+        return timeline;
+    },
+    setInspectorStartTime(state, startTime){
+        state.touchManager.inspector.timeline.startTime = startTime;
         return startTime;
     },
-    setTouchInspectorTimelineStartY(state, startY){
-        state.touchManager.touchInspector.timeline.startY = startY;
-        dispatch('setTouchInspectorTimelineMinutesY', startY + 5);
-        dispatch('setTouchInspectorTimelineSecondsY', startY + 55);
-        dispatch('setTouchInspectorTimelineAxisY', startY + 60);
+    setInspectorStartY(state, startY){
+        state.touchManager.inspector.timeline.startY = startY;
+        dispatch('setInspectorMinutesY', startY + 5);
+        dispatch('setInspectorSecondsY', startY + 55);
+        dispatch('setInspectorAxisY', startY + 60);
         return startY;
     },
-    setTouchInspectorTimelineAxisY(state, axisY){
-        state.touchManager.touchInspector.timeline.axisY = axisY;
+    setInspectorAxisY(state, axisY){
+        state.touchManager.inspector.timeline.axisY = axisY;
         return axisY;
     },
-    setTouchInspectorTimelineEndY(state, endY){
-        state.touchManager.touchInspector.timeline.endY = endY;
+    setInspectorEndY(state, endY){
+        state.touchManager.inspector.timeline.endY = endY;
         return endY;
     },
-    setTouchInspectorTimelineStartX(state, startX){
-        state.touchManager.touchInspector.timeline.startX = startX;
+    setInspectorStartX(state, startX){
+        state.touchManager.inspector.timeline.startX = startX;
         return startX;
     },
-    setTouchInspectorTimelineEndX(state, endX){
-        endX = (state.player.duration - state.touchManager.touchInspector.timeline.startTime) * state.touchManager.touchInspector.timeline.secondWidth + 30;
-        state.touchManager.touchInspector.timeline.endX = endX;
+    setInspectorEndX(state, endX){
+        state.touchManager.inspector.timeline.endX = endX;
         return endX;
     },
-    setTouchInspectorTimelineMinutesY(state, minutesY){
-        state.touchManager.touchInspector.timeline.minutesY = minutesY;
+    setInspectorMinutesY(state, minutesY){
+        state.touchManager.inspector.timeline.minutesY = minutesY;
         return minutesY;
     },
-    setTouchInspectorTimelineSecondsY(state, secondsY){
-        state.touchManager.touchInspector.timeline.secondsY = secondsY;
+    setInspectorSecondsY(state, secondsY){
+        state.touchManager.inspector.timeline.secondsY = secondsY;
         return secondsY;
     },
-    setTouchInspectorTimelineSecondWidth(state, secondWidth){
-        state.timeline.secondWidth = secondWidth;
+    setInspectorSecondWidth(state, secondWidth){
+        state.touchManager.inspector.timeline.secondWidth = secondWidth;
         return secondWidth;
     },
-    setTouchInspectorTimelineColWidth(state, colWidth){
-        state.timeline.colWidth = colWidth;
+    setInspectorColWidth(state, colWidth){
+        state.touchManager.inspector.timeline.colWidth = colWidth;
+        dispatch('setInspectorSecondWidth', colWidth / 10);
         return colWidth;
     },
 };

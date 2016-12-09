@@ -8952,7 +8952,9 @@ video::-webkit-media-text-track-display {
   background: white;
   border-right: 1px solid;
   border-left: 1px solid;
-  border-color: #d3e0e9; }
+  border-bottom: 1px solid;
+  border-color: #d3e0e9;
+  overflow: hidden; }
 
 .navbar {
   border-radius: 0 !important; }
@@ -9000,6 +9002,68 @@ video::-webkit-media-text-track-display {
     font-size: 14px;
     line-height: 14px; }
 
+.player-container {
+  min-height: 300px;
+  padding-right: 0; }
+
+.touches-container {
+  padding-left: 0; }
+  .touches-container .box {
+    height: 100%;
+    margin-bottom: 0;
+    border-bottom: 1px solid;
+    border-color: #d3e0e9; }
+    .touches-container .box .box-body ul {
+      overflow-y: scroll;
+      max-height: 259px; }
+
+.control-menu {
+  background: white;
+  border-bottom: 1px solid;
+  border-color: #d3e0e9; }
+
+.control-inspector-menu {
+  background: white;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  border-color: #d3e0e9; }
+
+.row.is-flex {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap; }
+
+.row.is-flex > [class*='col-'] {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column; }
+
+/*
+* And with max cross-browser enabled.
+* Nobody should ever write this by hand.
+* Use a preprocesser with autoprefixing.
+*/
+.row.is-flex {
+  display: -webkit-box;
+  display: flex;
+  flex-wrap: wrap; }
+
+.row.is-flex > [class*='col-'] {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column; }
+
+.no-padding-left {
+  padding-left: 0 !important; }
+
+.no-padding-right {
+  padding-right: 0 !important; }
+
 .main-content {
   margin-top: 50px;
   padding-top: 20px; }
@@ -9017,5 +9081,16 @@ video::-webkit-media-text-track-display {
 
 input {
   color: #555 !important; }
+
+.box {
+  border-radius: 0; }
+
+#inspectorBox {
+  margin-bottom: 0;
+  border-bottom: 1px solid;
+  border-color: #d3e0e9; }
+
+[v-cloak] {
+  display: none; }
 
 /*# sourceMappingURL=app.css.map */

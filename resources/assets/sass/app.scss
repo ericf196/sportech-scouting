@@ -9,6 +9,10 @@
 @import "libs/videojs/video-js";
 @import "components/forms/touchForm";
 @import "components/navbars/navbarXs";
+@import "components/player/playerContainer";
+@import "components/menus/controlMenu";
+@import "helpers/flex";
+@import "helpers/paddings";
 
 .main-content {
   margin-top: 50px;
@@ -31,4 +35,18 @@
 
 input {
   color: #555 !important;
+}
+
+.box {
+  border-radius: 0;
+}
+
+#inspectorBox {
+  margin-bottom: 0;
+  border-bottom: 1px solid;
+  border-color: #d3e0e9;
+}
+
+[v-cloak] {
+  display: none;
 }

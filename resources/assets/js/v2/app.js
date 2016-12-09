@@ -1,16 +1,18 @@
 require('./bootstrap');
 import dncPlayer from './components/global/video/player.vue';
 import Touch from './sketch/components/touches/Touch';
-import sketch from './sketch/sketch'
 import {setState, setActions, getState, dispatch} from 'mockstate';
 import {actions} from './stores/actions'
 import {state} from './stores/store'
 import VeeValidate, {Validator} from 'vee-validate';
 import newTouchForm from './components/forms/newTouchForm.vue';
 import editTouchForm from './components/forms/editTouchForm.vue';
-import {Compact} from 'vue-color';
+import touchesList from './components/lists/touchesList.vue';
+import timeline from './components/canvas/timeline.vue';
+import inspector from './components/canvas/inspector.vue';
 
 
+window.bus = new Vue();
 Vue.use(VeeValidate);
 
 window.vm = new Vue({
@@ -19,7 +21,9 @@ window.vm = new Vue({
         dncPlayer,
         newTouchForm,
         editTouchForm,
-        'compact-picker': Compact,
+        touchesList,
+        timeline,
+        inspector
     },
     data: {
         source: {},
@@ -45,10 +49,18 @@ window.vm = new Vue({
         this.source = window['source'];
         setState(state);
         setActions(actions);
-        window.p = new p5(sketch);
         window.getSt = function () {
             return getState('*');
-        }
+        };
+        bus.$on('edit-touch', (touch)=> {
+            this.resetTouch();
+            this.touch.edit = false;
+            this.editTouch(null, touch)
+        })
+
+        bus.$on('remove-touch', (touch)=> {
+            this.removeTouch(touch)
+        })
     },
     mounted(){
         this.$refs.player.api().play();
@@ -58,6 +70,8 @@ window.vm = new Vue({
             this.touch.color = val
         },
         startTouch(){
+            this.touch.edit = false;
+            this.resetTouch();
             this.touch.initialized = true;
             this.duration = Math.floor(this.$refs.player.api().duration());
             this.touch.start = Math.floor(this.$refs.player.api().currentTime());
@@ -86,6 +100,10 @@ window.vm = new Vue({
         cancelEditTouch(){
             this.resetTouch();
         },
+        playbackRate(rate){
+            this.$refs.player.api().playbackRate(rate);
+
+        },
         resetTouch(){
             this.touch = {
                 initialized: false,
@@ -94,12 +112,10 @@ window.vm = new Vue({
                 start: 0,
                 end: 100,
                 color: {
-                    rgba: {
-                        r: 25,
-                        g: 77,
-                        b: 51,
-                        a: 1
-                    },
+                    "hsl": {"h": 61.0762331838565, "s": 1, "l": 0.4372549019607843, "a": 1},
+                    "hex": "#DBDF00",
+                    "rgba": {"r": 219, "g": 223, "b": 0, "a": 1, "alpha": 50},
+                    "hsv": {"h": 61.0762331838565, "s": 1, "v": 0.8745098039215686, "a": 1},
                 }
             };
         },
@@ -119,17 +135,17 @@ window.vm = new Vue({
                 this.$refs.player.api().currentTime(0);
             }
         },
-        moveTl(){
-            dispatch('setTimelineStartY', 30);
+        toogleTimeline(){
+            bus.$emit('toogle-timeline');
         },
-        toogleTl(){
-            dispatch('setTimelineHide', !getState('timeline').hide);
+        toogleInspector(){
+            $.AdminLTE.boxWidget.collapse($('#inspectorCollapseBtn'));
         },
-        removeAction(touch){
+        removeTouch(touch)
+        {
             if (touch) {
                 dispatch('removeTouch', touch);
             }
         }
     }
-})
-;
+});

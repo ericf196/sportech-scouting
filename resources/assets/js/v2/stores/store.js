@@ -4,12 +4,20 @@ export const state = {
         instance: null,
         touches: [],
         selectedTouch: null,
-        touchInspector: {
+        inspector: {
             instance: null,
-            height: 0,
-            width: 0,
-            startY: 0,
+            canvas: {
+                instance: null,
+                width: 0,
+                height: 0,
+            },
+            stage: {
+                instance: null
+            },
             timeline: {
+                instance: null,
+                height: 0,
+                width: 0,
                 startY: 0,
                 secondWidth: 0,
                 colWidth: 0,

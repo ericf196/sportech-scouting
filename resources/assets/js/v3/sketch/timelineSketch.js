@@ -1,15 +1,15 @@
 import Stage from './components/ui/Stage'
 import Timeline from './components/ui/Timeline'
 import TouchManager from './components/touches/TouchManager'
-import TouchInspector from './components/touches/TouchInspector'
 import VideoTimeMarker from './components/ui/VideoTimeMarker'
+import TouchSpec from './specs/touchesSpec'
 import {getState, dispatch} from 'mockstate';
 
 export default function sketch(p) {
     let state = null;
     p.setup = function () {
-        var width = document.getElementById('timeline').offsetWidth;
-        var canvas = p.createCanvas(width, 700);
+        var width = document.getElementById('timelineBox').offsetWidth;
+        var canvas = p.createCanvas(width - 20, 130);
         state = getState('*');
         dispatch('setCanvas', canvas);
         dispatch('setHeight', p.height);
@@ -17,23 +17,21 @@ export default function sketch(p) {
         state.canvas.instance.parent('timeline');
         var stage = new Stage();
         dispatch('setStage', stage);
-        var timeline = new Timeline(230, 120);
+        var timeline = new Timeline(0, 120);
         dispatch('setTimeline', timeline);
-        var touchManager = new TouchManager([]);
+        var touchManager = new TouchManager([/*TouchSpec.setup()*/]);
         dispatch('setTouchManager', touchManager);
         var videoTimeMarker = new VideoTimeMarker();
         dispatch('setVideoMarker', videoTimeMarker);
 
-        //var touchInspector = new TouchInspector();
-        //dispatch('setTouchInspector', touchInspector);
-
         state.stage.instance.setup();
         p.colorMode(p.RGB, 255, 255, 255, 100)
         state.player.instance.play();
-        state.player.instance.on('timeupdate', (event)=> {
+        state.player.instance.on('timeupdate', function durationSetter(event) {
             if (!state.player.duration) {
                 dispatch('setDuration', state.player.instance.duration())
                 dispatch('setZoom', 1);
+                state.player.instance.off('timeupdate', durationSetter)
             }
         });
 
@@ -45,21 +43,17 @@ export default function sketch(p) {
         state.stage.instance.draw();
         state.timeline.instance.draw();
         state.touchManager.instance.draw();
-       // state.touchManager.touchInspector.instance.draw();
+        state.videoMarker.instance.draw();
     };
 
     function configButtons() {
-        var zoomInBtn = document.getElementById('zoomIn');
-        var zoomOutBtn = document.getElementById('zoomOut');
-        zoomInBtn.addEventListener('click', zoomIn);
-        zoomOutBtn.addEventListener('click', zoomOut);
+
     }
 
     function zoomIn(event) {
         event.preventDefault();
         dispatch('setZoom', state.timeline.zoomFactor + 1);
         dispatch('setInitialized', false);
-        p.redraw();
     }
 
     function zoomOut(event) {
@@ -67,7 +61,6 @@ export default function sketch(p) {
         if (state.timeline.zoomFactor > state.timeline.initialZoomFactor) {
             dispatch('setZoom', state.timeline.zoomFactor - 1);
             dispatch('setInitialized', false);
-            p.redraw();
         }
     }
 
@@ -77,31 +70,31 @@ export default function sketch(p) {
                 state.touchManager.instance.mouseOverTouch(p.mouseX, p.mouseY);
             }
             state.timeline.instance.mouseOver();
-            p.redraw();
         }
     };
 
     p.mouseDragged = function (event) {
-        state.timeline.instance.drag();
-        p.redraw();
+        if (state) {
+            state.timeline.instance.drag();
+        }
     };
 
     p.mousePressed = function () {
-        if (state.touchManager.instance) {
-            state.touchManager.instance.mousePressedTouch(p.mouseX, p.mouseY)
+        if (state) {
+            if (state.touchManager.instance) {
+                state.touchManager.instance.mousePressedTouch(p.mouseX, p.mouseY)
+            }
         }
     }
 
-    p.mouseReleased = function () {
-        if (state.touchManager.instance) {
-            state.touchManager.instance.endMouseDraggedTouch()
-        }
-    };
+    p.stop = function () {
+        console.log('noloop');
+        p.noLoop();
+    }
 
-    function pRemoveTouch() {
-        if (state.touchManager.instance.selectedTouch) {
-            vm.removeTouch(state.touchManager.instance.selectedTouch)
-        }
+    p.start = function () {
+        console.log('loop');
+        p.loop();
     }
 }
 

@@ -12,6 +12,7 @@
     <link href="css/AdminLte.css" rel="stylesheet" type="text/css">
     <link href="css/app.css" rel="stylesheet" type="text/css">
     <link href="css/skin-blue.css" rel="stylesheet" type="text/css">
+    <link href="vendor/videojs/libs/projectorjs/projectorjs.min.css" rel="stylesheet" type="text/css">
 </head>
 <body class="layout-top-nav skin-blue">
 <div id="app-layout" class="wrapper">
@@ -22,87 +23,92 @@
     </header>
     <div class="content-wrapper main-content">
         <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
+            <div class="row is-flex">
+                <div class="col-xs-12 col-md-6 player-container">
                     <dnc-player :source="source" ref="player"></dnc-player>
+                </div>
+                <div class="col-xs-12 col-md-6 touches-container">
+                    <touches-list></touches-list>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <nav class="navbar navbar-default navbar-xs" role="navigation">
-                        <div class="navbar-header">
-
+                    <div class="mailbox-controls control-menu">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success btn-sm" v-on:click="startTouch"
+                                    :disabled="started"><i
+                                        class="fa" :class="{'fa-play':!started,'fa-circle text-danger':started}"></i>
+                                @{{started?'Recording Touch':'Start Touch'}}
+                            </button>
+                            <button type="button" class="btn btn-danger btn-sm" :disabled="!started"
+                                    v-on:click="endTouch"><i
+                                        class="fa fa-stop"></i> End Touch
+                            </button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm" v-on:click="backward(10)"><i
+                                        class="fa fa-fast-backward"></i> 10 s
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" v-on:click="backward(5)"><i
+                                        class="fa fa-backward"></i> 5 s
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" v-on:click="forward(5)"><i
+                                        class="fa fa-forward"></i> 5 s
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" v-on:click="forward(10)"><i
+                                        class="fa fa-fast-forward"></i> 10 s
+                            </button>
                         </div>
 
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <ul class="nav navbar-nav">
-                                <li>
-                                    <button href="#" id="startTouch" v-on:click="startTouch" class="btn btn-link"><i
-                                                class="fa fa-play"></i>
-                                        Start Touch
-                                    </button>
-                                </li>
-                                <li>
-                                    <button href="#" id="endTouch" v-on:click="endTouch" class="btn btn-link"><i
-                                                class="fa fa-stop"></i>
-                                        End Touch
-                                    </button>
-                                </li>
-                            </ul>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(0.25)">
+                                0.25 x
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(0.5)">
+                                0.5 x
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(1)">
+                                1 x
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(1.5)">
+                                1.5 x
+                            </button>
+                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(2)">
+                                2 x
+                            </button>
+                        </div>
 
-                            <ul class="nav navbar-nav">
-                                <li>
-                                    <button href="#" id="backward10s" class="btn btn-link" v-on:click="backward(10)"><i
-                                                class="fa fa-fast-backward"></i>
-                                        10 s
-                                    </button>
-                                </li>
-                                <li>
-                                    <button href="#" id="backward5s" class="btn btn-link" v-on:click="backward(5)"><i
-                                                class="fa fa-backward"></i>
-                                        5 s
-                                    </button>
-                                </li>
-                                <li>
-                                    <button href="#" id="forward5s" class="btn btn-link" v-on:click="forward(5)"><i
-                                                class="fa fa-forward"></i>
-                                        5 s
-                                    </button>
-                                </li>
-                                <li>
-                                    <button href="#" id="forward10s" class="btn btn-link" v-on:click="forward(10)"><i
-                                                class="fa fa-fast-forward"></i>
-                                        10 s
-                                    </button>
-                                </li>
-                                <li>
-                                    <button href="#" id="moveTl" class="btn btn-link" v-on:click="moveTl"><i
-                                                class="fa fa-fast-forward"></i>
-                                       move Tl
-                                    </button>
-                                </li>
-                                <li>
-                                    <button href="#" id="moveTl" class="btn btn-link" v-on:click="toogleTl"><i
-                                                class="fa fa-fast-forward"></i>
-                                        toogle Tl
-                                    </button>
-                                </li>
-                            </ul>
-
-                        </div><!-- /.navbar-collapse -->
-                    </nav>
+                        <div class="pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="toogleTimeline"><i
+                                            class="fa fa-calendar"></i> Toogle Timeline
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="toogleInspector"><i
+                                            class="fa fa-eye"></i> Toogle
+                                    Touch Inspector
+                                </button>
+                            </div>
+                            <!-- /.btn-group -->
+                        </div>
+                    </div>
                 </div>
             </div>
             <new-touch-form :open="touch.initialized" :start="touch.start" :end="touch.end"
                             v-on:cancel-new-touch="cancelNewTouch"
                             v-on:add-new-touch="saveNewTouch" :duration="duration"></new-touch-form>
-            <edit-touch-form :open="touch.edit" :start="touch.start" :end="touch.end"
+            <edit-touch-form v-if="edit"
                              v-on:cancel-new-touch="cancelEditTouch"
                              :init-touch="touch"
                              v-on:add-new-touch="saveEditTouch" :duration="duration"></edit-touch-form>
             <div class="row">
                 <div class="col-xs-12">
-                    <div id='timeline'></div>
+                    <inspector></inspector>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <timeline></timeline>
                 </div>
             </div>
         </div>
@@ -120,55 +126,19 @@
             <li>
                 <a href="#" class="editTouch">Edit</a>
             </li>
-            <li>
-                <a href="#" class="addSubTouch">Add SubTouch</a>
-            </li>
-            <li>
-                <a href="#" class="loopVideo">Loop this touch</a>
-            </li>
         </ul>
     </div>
 </script>
-<script id="toolbar" type="text/template">
-    <nav class="navbar navbar-default navbar-xs" role="navigation">
-        <div class="navbar-header">
-            <p class="navbar-brand">Touches Timeline</p>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#" class="success" id="zoomIn"><i class="fa fa-search-plus"></i> Zoom In</a>
-                </li>
-                <li>
-                    <a href="#" class="danger" id="zoomOut"><i class="fa fa-search-minus"></i> Zoom Out</a>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-</script>
-<script id="touch-inspector-toolbar" type="text/template">
-    <nav class="navbar navbar-default navbar-xs" role="navigation">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Touch Inspector</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-</script>
-<script src="/vendor/videojs/video.min.js"></script>
-<script src="/vendor/videojs/libs/youtube.js"></script>
+<script src="/vendor/videojs/video.js"></script>
+<script src="/vendor/videojs/libs/videojs-externals.js"></script>
+<script src="/vendor/videojs/libs/projectorjs/projector.min.js"></script>
+<script src="/vendor/videojs/libs/videojs-abloop.js"></script>
+<script src="/vendor/videojs/libs/videojs-disable-progress/disable-progress.js"></script>
 <script src="/js/p5js/libs/p5.js"></script>
 <script type='text/javascript' src='/js/p5js/libs/addons/p5.dom.js'></script>
 <script type='text/javascript' src='/js/p5js/libs/addons/p5.collide.js'></script>
 <script src="/js/app.js"></script>
+<script src="/vendor/adminLte/adminLte.js"></script>
 
 </body>
 </html>

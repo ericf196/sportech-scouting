@@ -1,0 +1,20 @@
+.player-container {
+  min-height: 300px;
+  padding-right: 0;
+}
+
+.touches-container {
+  padding-left: 0;
+  .box {
+    height: 100%;
+    margin-bottom: 0;
+    border-bottom: 1px solid;
+    border-color: #d3e0e9;
+    .box-body {
+      ul {
+        overflow-y: scroll;
+        max-height: 259px;
+      }
+    }
+  }
+}

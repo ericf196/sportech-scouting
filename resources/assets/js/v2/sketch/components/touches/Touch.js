@@ -32,6 +32,7 @@ export default class Touch {
         this.isResizeRight = false;
         this.secondsUtil = new SecondsUtil();
         this.touchMenu = null
+        this.canvaContainer = null
     }
 
     draw() {
@@ -43,18 +44,16 @@ export default class Touch {
             var touchTemplate = p.select('#touch-dropdown');
             this.touchMenu = p.createDiv(touchTemplate.html());
             this.touchMenu.id('edit-touch-' + this.id);
-            var canvaContainer = p.select('#timeline');
-            canvaContainer.child(this.touchMenu);
+            this.canvaContainer = p.select('#timeline');
+            this.canvaContainer.child(this.touchMenu);
             var editBtn = p.select('.editTouch', this.touchMenu);
-            var addSubTouchBtn = p.select('.addSubTouch', this.touchMenu);
-            var loopVideoBtn = p.select('.loopVideo', this.touchMenu);
             var touch = this;
             editBtn.mousePressed((event)=> {
                 touch.editPressed(touch, event)
             });
         }
         var touchMenuPosition = this.x + this.width - 11;
-        this.touchMenu.position(touchMenuPosition, this.y);
+        this.touchMenu.position(touchMenuPosition, this.canvaContainer.position().y + this.y);
 
         if (touchMenuPosition - 14 < this.state.timeline.startX || touchMenuPosition > this.state.canvas.width) {
             this.touchMenu.hide();

@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add plyr
+  /usr/local/bin/node /usr/local/bin/yarn add videojs-externals
 
 PATH: 
   /usr/local/sbin:/usr/local/Cellar/android-sdk/24.4.1_1/tools:/usr/local/Cellar/android-sdk/24.4.1_1/platform-tools:/usr/local/opt/php70/bin:/usr/local/bin:/usr/local/heroku/bin:/Users/pedrogorrin/.composer/vendor/bin:/Applications/MAMP/bin/php/php5.5.3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
@@ -38,6 +38,7 @@ npm manifest:
       "mockstate": "^0.0.6",
       "moment": "^2.14.1",
       "p5": "^0.5.4",
+      "plyr": "^2.0.10",
       "processing-js": "^1.6.3",
       "slick-carousel": "^1.6.0",
       "vee-validate": "^2.0.0-beta.12",
@@ -45,6 +46,7 @@ npm manifest:
       "videojs-record": "^1.5.0",
       "vis": "^4.17.0",
       "vue": "^2.0.5",
+      "vue-animate": "^0.0.4",
       "vue-color": "^2.0.2",
       "vue-datetime-picker": "^0.2.1",
       "vue-echo": "^0.1.2",
@@ -5304,6 +5306,10 @@ Lockfile:
     version "0.4.0"
     resolved "https://registry.yarnpkg.com/pkginfo/-/pkginfo-0.4.0.tgz#349dbb7ffd38081fcadc0853df687f0c7744cd65"
   
+  plyr:
+    version "2.0.10"
+    resolved "https://registry.yarnpkg.com/plyr/-/plyr-2.0.10.tgz#d3a7b3a6821a03e3681f8b850d434912a8ad6210"
+  
   postcss-calc@^5.2.0:
     version "5.3.1"
     resolved "https://registry.yarnpkg.com/postcss-calc/-/postcss-calc-5.3.1.tgz#77bae7ca928ad85716e2fda42f261bf7c1d65b5e"
@@ -7259,6 +7265,10 @@ Lockfile:
   vue:
     version "2.0.5"
     resolved "https://registry.yarnpkg.com/vue/-/vue-2.0.5.tgz#b99dc7180a802d1148a508db3d84b52c09b5ca8e"
+  
+  vue-animate:
+    version "0.0.4"
+    resolved "https://registry.yarnpkg.com/vue-animate/-/vue-animate-0.0.4.tgz#bf7afcdfec4694e4d19147a75f6761ecf3735f8f"
   
   vue-color:
     version "2.0.2"

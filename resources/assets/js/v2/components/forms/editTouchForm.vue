@@ -164,8 +164,8 @@
             end: {}
         },
         watch: {
-            open(val){
-                this.touch = Object.assign({}, this.initTouch);
+            initTouch(val){
+                this.touch = Object.assign({}, val);
             },
             start(val){
                 this.touch.start = val;

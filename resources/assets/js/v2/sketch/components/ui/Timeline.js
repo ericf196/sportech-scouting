@@ -8,19 +8,12 @@ export default class Timeline {
         dispatch('setTimelineStartX', 30);
         dispatch('setTimelineHeight', height);
         this.startDelta = 0;
-        var menu = p.select('#toolbar');
-        this.menuEl = p.createDiv(menu.html());
-        this.canvaContainer = p.select('#timeline');
-        this.canvaContainer.child(this.menuEl);
-        this.menuEl.position(this.canvaContainer.position().x, this.state.timeline.startY - 30);
-        this.menuEl.size(p.width, 30)
     }
 
     draw() {
         if (!this.state.timeline.hide) {
             dispatch('setColWidth', this.calculateColWidth());
             dispatch('setTimelineEndX', 0);
-            this.menuEl.position(this.canvaContainer.position().x, this.state.timeline.startY - 30);
             p.strokeWeight(0);
             p.stroke(1);
             p.fill(0, 0, 0);

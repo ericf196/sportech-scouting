@@ -5519,6 +5519,10 @@ processing-js:
   dependencies:
     minifier "^0.7.1"
 
+projectorjs:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/projectorjs/-/projectorjs-0.1.1.tgz#9f2b482721f2914b5e11713baf77b2a70ca8e05b"
+
 promise@^7.1.1:
   version "7.1.1"
   resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
@@ -7008,7 +7012,7 @@ video.js:
     videojs-vtt.js "0.12.1"
     xhr "2.2.0"
 
-video.js@>=5.0.0:
+video.js@^5.11.6, video.js@>=5.0.0:
   version "5.13.2"
   resolved "https://registry.yarnpkg.com/video.js/-/video.js-5.13.2.tgz#a89de931f9fdfc7f83a8a17e7174c8fb319f98f6"
   dependencies:
@@ -7023,6 +7027,12 @@ video.js@>=5.0.0:
     videojs-swf "5.1.0"
     videojs-vtt.js "0.12.1"
     xhr "2.2.0"
+
+videojs-externals:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/videojs-externals/-/videojs-externals-1.0.12.tgz#7814ac347d1c5938b427b7dcbdc5653f39c952fb"
+  dependencies:
+    video.js "^5.11.6"
 
 videojs-font@2.0.0:
   version "2.0.0"
@@ -7186,6 +7196,10 @@ vm-browserify@0.0.4:
 vue:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.0.5.tgz#b99dc7180a802d1148a508db3d84b52c09b5ca8e"
+
+vue-animate:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/vue-animate/-/vue-animate-0.0.4.tgz#bf7afcdfec4694e4d19147a75f6761ecf3735f8f"
 
 vue-color:
   version "2.0.2"

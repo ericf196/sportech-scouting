@@ -27,17 +27,20 @@ export default class TouchManager {
     }
 
     mousePressedTouch(x, y) {
-        var anTouchIsSelected = false;
+        var aTouchIsSelected = false;
         for (var j = 0; j < this.state.touchManager.touches.length; j++) {
             this.state.touchManager.touches[j].isMousePresssedOver(x, y);
             if (this.state.touchManager.touches[j].isSelected) {
-                anTouchIsSelected = true;
+                aTouchIsSelected = true;
+                vm.$refs.player.api().abLoopPlugin.setStart(this.state.touchManager.touches[j].start).setEnd(this.state.touchManager.touches[j].end).enable();
+                vm.$refs.player.api().abLoopPlugin.goToStart();
                 this.state.touchManager.selectedTouch = this.state.touchManager.touches[j];
             }
         }
 
-        if (!anTouchIsSelected) {
+        if (!aTouchIsSelected) {
             this.state.touchManager.selectedTouch = null;
+            vm.$refs.player.api().abLoopPlugin.disable();
         }
     }
 
