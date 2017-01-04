@@ -102,7 +102,7 @@
                              v-on:add-new-touch="saveEditTouch" :duration="duration"></edit-touch-form>
             <div class="row">
                 <div class="col-xs-12">
-                    <inspector></inspector>
+                    <inspector ref="inspector" :playing="playing"></inspector>
                 </div>
             </div>
 

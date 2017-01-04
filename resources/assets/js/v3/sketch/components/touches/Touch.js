@@ -93,11 +93,12 @@ export default class Touch {
             if (y >= this.state.timeline.startY) {
                 if (x >= this.x && x <= (this.x + this.width) && y >= this.y && y <= (this.y + this.height)) {
                     this.isSelected = true;
-                    vm.toogleInspector(true);
-                    vm.$refs.player.api().abLoopPlugin.setStart(this.start).setEnd(this.end).enable();
-                    vm.$refs.player.api().abLoopPlugin.goToStart();
-                    vm.$refs.player.api().play();
-                    dispatch('setSelectedTouch', this)
+                    if (!vm.started) {
+                        vm.$refs.player.api().abLoopPlugin.setStart(this.start).setEnd(this.end).enable();
+                        vm.$refs.player.api().abLoopPlugin.goToStart();
+                        vm.$refs.player.api().play();
+                        dispatch('setSelectedTouch', this)
+                    }
                 } else {
                     this.isSelected = false;
                 }

@@ -19,7 +19,9 @@ export default class Action {
         this.height = 0;
         this.limitTextY = 30 + this.state.touchManager.inspector.timeline.startY;
         this.secondsUtil = new SecondsUtil();
-        this.canvaContainer = null
+        this.canvaContainer = null;
+        this.leftTags = []
+        this.rightTags = []
     }
 
     draw() {
@@ -67,7 +69,7 @@ export default class Action {
     }
 
     isMouseOver(x, y) {
-        if (x >= this.x && x <= (this.x + this.width) && y >= this.y && y <= (this.y + this.height*2)) {
+        if (x >= this.x && x <= (this.x + this.width) && y >= this.y && y <= (this.y + this.height * 2)) {
             this.color.rgba.alpha = 100;
             this.mouseIsOver = true;
         } else {
@@ -78,7 +80,7 @@ export default class Action {
     }
 
     isMousePresssedOver(x, y) {
-        if(!this.state.touchManager.recordingAction && !this.state.touchManager.recordingTouch){
+        if (!this.state.touchManager.recordingAction && !this.state.touchManager.recordingTouch) {
             if (y >= this.state.touchManager.inspector.timeline.startY) {
                 if (x >= this.x && x <= (this.x + this.width) && y >= this.y && y <= (this.y + this.height * 2)) {
                     this.isSelected = true;

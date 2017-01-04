@@ -29,21 +29,16 @@
         <div class="box-body">
             <div class="row" v-if="touch">
                 <div class="col-xs-12">
-
-                </div>
-            </div>
-            <div class="row" v-if="touch">
-                <div class="col-xs-12">
                     <div class="mailbox-controls control-inspector-menu">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm" v-on:click="startAction"
-                                    :disabled="started"><i
-                                    class="fa" :class="{'fa-play':!started,'fa-circle text-danger':started}"></i>
-                                {{started?'Recording Action':'Start Action'}}
+                            <button type="button" class="btn btn-success btn-sm" v-on:click="createAction"
+                                    v-if="recordingTouch"><i
+                                    class="fa fa-plus"></i>
+                                Create Action
                             </button>
-                            <button type="button" class="btn btn-danger btn-sm" :disabled="!started"
-                                    v-on:click="endAction"><i
-                                    class="fa fa-stop"></i> End Action
+                            <button type="button" class="btn btn-success btn-sm" v-on:click="play"><i
+                                    class="fa" :class="{'fa-play':!playing,'fa-pause text-danger':playing}"></i>
+                                {{playing?'Pause':'Play'}}
                             </button>
                         </div>
                     </div>
@@ -66,12 +61,14 @@
                 <div class="row" v-if="touch">
                     <div class="col-xs-6 no-padding-right">
                         <div class="athlete-menu-left">
-                            <tags :tags="tagsLeft" v-on:tag-selected="tagSelectedLeft"></tags>
+                            <tags :tags="tagsLeft" :selected="action.leftTags"
+                                  v-on:tag-selected="tagSelectedLeft"></tags>
                         </div>
                     </div>
                     <div class="col-xs-6 no-padding-left">
                         <div class="athlete-menu-left">
-                            <tags :tags="tagsRight" v-on:tag-selected="tagSelectedRight"></tags>
+                            <tags :tags="tagsRight" :selected="action.rightTags"
+                                  v-on:tag-selected="tagSelectedRight"></tags>
                         </div>
                     </div>
                 </div>
@@ -127,6 +124,7 @@
                 open: false,
                 touch: null,
                 actions: [],
+                recordingTouch: false,
                 started: false,
                 edit: false,
                 action: {
@@ -135,6 +133,8 @@
                     text: '',
                     start: 0,
                     end: 100,
+                    leftTags: [],
+                    rightTags: [],
                     color: {
                         "hsl": {"h": 61.0762331838565, "s": 1, "l": 0.4372549019607843, "a": 1},
                         "hex": "#DBDF00",
@@ -143,8 +143,11 @@
                     }
                 },
                 tagsLeft: _.cloneDeep(defaultTags),
-                tagsRight: _.cloneDeep(defaultTags)
+                tagsRight: _.cloneDeep(defaultTags),
             }
+        },
+        props: {
+            playing: {},
         },
         mixins: [collideMixin],
         watch: {
@@ -168,6 +171,15 @@
                     } else {
                         this.actions = []
                     }
+                }
+                if (data.action == 'setSelectedAction') {
+                    var action = getState('*').touchManager.selectedAction;
+                    if (action) {
+                        this.action = action;
+                    }
+                }
+                if (data.action == 'recordingTouch') {
+                    this.recordingTouch = getState('*').touchManager.recordingTouch;
                 }
             })
 
@@ -199,11 +211,17 @@
         },
         mounted(){
             window.inspector = new p5(inspectorSketch);
-            console.log(window.inspector);
         },
         methods: {
             toogleOpen(){
                 this.open = !this.open;
+            },
+            play(){
+                if (this.playing) {
+                    this.$parent.$refs.player.api().pause();
+                } else {
+                    this.$parent.$refs.player.api().play();
+                }
             },
             startAction(){
                 var collideResult = this.checkCollideActions({
@@ -213,12 +231,21 @@
                 if (collideResult.collide) {
                     console.log('collide');
                 } else {
+                    if (!this.touch) {
+                        this.touch = getState('*').touchManager.selectedTouch;
+                    }
                     this.$parent.$refs.player.api().play();
                     this.$parent.$refs.player.api().disableProgress.disable();
-                    console.log(_.cloneDeep(this.touch.color), this.touch.color);
-                    var act = new Action(Math.floor(this.$parent.$refs.player.api().currentTime()), Math.floor(this.$parent.$refs.player.api().currentTime()), _.cloneDeep(this.touch.color));
+                    var start = 0;
+                    if (this.touch.actions.length) {
+                        start = this.touch.actions[this.touch.actions.length - 1].end
+                    } else {
+                        start = this.touch.start;
+                    }
+                    var act = new Action(Math.floor(start), Math.floor(this.$parent.$refs.player.api().currentTime()), _.cloneDeep(this.touch.color));
                     dispatch('addAction', act);
                     dispatch('recordingAction', true);
+                    dispatch('setSelectedAction', act);
                     this.action = act;
                     this.$parent.$refs.player.api().on('timeupdate', this.onStartAction);
                     this.edit = false;
@@ -226,10 +253,20 @@
                 }
             },
             tagSelectedLeft(tag){
-                console.log('left', tag)
+                if (!this.action) {
+                    this.action = getState('*').touchManager.selectedAction;
+                }
+                if (this.action) {
+                    this.action.leftTags.push(tag);
+                }
             },
             tagSelectedRight(tag){
-                console.log('right', tag)
+                if (!this.action) {
+                    this.action = getState('*').touchManager.selectedAction;
+                }
+                if (this.action) {
+                    this.action.rightTags.push(tag);
+                }
             },
             onStartAction(){
                 this.action.end = Math.floor(this.$parent.$refs.player.api().currentTime());
@@ -242,15 +279,16 @@
                     this.action.end = Math.floor(this.$parent.$refs.player.api().currentTime() - 1);
                     this.$parent.$refs.player.api().disableProgress.enable();
                     this.$parent.$refs.player.api().pause();
-                } else if (Math.floor(this.$parent.$refs.player.api().currentTime()) >= this.touch.end) {
-                    this.edit = true;
-                    this.started = false;
-                    this.$parent.$refs.player.api().off('timeupdate', this.onStartAction);
-                    dispatch('recordingAction', false);
-                    this.action.end = Math.floor(this.touch.end);
-                    this.$parent.$refs.player.api().disableProgress.enable();
-                    this.$parent.$refs.player.api().pause();
                 }
+                /* else if (Math.floor(this.$parent.$refs.player.api().currentTime()) > this.touch.end) {
+                 this.edit = true;
+                 this.started = false;
+                 this.$parent.$refs.player.api().off('timeupdate', this.onStartAction);
+                 dispatch('recordingAction', false);
+                 this.action.end = Math.floor(this.touch.end);
+                 this.$parent.$refs.player.api().disableProgress.enable();
+                 this.$parent.$refs.player.api().pause();
+                 }*/
             },
             endAction(){
                 this.edit = true;
@@ -260,6 +298,9 @@
                 this.$parent.$refs.player.api().pause()
                 this.$parent.$refs.player.api().disableProgress.enable();
                 this.$parent.$refs.player.api().pause();
+            },
+            createAction(){
+                this.startAction();
             }
         }
     }

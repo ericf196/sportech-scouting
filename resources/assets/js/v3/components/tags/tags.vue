@@ -7,7 +7,7 @@
         </div>
         <div class="tags-selected">
             <ul class="list-inline">
-                <li v-for="tag in selectedTags">
+                <li v-for="tag in selected">
                     <div class="label label-info">
                         <span v-if="tag.tag">{{tag.tag.name}}</span>
                         <span v-else>{{tag.name}}</span>
@@ -43,25 +43,12 @@
                 }
             }
         },
-        data(){
-            return {
-                selectedTags: []
-            }
-        },
         components: {
             tag
         },
         methods: {
             tagSelected(tag){
                 this.$emit('tag-selected', tag);
-                this.selectedTags.push(tag);
-                var index = _.findIndex(this.tags, function (o) {
-                    return o.name == tag.tag ? tag.tag.name : tag.name
-                });
-                if (index > -1) {
-                    this.tags.splice(index, 1);
-                }
-                console.log('tag selected', tag)
             }
         }
     }

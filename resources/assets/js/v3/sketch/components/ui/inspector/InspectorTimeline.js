@@ -11,51 +11,55 @@ export default class InspectorTimeline {
     }
 
     draw() {
-        dispatch('setInspectorColWidth', this.calculateColWidth());
-        dispatch('setInspectorEndX', (this.state.touchManager.selectedTouch.end - this.state.touchManager.selectedTouch.start) * this.state.touchManager.inspector.timeline.secondWidth + this.state.touchManager.inspector.timeline.startX);
-        dispatch('setInspectorStartTime', this.state.touchManager.selectedTouch.start)
-        inspector.strokeWeight(0);
-        inspector.stroke(1);
-        inspector.fill(0, 0, 0);
-        inspector.textSize(12);
-        inspector.textStyle(p.NORMAL);
-        inspector.text(TimeConverter.toHHMMSS(this.state.touchManager.selectedTouch.end), this.state.touchManager.inspector.timeline.endX - 20, this.state.touchManager.inspector.timeline.startY + 30, 40, 20);
-        inspector.textAlign(p.CENTER);
+        var colWidth = this.calculateColWidth();
+        if (colWidth > 0) {
+            dispatch('setInspectorColWidth', colWidth);
+            dispatch('setInspectorEndX', (this.state.touchManager.selectedTouch.end - this.state.touchManager.selectedTouch.start) * this.state.touchManager.inspector.timeline.secondWidth + this.state.touchManager.inspector.timeline.startX);
+            dispatch('setInspectorStartTime', this.state.touchManager.selectedTouch.start)
+            inspector.strokeWeight(0);
+            inspector.stroke(1);
+            inspector.fill(0, 0, 0);
+            inspector.textSize(12);
+            inspector.textStyle(p.NORMAL);
+            inspector.text(TimeConverter.toHHMMSS(this.state.touchManager.selectedTouch.end), this.state.touchManager.inspector.timeline.endX - 20, this.state.touchManager.inspector.timeline.startY + 30, 40, 20);
+            inspector.textAlign(p.CENTER);
 
-        inspector.stroke(0);
-        inspector.strokeWeight(1);
-        inspector.line(this.state.touchManager.inspector.timeline.startX, this.state.touchManager.inspector.timeline.axisY, this.state.touchManager.inspector.timeline.width, this.state.touchManager.inspector.timeline.axisY);
-        for (var i = 0; i <= this.state.touchManager.inspector.timeline.width + this.state.touchManager.selectedTouch.start * this.state.touchManager.inspector.timeline.secondWidth - 30; i += this.state.touchManager.inspector.timeline.colWidth) {
-            var x = i + this.state.touchManager.inspector.timeline.startX;
-            var newX = x - this.state.touchManager.inspector.timeline.startTime * this.state.touchManager.inspector.timeline.secondWidth;
+            inspector.stroke(0);
+            inspector.strokeWeight(1);
+            inspector.line(this.state.touchManager.inspector.timeline.startX, this.state.touchManager.inspector.timeline.axisY, this.state.touchManager.inspector.timeline.width, this.state.touchManager.inspector.timeline.axisY);
+            for (var i = 0; i <= this.state.touchManager.inspector.timeline.width + this.state.touchManager.selectedTouch.start * this.state.touchManager.inspector.timeline.secondWidth - 30; i += this.state.touchManager.inspector.timeline.colWidth) {
+                var x = i + this.state.touchManager.inspector.timeline.startX;
+                var newX = x - this.state.touchManager.inspector.timeline.startTime * this.state.touchManager.inspector.timeline.secondWidth;
 
-            if (i == 0) {
-                this.drawStartLabel(this.state.touchManager.inspector.timeline.startTime, x);
-                this.drawMinuteLine(x);
-            } else if (i % (this.state.touchManager.inspector.timeline.colWidth * 6) == 0) {
-                if (newX >= 120) {
-                    this.drawMinuteLabel(i, newX);
-                    this.drawMinuteLine(newX);
-                }
-            } else {
-                if (newX >= 120) {
-                    if (this.state.touchManager.inspector.timeline.showSecondsInterval) {
-                        this.drawMiddleSecondLabel(i, newX);
+                if (i == 0) {
+                    this.drawStartLabel(this.state.touchManager.inspector.timeline.startTime, x);
+                    this.drawMinuteLine(x);
+                } else if (i % (this.state.touchManager.inspector.timeline.colWidth * 6) == 0) {
+                    if (newX >= 120) {
+                        this.drawMinuteLabel(i, newX);
+                        this.drawMinuteLine(newX);
                     }
-                    this.drawMiddleSecondLine(newX);
+                } else {
+                    if (newX >= 120) {
+                        if (this.state.touchManager.inspector.timeline.showSecondsInterval) {
+                            this.drawMiddleSecondLabel(i, newX);
+                        }
+                        this.drawMiddleSecondLine(newX);
+                    }
+                }
+
+
+                if (this.state.touchManager.inspector.timeline.showSeconds) {
+                    this.drawMiddleSecondLabel(i, newX);
+                    this.drawSecondLine(x);
                 }
             }
+            inspector.stroke('red');
+            inspector.strokeWeight(2)
+            inspector.line(this.state.touchManager.inspector.timeline.endX, this.state.touchManager.inspector.timeline.startY + 45, this.state.touchManager.inspector.timeline.endX, this.state.touchManager.inspector.timeline.axisY);
+            inspector.line(this.state.touchManager.inspector.timeline.endX, this.state.touchManager.inspector.timeline.axisY, this.state.touchManager.inspector.timeline.endX, this.state.touchManager.inspector.timeline.endY);
 
-
-            if (this.state.touchManager.inspector.timeline.showSeconds) {
-                this.drawMiddleSecondLabel(i, newX);
-                this.drawSecondLine(x);
-            }
         }
-        inspector.stroke('red');
-        inspector.strokeWeight(2)
-        inspector.line(this.state.touchManager.inspector.timeline.endX, this.state.touchManager.inspector.timeline.startY + 45, this.state.touchManager.inspector.timeline.endX, this.state.touchManager.inspector.timeline.axisY);
-        inspector.line(this.state.touchManager.inspector.timeline.endX, this.state.touchManager.inspector.timeline.axisY, this.state.touchManager.inspector.timeline.endX, this.state.touchManager.inspector.timeline.endY);
     }
 
     mouseOver() {
@@ -145,7 +149,11 @@ export default class InspectorTimeline {
 
     calculateColWidth() {
         var minutes = ( this.state.touchManager.selectedTouch.end - this.state.touchManager.selectedTouch.start) / 60;
-        return Math.floor(((this.state.canvas.width - this.state.touchManager.inspector.timeline.startX - 30) / minutes) / 6);
+        if (minutes > 0) {
+            return Math.floor(((this.state.canvas.width - this.state.touchManager.inspector.timeline.startX - 30) / minutes) / 6);
+        }
+
+        return 0;
     }
 
     getStartTime() {

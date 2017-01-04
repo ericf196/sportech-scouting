@@ -44,7 +44,7 @@ export default class TouchManager {
             }
         }
 
-        if (!aTouchIsSelected) {
+        if (!aTouchIsSelected && !vm.started) {
             dispatch('setSelectedTouch', null)
             vm.$refs.player.api().abLoopPlugin.disable();
         }

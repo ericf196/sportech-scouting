@@ -31,6 +31,7 @@ window.vm = new Vue({
         source: {},
         duration: 0,
         edit: false,
+        playing: false,
         started: false,
         touch: {
             initialized: false,
@@ -64,6 +65,13 @@ window.vm = new Vue({
         })
     },
     mounted(){
+        this.$refs.player.api().on('play', ()=> {
+            this.playing = true;
+        });
+
+        this.$refs.player.api().on('pause', ()=> {
+            this.playing = false;
+        });
         this.$refs.player.api().play();
         this.$refs.player.api().on('timeupdate', ()=> {
             if (!this.started) {
@@ -78,7 +86,7 @@ window.vm = new Vue({
                     } else if (collideResult.collideTouches[0].current instanceof Touch) {
                         dispatch('setSelectedTouch', collideResult.collideTouches[0].current);
                     }
-                } else {
+                } else if (!this.started) {
                     dispatch('setSelectedTouch', null);
                 }
             }
@@ -101,6 +109,9 @@ window.vm = new Vue({
                 var act = new Touch(Math.floor(this.$refs.player.api().currentTime()), Math.floor(this.$refs.player.api().currentTime()), this.touch.text, this.touch.color);
                 dispatch('addTouch', act);
                 dispatch('recordingTouch', true);
+                this.toogleInspector(true);
+                dispatch('setSelectedTouch', act);
+                this.$refs.inspector.startAction();
                 this.duration = Math.floor(this.$refs.player.api().duration());
                 var self = this
                 this.touch = act;
@@ -132,6 +143,7 @@ window.vm = new Vue({
             this.$refs.player.api().pause()
             this.$refs.player.api().disableProgress.enable();
             this.$refs.player.api().pause();
+            this.$refs.inspector.endAction();
         },
         editTouch(event, touch){
             this.touch = touch;
