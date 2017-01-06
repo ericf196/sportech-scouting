@@ -31,7 +31,7 @@
                 <div class="col-xs-12">
                     <div class="mailbox-controls control-inspector-menu">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-dabger btn-sm" v-on:click="createAction"
+                            <button type="button" class="btn btn-danger btn-sm" v-on:click="createAction"
                                     v-if="recordingTouch">
                                 End Action
                             </button>
