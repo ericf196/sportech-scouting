@@ -12,7 +12,12 @@ import timeline from './components/canvas/timeline.vue';
 import inspector from './components/canvas/inspector.vue';
 import collideMixin from './mixins/collide'
 
+var VueDragula = require('vue-dragula');
 
+Vue.use(VueDragula);
+Vue.vueDragula.options('first-bag', {
+    direction: 'horizontal'
+})
 window.bus = new Vue();
 Vue.use(VeeValidate);
 
@@ -169,10 +174,6 @@ window.vm = new Vue({
             }
             this.resetTouch();
         },
-        playbackRate(rate){
-            this.$refs.player.api().playbackRate(rate);
-
-        },
         resetTouch(){
             this.touch = {
                 initialized: false,
@@ -187,22 +188,6 @@ window.vm = new Vue({
                     "hsv": {"h": 61.0762331838565, "s": 1, "v": 0.8745098039215686, "a": 1},
                 }
             };
-        },
-        forward(s){
-            var forward = this.$refs.player.api().currentTime() + s;
-            if (forward <= this.$refs.player.api().duration()) {
-                this.$refs.player.api().currentTime(forward);
-            } else {
-                this.$refs.player.api().currentTime(this.$refs.player.api().duration());
-            }
-        },
-        backward(s){
-            var backward = this.$refs.player.api().currentTime() - s;
-            if (backward >= 0) {
-                this.$refs.player.api().currentTime(backward);
-            } else {
-                this.$refs.player.api().currentTime(0);
-            }
         },
         toogleTimeline(){
             bus.$emit('toogle-timeline');

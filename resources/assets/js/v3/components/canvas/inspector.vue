@@ -31,15 +31,45 @@
                 <div class="col-xs-12">
                     <div class="mailbox-controls control-inspector-menu">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success btn-sm" v-on:click="createAction"
-                                    v-if="recordingTouch"><i
-                                    class="fa fa-plus"></i>
-                                Create Action
+                            <button type="button" class="btn btn-dabger btn-sm" v-on:click="createAction"
+                                    v-if="recordingTouch">
+                                End Action
                             </button>
                             <button type="button" class="btn btn-success btn-sm" v-on:click="play"><i
                                     class="fa" :class="{'fa-play':!playing,'fa-pause text-danger':playing}"></i>
                                 {{playing?'Pause':'Play'}}
                             </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="backward(10)"><i
+                                        class="fa fa-fast-backward"></i> 10 s
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="backward(5)"><i
+                                        class="fa fa-backward"></i> 5 s
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="forward(5)"><i
+                                        class="fa fa-forward"></i> 5 s
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="forward(10)"><i
+                                        class="fa fa-fast-forward"></i> 10 s
+                                </button>
+                            </div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(0.25)">
+                                    0.25 x
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(0.5)">
+                                    0.5 x
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(1)">
+                                    1 x
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(1.5)">
+                                    1.5 x
+                                </button>
+                                <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(2)">
+                                    2 x
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,13 +92,13 @@
                     <div class="col-xs-6 no-padding-right">
                         <div class="athlete-menu-left">
                             <tags :tags="tagsLeft" :selected="action.leftTags"
-                                  v-on:tag-selected="tagSelectedLeft"></tags>
+                                  v-on:tag-deleted="tagDeletedLeft" v-on:tag-selected="tagSelectedLeft"></tags>
                         </div>
                     </div>
                     <div class="col-xs-6 no-padding-left">
                         <div class="athlete-menu-left">
                             <tags :tags="tagsRight" :selected="action.rightTags"
-                                  v-on:tag-selected="tagSelectedRight"></tags>
+                                  v-on:tag-deleted="tagDeletedRight" v-on:tag-selected="tagSelectedRight"></tags>
                         </div>
                     </div>
                 </div>
@@ -102,10 +132,12 @@
         .athlete-menu-left {
             border-left: 1px solid #d3e0e9;
             border-right: 1px solid #d3e0e9;
+            padding-bottom: 5px;
         }
 
         .athlete-menu-right {
             border-right: 1px solid #d3e0e9;
+            padding-bottom: 5px;
         }
     }
 </style>
@@ -114,10 +146,10 @@
     import inspectorSketch from '../../sketch/inspectorSketch'
     import TimeConverter from '../../sketch/components/utils/TimeConverter'
     import collideMixin from '../../mixins/collide'
+    import uuidMixin from '../../mixins/uuid'
     import Action from '../../sketch/components/touches/Action'
     import tags from '../tags/tags.vue'
     import defaultTags from '../tags/tagList'
-
     export default{
         data(){
             return {
@@ -149,7 +181,7 @@
         props: {
             playing: {},
         },
-        mixins: [collideMixin],
+        mixins: [collideMixin, uuidMixin],
         watch: {
             'open': function (open, oldOpen) {
                 if (open) {
@@ -257,6 +289,7 @@
                     this.action = getState('*').touchManager.selectedAction;
                 }
                 if (this.action) {
+                    tag.id = this.generateUUID();
                     this.action.leftTags.push(tag);
                 }
             },
@@ -265,7 +298,30 @@
                     this.action = getState('*').touchManager.selectedAction;
                 }
                 if (this.action) {
+                    tag.id = this.generateUUID();
                     this.action.rightTags.push(tag);
+                }
+            },
+            tagDeletedRight(tag){
+                if (!this.action) {
+                    this.action = getState('*').touchManager.selectedAction;
+                }
+                if (this.action) {
+                    var tagIndex = _.findIndex(this.action.rightTags, function (o) {
+                        return o.id == tag.id;
+                    });
+                    this.action.rightTags.splice(tagIndex, 1);
+                }
+            },
+            tagDeletedLeft(tag){
+                if (!this.action) {
+                    this.action = getState('*').touchManager.selectedAction;
+                }
+                if (this.action) {
+                    var tagIndex = _.findIndex(this.action.leftTags, function (o) {
+                        return o.id == tag.id;
+                    });
+                    this.action.leftTags.splice(tagIndex, 1);
                 }
             },
             onStartAction(){
@@ -301,7 +357,26 @@
             },
             createAction(){
                 this.startAction();
-            }
+            },
+            playbackRate(rate){
+                this.$parent.$refs.player.api().playbackRate(rate);
+            },
+            forward(s){
+                var forward = this.$parent.$refs.player.api().currentTime() + s;
+                if (forward <= this.$parent.$refs.player.api().duration()) {
+                    this.$parent.$refs.player.api().currentTime(forward);
+                } else {
+                    this.$parent.$refs.player.api().currentTime(this.$parent.$refs.player.api().duration());
+                }
+            },
+            backward(s){
+                var backward = this.$parent.$refs.player.api().currentTime() - s;
+                if (backward >= 0) {
+                    this.$parent.$refs.player.api().currentTime(backward);
+                } else {
+                    this.$parent.$refs.player.api().currentTime(0);
+                }
+            },
         }
     }
 </script>

@@ -45,38 +45,6 @@
                                         class="fa fa-stop"></i> End Touch
                             </button>
                         </div>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm" v-on:click="backward(10)"><i
-                                        class="fa fa-fast-backward"></i> 10 s
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" v-on:click="backward(5)"><i
-                                        class="fa fa-backward"></i> 5 s
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" v-on:click="forward(5)"><i
-                                        class="fa fa-forward"></i> 5 s
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" v-on:click="forward(10)"><i
-                                        class="fa fa-fast-forward"></i> 10 s
-                            </button>
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(0.25)">
-                                0.25 x
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(0.5)">
-                                0.5 x
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(1)">
-                                1 x
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(1.5)">
-                                1.5 x
-                            </button>
-                            <button type="button" class="btn btn-default btn-sm" v-on:click="playbackRate(2)">
-                                2 x
-                            </button>
-                        </div>
 
                         <div class="pull-right">
                             <div class="btn-group">

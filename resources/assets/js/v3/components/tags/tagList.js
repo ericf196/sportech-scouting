@@ -31,24 +31,37 @@ export default [
         dropdown: true,
         options: [
             {
-                name: '1era',
+                name: '-2',
+                value: -2
+            },
+            {
+                name: '-1.5',
+                value: -1.5
+            },
+            {
+                name: '-1',
+                value: -1
+            },
+            {
+                name: '-0.5',
+                value: -0.5
+            },
+            {
+                name: '0.5',
+                value: 0.5
+            },
+            {
+                name: '1',
                 value: 1
             },
             {
-                name: '2da',
+                name: '1.5',
+                value: 1.5
+            },
+            {
+                name: '2',
                 value: 2
             },
-            {
-                name: '3era',
-                value: 3
-            },
-            {
-                name: '4ta',
-                value: 4
-            }, {
-                name: '5ta',
-                value: 5
-            }
         ]
     },
     {
