@@ -286,7 +286,7 @@
                 if (this.errors.any()) {
 
                 } else {
-                    this.endInvalid = !!(parseInt(this.touch.start) >= parseInt(this.touch.end) || parseInt(this.touch.end) > parseInt(this.duration));
+                    this.endInvalid = !!(parseInt(this.touch.start) >= parseInt(this.touch.end) || parseInt(this.touch.end) > parseInt(Math.floor(this.$parent.$refs.player.api().duration())));
                     if (!this.endInvalid) {
                         if (!this.collide) {
                             this.endInvalid = false;

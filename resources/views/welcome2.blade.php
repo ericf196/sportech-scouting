@@ -79,6 +79,16 @@
                     <timeline></timeline>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-xs-6">
+                    <button v-on:click="guardar" class="btn btn-success btn-block">GUARDAR</button>
+                </div>
+                <div class="col-xs-6">
+                    <button v-on:click="cerrar" class="btn btn-success btn-block">CERRAR</button>
+                </div>
+            </div>
+
         </div>
     </div>
 

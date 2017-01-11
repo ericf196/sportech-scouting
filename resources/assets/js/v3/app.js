@@ -200,6 +200,14 @@ window.vm = new Vue({
             if (touch) {
                 dispatch('removeTouch', touch);
             }
+        },
+
+        guardar(){
+
+        },
+        cerrar(){
+
         }
+
     }
 });

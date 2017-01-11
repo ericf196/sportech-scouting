@@ -1,12 +1,23 @@
 <template>
-    <video ref="player"
-           class="video-js vjs-default-skin"
-           controls preload="auto"
-           :poster="poster"
-           :data-setup="strSource"
-    ></video>
+    <div>
+        <video ref="player"
+               class="video-js vjs-default-skin"
+               controls preload="auto"
+               :poster="poster"
+               :data-setup="strSource"
+        ></video>
+        <canvas id="video-canvas"></canvas>
+    </div>
 </template>
-
+<style>
+    #video-canvas {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        padding-right: 15px;
+    }
+</style>
 <script>
     import {dispatch} from 'mockstate';
 
@@ -48,9 +59,7 @@
                 techOrder: ['youtube'],
                 playbackRates: [0.25, 0.5, 1, 1.5, 2],
                 plugins: {
-                    disableProgress:{
-
-                    },
+                    disableProgress: {},
                     abLoopPlugin: {
                         enabled: false,
                         loopIfBeforeStart: false, //allow video to play normally before the loop section? defaults to true
@@ -70,9 +79,11 @@
             this.player = videojs(this.$refs.player, config)
             dispatch('setPlayer', this.player);
             this.player.playbackRate(1);
+
             this.player.on('timeupdate', ()=> {
                 dispatch('setCurrentTime', this.player.currentTime());
             });
+
         },
         methods: {
             api()

@@ -167,6 +167,8 @@ return [
          * Package Service Providers...
          */
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         //
 
