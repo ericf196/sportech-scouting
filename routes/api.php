@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:api');
+Route::put('/scouting/touches/{scoutingId}', 'Api\Scouting\ScoutingTouchesController@update');
+Route::resource('/scouting', 'Api\Scouting\ScoutingController');

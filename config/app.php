@@ -169,6 +169,14 @@ return [
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+        Kodeine\Acl\AclServiceProvider::class,
+        Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
+        Webpatser\Countries\CountriesServiceProvider::class,
+        Spatie\Translatable\TranslatableServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
         //
 
@@ -228,6 +236,10 @@ return [
         'URL'          => Illuminate\Support\Facades\URL::class,
         'Validator'    => Illuminate\Support\Facades\Validator::class,
         'View'         => Illuminate\Support\Facades\View::class,
+        'JWTAuth'      => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory'   => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Countries'    => Webpatser\Countries\CountriesFacade::class,
+
 
     ],
 
