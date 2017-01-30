@@ -7,12 +7,15 @@
 @import "libs/vis/vis.min";
 @import "libs/vis/vis-timeline-graph2d.min";
 @import "libs/videojs/video-js";
+@import "libs/datatables/dataTables.bootstrap.min";
 @import "components/forms/touchForm";
 @import "components/navbars/navbarXs";
 @import "components/player/playerContainer";
 @import "components/menus/controlMenu";
+@import "components/buttons/buttons";
 @import "helpers/flex";
 @import "helpers/paddings";
+@import 'libs/bs-datetimepicker/bootstrap-datetimepicker';
 
 .main-content {
   margin-top: 50px;
@@ -47,6 +50,30 @@ input {
   border-color: #d3e0e9;
 }
 
+.wrapper {
+  background-color: #ecf0f5 !important;
+}
+
 [v-cloak] {
   display: none;
 }
+
+body, html {
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.wrapper {
+  height: auto; /* These two lines were the key. */
+  min-height: 100%;
+  /*overflow:   hidden;*/
+  /* Do not use this, it crops in small browsers. */
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
+.content {
+  margin-bottom: 53px;
+}
+

@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests\Scoutings;
 
+use App\Http\Requests\BaseFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ScoutingCreateRequest extends FormRequest
+class ScoutingCreateRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +25,12 @@ class ScoutingCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'leftAthlete'  => 'required',
-            'rightAthlete' => 'required',
-            'name'         => 'required',
-            'videoSrc'     => 'required|url'
+            'championship'     => 'required',
+            'event'            => 'required',
+            'leftAthlete'      => 'required',
+            'rightAthlete'     => 'required',
+            'translation.name' => 'required',
+            'videoSrc'         => 'required|url'
         ];
     }
 }

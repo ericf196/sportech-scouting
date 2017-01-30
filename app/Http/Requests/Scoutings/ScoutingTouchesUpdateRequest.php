@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\Scoutings;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
-class ScoutingTouchesUpdateRequest extends FormRequest
+class ScoutingTouchesUpdateRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

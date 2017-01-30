@@ -6,6 +6,7 @@ use App\Scouting\Entities\Scoutings\ScoutingTouch;
 use App\Scouting\Entities\Scoutings\ScoutingTouchAction;
 use App\Scouting\Entities\Scoutings\Tag;
 use App\Scouting\Entities\Scoutings\TagOption;
+use App\Scouting\Entities\Users\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ScoutingTouchesApiTest extends TestCase
@@ -17,6 +18,7 @@ class ScoutingTouchesApiTest extends TestCase
      */
     public function it_updates_an_scouting_with_touches_and_actions_with_tags()
     {
+        $user = factory(User::class)->create();
         $athlete = factory(Athlete::class)->create();
         $athlete2 = factory(Athlete::class)->create();
         $scouting = factory(Scouting::class)->create(['left_athlete_id' => $athlete->id, 'right_athlete_id' => $athlete2->id]);
@@ -50,7 +52,7 @@ class ScoutingTouchesApiTest extends TestCase
             'touches' => [$touch]
         ];
 
-        $response = $this->put('api/scouting/touches/' . $scouting->id . '?include=touches.actions.leftTags,touches.actions.rightTags', $data, $this->headers())
+        $response = $this->put('api/scoutings/touches/' . $scouting->id . '?include=touches.actions.leftTags,touches.actions.rightTags', $data, $this->headers($user))
             ->assertResponseOk()
             ->seeJsonStructure([
                 'data' => [
@@ -82,6 +84,7 @@ class ScoutingTouchesApiTest extends TestCase
      */
     public function it_updates_an_scouting_with_touches_and_actions()
     {
+        $user = factory(User::class)->create();
         $athlete = factory(Athlete::class)->create();
         $athlete2 = factory(Athlete::class)->create();
         $scouting = factory(Scouting::class)->create(['left_athlete_id' => $athlete->id, 'right_athlete_id' => $athlete2->id]);
@@ -98,7 +101,7 @@ class ScoutingTouchesApiTest extends TestCase
             'touches' => [$touch]
         ];
 
-        $response = $this->put('api/scouting/touches/' . $scouting->id . '?include=touches.actions.leftTags,touches.actions.rightTags', $data, $this->headers())
+        $response = $this->put('api/scoutings/touches/' . $scouting->id . '?include=touches.actions.leftTags,touches.actions.rightTags', $data, $this->headers($user))
             ->assertResponseOk()
             ->seeJsonStructure([
                 'data' => [
@@ -121,6 +124,7 @@ class ScoutingTouchesApiTest extends TestCase
      */
     public function it_updates_an_scouting_with_touches_and()
     {
+        $user = factory(User::class)->create();
         $athlete = factory(Athlete::class)->create();
         $athlete2 = factory(Athlete::class)->create();
         $scouting = factory(Scouting::class)->create(['left_athlete_id' => $athlete->id, 'right_athlete_id' => $athlete2->id]);
@@ -132,7 +136,7 @@ class ScoutingTouchesApiTest extends TestCase
             'touches' => [$touch]
         ];
 
-        $response = $this->put('api/scouting/touches/' . $scouting->id . '?include=touches.actions.leftTags,touches.actions.rightTags', $data, $this->headers())
+        $response = $this->put('api/scoutings/touches/' . $scouting->id . '?include=touches.actions.leftTags,touches.actions.rightTags', $data, $this->headers($user))
             ->assertResponseOk()
             ->seeJsonStructure([
                 'data' => [
@@ -156,18 +160,17 @@ class ScoutingTouchesApiTest extends TestCase
      */
     public function it_return_a_validation_error_when_updating_an_scouting_with_invalid_data()
     {
+        $user = factory(User::class)->create();
 
         $athlete = factory(Athlete::class)->create();
         $athlete2 = factory(Athlete::class)->create();
         $scouting = factory(Scouting::class)->create(['left_athlete_id' => $athlete->id, 'right_athlete_id' => $athlete2->id]);
 
         $data = [];
-        $response = $this->put('api/scouting/touches/' . $scouting->id, $data, $this->headers())
+        $response = $this->put('api/scoutings/touches/' . $scouting->id, $data, $this->headers($user))
             ->assertResponseStatus(422)
-            ->seeJson([
-                "touches" => [
-                    0 => "The touches field is required."
-                ]
+            ->seeJsonContains([
+                "errors" => ["The touches field is required."]
             ]);
 
         $touch = factory(ScoutingTouch::class)->make();
@@ -176,7 +179,7 @@ class ScoutingTouchesApiTest extends TestCase
         $data = [
             'touches' => [$touch]
         ];
-        $response = $this->put('api/scouting/touches/444', $data, $this->headers())->assertResponseStatus(400)
+        $response = $this->put('api/scoutings/touches/444', $data, $this->headers())->assertResponseStatus(400)
             ->seeJson([
                 "success" => false
             ]);

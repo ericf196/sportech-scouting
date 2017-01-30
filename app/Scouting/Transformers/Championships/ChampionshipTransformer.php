@@ -31,7 +31,12 @@ class ChampionshipTransformer extends TransformerAbstract
             'slug'        => $model->slug,
             'description' => $model->description,
             'init_date'   => $model->init_date ? $model->init_date->toDateTimeString() : '',
-            'end_date'    => $model->end_date ? $model->end_date->toDateTimeString() : ''
+            'end_date'    => $model->end_date ? $model->end_date->toDateTimeString() : '',
+            'image'       => $model->getFirstMediaUrl('poster', 'medium') ?: url('/images/missing/event/missing.png'),
+            'translation' => [
+                'name'        => $model->getTranslations('name'),
+                'description' => $model->getTranslations('description')
+            ]
         ];
     }
 

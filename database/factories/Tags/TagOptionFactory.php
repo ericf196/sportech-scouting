@@ -6,7 +6,7 @@ $factory->define(TagOption::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name'  => $faker->name,
+        'name'  => ['es' => $faker->words(1, true), 'en' => $faker->words(1, true)],
         'value' => $faker->words(1, true)
     ];
 });

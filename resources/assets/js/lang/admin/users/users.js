@@ -1,0 +1,62 @@
+export default {
+    "en": {
+        "users": {
+            "first_name": "First Name",
+            "last_name": "Last Name",
+            "code": "Code",
+            "email": "Email Address",
+            "created_at": "Created At",
+            "updated_at": "Updated At",
+            "new_users": "New Users",
+            "registered_users": "Registered Users",
+            "no_increment": "No increment from yesterday",
+            "increment": "{increment} % from yesterday",
+            "role": "Role",
+            "actions": "Actions",
+            "choose": "Choose an option",
+            "user_updated": "The user was updated successfully",
+            "delete_message": "Are you sure? this action cannot be undone",
+            "delete_user": "Delete User",
+            "user_info": "User Information",
+            "name": "Name",
+            "user_deleted": "The user was deleted successfully",
+            "user_not_found": "The user doesn't exist",
+            "user_blocked": "The user was blocked successfully",
+            "user_unblocked": "The user was unblocked successfully",
+            "block_user": "Block user",
+            "unblock_user": "Unblock user",
+            "block_message": "Are you sure? This will prevent the user logs on to the application",
+            "unblock_message": "Are you sure? This will grant access to the user to the application"
+        }
+    },
+    "es": {
+        "users": {
+            "first_name": "Nombre",
+            "last_name": "Apellido",
+            "code": "Código",
+            "email": "Correo Electrónico",
+            "created_at": "Creado El",
+            "updated_at": "Actualizado El",
+            "new_users": "Nuevos Usuarios",
+            "registered_users": "Usuarios Registrados",
+            "no_increment": "No hay incremento desde ayer",
+            "increment": "{increment} % desde ayer",
+            "role": "Rol",
+            "actions": "Acciones",
+            "choose": "Seleccione una opción",
+            "user_updated": "El usuario fue actualizado satisfactoriamente",
+            "delete_message": "¿Estas Seguro? esta acción no se puede deshacer",
+            "delete_user": "Eliminar Usuario",
+            "user_info": "Información del usuario",
+            "name": "Nombre",
+            "user_deleted": "El usuario fue eliminado satisfactoriamente",
+            "user_not_found": "El usuario no existe",
+            "user_blocked": "El usuario fue bloqueado satisfactoriamente",
+            "user_unblocked": "El usuario fue desbloqueado satisfactoriamente",
+            "block_user": "Bloquear usuario",
+            "unblock_user": "Desbloquear usuario",
+            "block_message": "¿Estas Seguro? Esto hara que el usuario no pueda iniciar sesión en la apliación",
+            "unblock_message": "¿Estas Seguro? Esto permitira al usuario iniciar sesión en la apliación"
+        }
+    }
+}

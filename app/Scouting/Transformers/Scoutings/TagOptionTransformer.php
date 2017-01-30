@@ -21,9 +21,12 @@ class TagOptionTransformer extends TransformerAbstract
     public function transform(TagOption $model)
     {
         return [
-            'id'    => (int)$model->id,
-            'name'  => $model->name,
-            'value' => $model->value
+            'id'           => (int)$model->id,
+            'name'         => $model->name,
+            'value'        => $model->value,
+            'translations' => [
+                'name' => $model->getTranslations('name')
+            ]
         ];
     }
 }

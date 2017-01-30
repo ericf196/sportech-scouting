@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'm'                       => 'Male',
+    'w'                       => 'Female',
+    'n'                       => 'Mixto',
+    'created_successfully'    => 'The Arbiter was created successfully',
+    'updated_successfully'    => 'The Arbiter was updated successfully',
+    'deleted_succesfully'     => 'The Arbiter was deleted successfully',
+    'not_found'               => 'The Arbiter doesn\'t exist',
+    'first_name'              => 'First Name',
+    'last_name'               => 'Last Name',
+    'code'                    => 'Code',
+    'country'                 => 'Country',
+    'countries'               => 'Countries',
+    'actions'                 => 'Actions',
+    'select_option'           => 'Select an option',
+    'upload_image'            => 'Upload image',
+    'federation_code'         => 'Federation Code',
+    'update'                  => 'Update',
+    'new'                     => 'New Arbiter',
+    'delete_message'          => 'Are you sure? this action cannot be undone',
+    'delete_arbiter'          => 'Delete Arbiter',
+    'arbiter_info'            => 'Arbiter Information',
+    'arbiter'                 => 'Arbiter',
+    'gender'                  => 'Gender',
+    'arbiters'                => 'Arbiters',
+];

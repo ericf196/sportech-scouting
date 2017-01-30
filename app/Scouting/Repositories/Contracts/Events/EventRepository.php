@@ -10,5 +10,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface EventRepository extends RepositoryInterface
 {
-    //
+    public function datatable();
+
+    public function datatableIn($ids);
 }

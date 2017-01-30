@@ -26,8 +26,9 @@ elixir((mix) => {
     mix.less('adminlte/AdminLte.less', pathCss);
     mix.less('adminlte/skins/skin-blue.less', pathCss);
     mix.less('adminlte/skins/skin-black.less', pathCss);
+    mix.less('vue-toastr/vue-toastr.less', pathCss);
     mix.sass('app.scss');
-    mix.webpack('/v3/app.js', require(webpackConfig), pathJs);
+    mix.webpack('dashboard/app.js', require(webpackConfig), pathJs);
     mix.copy('node_modules/p5/lib/p5.min.js', pathJs + '/p5js/p5.min.js')
     mix.copy('node_modules/p5/lib/addons/p5.dom.js', pathJs + '/p5js/addons/p5.dom.js')
     mix.scripts(['vendor/adminLte.js'], 'public/vendor/adminLte/adminLte.js')

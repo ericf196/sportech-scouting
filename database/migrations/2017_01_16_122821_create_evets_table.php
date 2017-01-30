@@ -16,10 +16,10 @@ class CreateEvetsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('championship_id')->unsigned()->nullable()->index('championship_idx')->comment('related championship id');
-            $table->integer('specialty_id')->unsigned();
-            $table->integer('category_id')->unsigned();
-            $table->integer('event_type_id')->nullable();
-            $table->integer('event_reach_id')->nullable();
+            $table->integer('specialty_id')->nullable()->unsigned();
+            $table->integer('category_id')->nullable()->unsigned();
+            $table->integer('event_type_id')->nullable()->nullable();
+            $table->integer('event_reach_id')->nullable()->nullable();
             $table->json('name')->nullable();
             $table->string('slug')->default('');
             $table->json('description')->nullable();

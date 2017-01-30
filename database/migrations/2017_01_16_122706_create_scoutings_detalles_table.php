@@ -15,7 +15,7 @@ class CreateScoutingsDetallesTable extends Migration
     {
         Schema::create('scoutings_touches', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('scouting_id');
+            $table->integer('scouting_id')->unsigned();
             $table->json('title');
             $table->integer('start');
             $table->integer('end');

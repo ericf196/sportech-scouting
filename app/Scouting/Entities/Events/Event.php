@@ -8,9 +8,10 @@ use App\Scouting\Entities\Sports\Category;
 use App\Scouting\Entities\Sports\Specialty;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Spatie\Translatable\HasTranslations;
 
-class Event extends Model
+class Event extends Model implements HasMediaConversions
 {
     use HasMediaTrait, HasTranslations;
 

@@ -10,5 +10,9 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface AthleteRepository extends RepositoryInterface
 {
-    //
+    /**
+     * @param $except
+     * @return mixed
+     */
+    public function datatable($except);
 }

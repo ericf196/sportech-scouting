@@ -16,9 +16,9 @@ class CreateAthletesTable extends Migration
         Schema::create('athletes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->nullable();
-            $table->integer('sport_id');
-            $table->integer('category_id');
-            $table->integer('specialty_id');
+            $table->integer('sport_id')->nullable();
+            $table->integer('category_id')->nullable();
+            $table->integer('specialty_id')->nullable();
             $table->integer('country_id');
             $table->string('first_name', 50);
             $table->string('last_name', 50);

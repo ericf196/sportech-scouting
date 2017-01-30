@@ -21,4 +21,12 @@ class AthleteRepositoryEloquent extends BaseRepository implements AthleteReposit
     {
         return Athlete::class;
     }
+
+    public function datatable($except)
+    {
+        if ($except) {
+            return $this->model->with(['sport', 'specialty', 'category', 'country', 'user'])->whereNotIn('id', explode(',', $except))->select('athletes.*');
+        }
+        return $this->model->with(['sport', 'specialty', 'category', 'country', 'user'])->select('athletes.*');
+    }
 }

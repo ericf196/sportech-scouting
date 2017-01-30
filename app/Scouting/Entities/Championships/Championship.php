@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Spatie\Translatable\HasTranslations;
 
-class Championship extends Model
+class Championship extends Model implements HasMediaConversions
 {
     use HasMediaTrait, HasTranslations;
 

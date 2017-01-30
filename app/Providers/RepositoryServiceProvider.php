@@ -11,6 +11,7 @@ use App\Scouting\Repositories\Contracts\Clubs\ClubRepository;
 use App\Scouting\Repositories\Contracts\Events\EventReachRepository;
 use App\Scouting\Repositories\Contracts\Events\EventRepository;
 use App\Scouting\Repositories\Contracts\Events\EventTypeRepository;
+use App\Scouting\Repositories\Contracts\Locations\CountryRepository;
 use App\Scouting\Repositories\Contracts\Locations\LocationRepository;
 use App\Scouting\Repositories\Contracts\Referees\RefereeRepository;
 use App\Scouting\Repositories\Contracts\Scoutings\ScoutingRepository;
@@ -20,6 +21,7 @@ use App\Scouting\Repositories\Contracts\Sports\SportRepository;
 use App\Scouting\Repositories\Events\EventReachRepositoryEloquent;
 use App\Scouting\Repositories\Events\EventRepositoryEloquent;
 use App\Scouting\Repositories\Events\EventTypeRepositoryEloquent;
+use App\Scouting\Repositories\Locations\CountryRepositoryEloquent;
 use App\Scouting\Repositories\Locations\LocationRepositoryEloquent;
 use App\Scouting\Repositories\Referees\RefereeRepositoryEloquent;
 use App\Scouting\Repositories\Scoutings\ScoutingRepositoryEloquent;
@@ -63,6 +65,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Scouting\Repositories\Contracts\Scoutings\ScoutingTouchActionRepository::class, \App\Scouting\Repositories\Scoutings\ScoutingTouchActionRepositoryEloquent::class);
         $this->app->bind(\App\Scouting\Repositories\Contracts\Scoutings\TagRepository::class, \App\Scouting\Repositories\Scoutings\TagRepositoryEloquent::class);
         $this->app->bind(\App\Scouting\Repositories\Contracts\Scoutings\TagOptionRepository::class, \App\Scouting\Repositories\Scoutings\TagOptionRepositoryEloquent::class);
+        $this->app->bind(CountryRepository::class, CountryRepositoryEloquent::class);
         //:end-bindings:
     }
 }

@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +47,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof TokenExpiredException) {
+            return response()->json(['token_expired'], $e->getStatusCode());
+        } else if ($exception instanceof TokenInvalidException) {
+            return response()->json(['token_invalid'], $e->getStatusCode());
+        }
+
         if (!($exception instanceof ValidationException))
             if ($request->ajax() || $request->wantsJson()) {
                 $json = [

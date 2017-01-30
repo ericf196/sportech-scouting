@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+use App\Scouting\Entities\Users\User;
+
 return [
 
     /*
@@ -33,7 +35,7 @@ return [
     |
     */
 
-    'ttl' => 60,
+    'ttl' => 480,
 
     /*
     |--------------------------------------------------------------------------
@@ -73,7 +75,7 @@ return [
     |
     */
 
-    'user' => 'App\User',
+    'user' => User::class,
 
     /*
     |--------------------------------------------------------------------------

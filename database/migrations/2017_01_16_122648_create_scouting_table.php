@@ -15,13 +15,13 @@ class CreateScoutingTable extends Migration
     {
         Schema::create('scoutings', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('scouter_id')->nullable();
-            $table->text('event_id')->nullable();
-            $table->text('championship_id')->nullable();
-            $table->text('left_athlete_id')->nullable();
-            $table->text('right_athlete_id')->nullable();
+            $table->integer('scouter_id')->unsigned()->nullable();
+            $table->integer('event_id')->unsigned()->nullable();
+            $table->integer('championship_id')->unsigned()->nullable();
+            $table->integer('left_athlete_id')->nullable()->unsigned();
+            $table->integer('right_athlete_id')->nullable()->unsigned();
             $table->json('name');
-            $table->json('description');
+            $table->json('description')->nullable();
             $table->text('video_src');
 
             $table->nullableTimestamps();

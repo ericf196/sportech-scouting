@@ -11,9 +11,10 @@ use App\Scouting\Entities\Users\User;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMedia;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Webpatser\Countries\Countries;
 
-class Athlete extends Model implements HasMedia
+class Athlete extends Model implements HasMediaConversions
 {
     use HasMediaTrait;
 

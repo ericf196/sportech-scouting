@@ -27,16 +27,42 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         return $app;
     }
 
-    protected function headers($user = null)
+    protected function token($user)
+    {
+        return JWTAuth::fromUser($user);
+    }
+
+    protected function headers($user = null, $token = null)
     {
         $headers = ['Accept' => 'application/json', 'X-Requested-With' => 'XMLHttpRequest'];
 
-        if (!is_null($user)) {
+        if (!is_null($user) && !$token) {
             $token = JWTAuth::fromUser($user);
-            JWTAuth::setToken($token);
+            $headers['Authorization'] = 'Bearer ' . $token;
+        } elseif ($token) {
             $headers['Authorization'] = 'Bearer ' . $token;
         }
 
         return $headers;
+    }
+
+    public function authGet($uri, $user = null)
+    {
+        return parent::get($uri . '?token=' . $this->token($user), $this->headers($user));
+    }
+
+    public function authPost($uri, $data, $user = null)
+    {
+        return parent::post($uri . '?token=' . $this->token($user), $data, $this->headers($user));
+    }
+
+    public function authPut($uri, $data, $user = null)
+    {
+        return parent::put($uri . '?token=' . $this->token($user), $data, $this->headers($user));
+    }
+
+    public function authDelete($uri, $data, $user = null)
+    {
+        return parent::delete($uri . '?token=' . $this->token($user), $data, $this->headers($user));
     }
 }

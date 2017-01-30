@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Composers\LocaleComposer;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer(
+            'welcome2', LocaleComposer::class
+        );
     }
 
     /**

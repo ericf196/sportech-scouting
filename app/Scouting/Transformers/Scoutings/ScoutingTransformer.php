@@ -36,44 +36,48 @@ class ScoutingTransformer extends TransformerAbstract
         return [
             'id'          => (int)$model->id,
             'name'        => $model->name,
-            'description' => $model->descrption,
+            'description' => $model->description,
             'videoSrc'    => $model->video_src,
+            'translation' => [
+                'name'        => $model->getTranslations('name'),
+                'description' => $model->getTranslations('description')
+            ]
         ];
     }
 
     public function includeLeftAthlete(Scouting $model)
     {
         if ($model->leftAthlete)
-            return $this->item($model->leftAthlete, new AthleteTransformer(),'parent');
+            return $this->item($model->leftAthlete, new AthleteTransformer(), 'parent');
     }
 
     public function includeRightAthlete(Scouting $model)
     {
         if ($model->rightAthlete)
-            return $this->item($model->rightAthlete, new AthleteTransformer(),'parent');
+            return $this->item($model->rightAthlete, new AthleteTransformer(), 'parent');
     }
 
     public function includeScouter(Scouting $model)
     {
         if ($model->scouter)
-            return $this->item($model->scouter, new UserTransformer(),'parent');
+            return $this->item($model->scouter, new UserTransformer(), 'parent');
     }
 
     public function includeEvent(Scouting $model)
     {
         if ($model->event)
-            return $this->item($model->event, new EventTransformer(),'parent');
+            return $this->item($model->event, new EventTransformer(), 'parent');
     }
 
     public function includeChampionship(Scouting $model)
     {
         if ($model->championship)
-            return $this->item($model->championship, new ChampionshipTransformer(),'parent');
+            return $this->item($model->championship, new ChampionshipTransformer(), 'parent');
     }
 
     public function includeTouches(Scouting $model)
     {
         if ($model->scoutingTouches)
-            return $this->collection($model->scoutingTouches, new ScoutingTouchTransformer(),'parent');
+            return $this->collection($model->scoutingTouches, new ScoutingTouchTransformer(), 'parent');
     }
 }

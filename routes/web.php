@@ -10,20 +10,31 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::get('/', function () {
-    $source = [
-        'techOrder' => ['youtube'],
-        'sources'   => [
-            [
-                'type' => "video/youtube",
-                'src'  => 'https://www.youtube.com/watch?v=OBprK4dXxTk'
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect']], function () {
+
+    Route::get('/', function () {
+        $source = [
+            'techOrder' => ['youtube'],
+            'sources'   => [
+                [
+                    'type' => "video/youtube",
+                    'src'  => 'https://www.youtube.com/watch?v=OBprK4dXxTk'
+                ]
             ]
-        ]
-    ];
+        ];
+        $locale = LaravelLocalization::getCurrentLocale();
+        \JavaScript::put([
+            'source' => $source,
+            'locale' => $locale,
 
-    \JavaScript::put([
-        'source' => $source,
-    ]);
-    return view('welcome2');
+        ]);
+        return view('dashboard');
+    });
+
+    Route::get('/test', function () {
+
+        return view('test');
+    });
 });

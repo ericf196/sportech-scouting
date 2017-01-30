@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add videojs-externals
+  /usr/local/bin/node /usr/local/bin/yarn add @websanova/vue-auth
 
 PATH: 
   /usr/local/sbin:/usr/local/Cellar/android-sdk/24.4.1_1/tools:/usr/local/Cellar/android-sdk/24.4.1_1/platform-tools:/usr/local/opt/php70/bin:/usr/local/bin:/usr/local/heroku/bin:/Users/pedrogorrin/.composer/vendor/bin:/Applications/MAMP/bin/php/php5.5.3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
@@ -21,6 +21,7 @@ npm manifest:
       "dev": "gulp watch"
     },
     "dependencies": {
+      "axios": "^0.15.3",
       "bootstrap-sass": "^3.3.7",
       "datatables.net": "^1.10.12",
       "datatables.net-bs": "^1.10.12",
@@ -40,19 +41,23 @@ npm manifest:
       "p5": "^0.5.4",
       "plyr": "^2.0.10",
       "processing-js": "^1.6.3",
+      "projectorjs": "^0.1.1",
       "slick-carousel": "^1.6.0",
       "vee-validate": "^2.0.0-beta.12",
       "video.js": "^5.12.6",
+      "videojs-externals": "^1.0.12",
       "videojs-record": "^1.5.0",
       "vis": "^4.17.0",
       "vue": "^2.0.5",
       "vue-animate": "^0.0.4",
+      "vue-axios": "^1.2.2",
       "vue-color": "^2.0.2",
       "vue-datetime-picker": "^0.2.1",
+      "vue-dragula": "^1.3.0",
       "vue-echo": "^0.1.2",
       "vue-i18n": "^4.6.0",
       "vue-resource": "^1.0.2",
-      "vue-router": "^2.0.0",
+      "vue-router": "^2.1.2",
       "vue-select": "github:sagalbot/vue-select",
       "vue-toastr": "^2.0.3",
       "vuex": "^2.0.0"
@@ -340,6 +345,10 @@ Lockfile:
     version "0.4.0"
     resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   
+  atoa@1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/atoa/-/atoa-1.0.0.tgz#0cc0e91a480e738f923ebc103676471779b34a49"
+  
   atob@~1.1.0:
     version "1.1.3"
     resolved "https://registry.yarnpkg.com/atob/-/atob-1.1.3.tgz#95f13629b12c3a51a5d215abdce2aa9f32f80773"
@@ -366,6 +375,12 @@ Lockfile:
   aws4@^1.2.1:
     version "1.5.0"
     resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.5.0.tgz#0a29ffb79c31c9e712eeb087e8e7a64b4a56d755"
+  
+  axios:
+    version "0.15.3"
+    resolved "https://registry.yarnpkg.com/axios/-/axios-0.15.3.tgz#2c9d638b2e191a08ea1d6cc988eadd6ba5bdc053"
+    dependencies:
+      follow-redirects "1.0.0"
   
   babel-code-frame@^6.16.0:
     version "6.16.0"
@@ -1549,6 +1564,13 @@ Lockfile:
     version "0.0.1"
     resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-0.0.1.tgz#92577db527ba6c4cf0a4568d84bc031f441e21f2"
   
+  contra@1.9.4:
+    version "1.9.4"
+    resolved "https://registry.yarnpkg.com/contra/-/contra-1.9.4.tgz#f53bde42d7e5b5985cae4d99a8d610526de8f28d"
+    dependencies:
+      atoa "1.0.0"
+      ticky "1.0.1"
+  
   convert-source-map@^1.1.0, convert-source-map@^1.1.1, convert-source-map@^1.2.0, convert-source-map@1.X:
     version "1.3.0"
     resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-1.3.0.tgz#e9f3e9c6e2728efc2676696a70eb382f73106a67"
@@ -1627,6 +1649,12 @@ Lockfile:
     dependencies:
       lru-cache "^4.0.1"
       which "^1.2.9"
+  
+  crossvent@1.5.4:
+    version "1.5.4"
+    resolved "https://registry.yarnpkg.com/crossvent/-/crossvent-1.5.4.tgz#da2c4f8f40c94782517bf2beec1044148194ab92"
+    dependencies:
+      custom-event "1.0.0"
   
   cryptiles@0.2.x:
     version "0.2.2"
@@ -1781,6 +1809,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
     dependencies:
       array-find-index "^1.0.1"
+  
+  custom-event@1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/custom-event/-/custom-event-1.0.0.tgz#2e4628be19dc4b214b5c02630c5971e811618062"
   
   cycle@1.0.x:
     version "1.0.3"
@@ -2127,6 +2159,13 @@ Lockfile:
       vinyl "^1.0.0"
       vinyl-fs "^2.2.0"
       ware "^1.2.0"
+  
+  dragula@3.7.2:
+    version "3.7.2"
+    resolved "https://registry.yarnpkg.com/dragula/-/dragula-3.7.2.tgz#4a35c9d3981ffac1a949c29ca7285058e87393ce"
+    dependencies:
+      contra "1.9.4"
+      crossvent "1.5.4"
   
   duplexer@~0.1.1:
     version "0.1.1"
@@ -2615,6 +2654,12 @@ Lockfile:
   fmerge@^1.2.0:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/fmerge/-/fmerge-1.2.0.tgz#36e99d2ae255e3ee1af666b4df780553671cf692"
+  
+  follow-redirects@1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.0.0.tgz#8e34298cbd2e176f254effec75a1c78cc849fd37"
+    dependencies:
+      debug "^2.2.0"
   
   for-each@^0.3.2:
     version "0.3.2"
@@ -5598,6 +5643,10 @@ Lockfile:
     dependencies:
       minifier "^0.7.1"
   
+  projectorjs:
+    version "0.1.1"
+    resolved "https://registry.yarnpkg.com/projectorjs/-/projectorjs-0.1.1.tgz#9f2b482721f2914b5e11713baf77b2a70ca8e05b"
+  
   promise@^7.1.1:
     version "7.1.1"
     resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
@@ -6769,6 +6818,10 @@ Lockfile:
       readable-stream "~1.0.17"
       xtend "~2.1.1"
   
+  ticky@1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/ticky/-/ticky-1.0.1.tgz#b7cfa71e768f1c9000c497b9151b30947c50e46d"
+  
   tildify@^1.0.0:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/tildify/-/tildify-1.2.0.tgz#dcec03f55dca9b7aa3e5b04f21817eb56e63588a"
@@ -7087,7 +7140,7 @@ Lockfile:
       videojs-vtt.js "0.12.1"
       xhr "2.2.0"
   
-  video.js@>=5.0.0:
+  video.js@^5.11.6, video.js@>=5.0.0:
     version "5.13.2"
     resolved "https://registry.yarnpkg.com/video.js/-/video.js-5.13.2.tgz#a89de931f9fdfc7f83a8a17e7174c8fb319f98f6"
     dependencies:
@@ -7102,6 +7155,12 @@ Lockfile:
       videojs-swf "5.1.0"
       videojs-vtt.js "0.12.1"
       xhr "2.2.0"
+  
+  videojs-externals:
+    version "1.0.12"
+    resolved "https://registry.yarnpkg.com/videojs-externals/-/videojs-externals-1.0.12.tgz#7814ac347d1c5938b427b7dcbdc5653f39c952fb"
+    dependencies:
+      video.js "^5.11.6"
   
   videojs-font@2.0.0:
     version "2.0.0"
@@ -7270,6 +7329,10 @@ Lockfile:
     version "0.0.4"
     resolved "https://registry.yarnpkg.com/vue-animate/-/vue-animate-0.0.4.tgz#bf7afcdfec4694e4d19147a75f6761ecf3735f8f"
   
+  vue-axios:
+    version "1.2.2"
+    resolved "https://registry.yarnpkg.com/vue-axios/-/vue-axios-1.2.2.tgz#d18bb48fa7bf469ffa86676960f52a89b7d38a9d"
+  
   vue-color:
     version "2.0.2"
     resolved "https://registry.yarnpkg.com/vue-color/-/vue-color-2.0.2.tgz#b4832e33d98bf8de79f58f311b7029e96ce3f8c9"
@@ -7281,6 +7344,12 @@ Lockfile:
   vue-datetime-picker@^0.2.1:
     version "0.2.1"
     resolved "https://registry.yarnpkg.com/vue-datetime-picker/-/vue-datetime-picker-0.2.1.tgz#7b724dde3b72d531645a27d6597589d6d882ad3b"
+  
+  vue-dragula@^1.3.0:
+    version "1.3.0"
+    resolved "https://registry.yarnpkg.com/vue-dragula/-/vue-dragula-1.3.0.tgz#2672ce290c8d48f02eaaa117f71fd3acff450ef1"
+    dependencies:
+      dragula "3.7.2"
   
   vue-echo@^0.1.2:
     version "0.1.2"
@@ -7328,9 +7397,9 @@ Lockfile:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/vue-resource/-/vue-resource-1.0.3.tgz#8d52d0d8a9ed5f2ae704c68d530c84ceaf97be14"
   
-  vue-router@^2.0.0:
-    version "2.0.1"
-    resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.0.1.tgz#88b83cdc9497bad5b20b579e847a7e7240e221dd"
+  vue-router:
+    version "2.1.2"
+    resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.1.2.tgz#65643861df3dd822662623124acecb2ec2a3b620"
   
   "vue-select@github:sagalbot/vue-select":
     version "1.3.3"

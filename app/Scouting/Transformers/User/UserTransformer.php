@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Scouting\Transformers\Sports;
+namespace App\Scouting\Transformers\User;
 
 use App\Scouting\Entities\Users\User;
 use League\Fractal\TransformerAbstract;
