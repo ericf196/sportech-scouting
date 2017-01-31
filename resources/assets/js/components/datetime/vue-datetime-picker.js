@@ -61,6 +61,7 @@ var DEFAULT_LANGUAGE = "en-US";
  *    function which accept one argument: the new date time, which is a moment
  *    object.
  */
+
 module.exports = {
     replace: true,
     inherit: false,

@@ -15,7 +15,7 @@ use App\Scouting\Entities\Users\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Webpatser\Countries\Countries;
 
-class TagsApiTest extends TestCase
+class TagsApiTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 

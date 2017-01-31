@@ -187,7 +187,7 @@
     }
 </script>
 
-<style lang="sass" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
     .select-input {
         margin-top: 0 !important;
     }

@@ -272,7 +272,6 @@
     import vSelect from "base/components/forms/select/select.vue"
     import adminHeader from 'base/components/header/pageHeader.vue'
     import eventService from 'base/dashboard/services/events/eventService'
-    import 'datetimepicker';
 
     export default{
         components: {
@@ -495,7 +494,7 @@
     }
 </script>
 
-<style lang="sass" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
     .select-input {
         margin-top: 0 !important;
     }

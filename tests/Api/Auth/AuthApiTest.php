@@ -8,7 +8,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  * @group auth
  */
 
-class AuthApiTest extends TestCase
+class AuthApiTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 

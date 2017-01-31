@@ -13,7 +13,7 @@ use App\Scouting\Entities\Users\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Webpatser\Countries\Countries;
 
-class ScoutingApiTest extends TestCase
+class ScoutingApiTest extends BrowserKitTestCase
 {
     use DatabaseTransactions;
 

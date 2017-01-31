@@ -102,7 +102,7 @@
     import {mapActions} from 'vuex'
     import vSelect from "base/components/forms/select/select.vue"
     import championshipService from 'base/dashboard/services/championships/championshipService'
-    import 'datetimepicker';
+
     import moment from 'moment';
 
     export default{
@@ -186,7 +186,7 @@
     }
 </script>
 
-<style lang="sass" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
     .select-input {
         margin-top: 0 !important;
     }

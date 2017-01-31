@@ -20,7 +20,7 @@
             </div>
         </div>
 </template>
-<style lang="sass" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
     .tags {
         a {
             border-radius: 0 !important;

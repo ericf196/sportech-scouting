@@ -10,7 +10,7 @@
         </ol>
     </section>
 </template>
-<style lang="sass" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
     .admin-header {
         height: 97px;
         margin-bottom: 20px;

@@ -16,5 +16,7 @@
     <script src="/js/p5js/libs/p5.js"></script>
     <script type='text/javascript' src='/js/p5js/libs/addons/p5.dom.js'></script>
     <script type='text/javascript' src='/js/p5js/libs/addons/p5.collide.js'></script>
-    <script src="{{loadAsset('js/app.js')}}"></script>
+    <script src="{{'js/manifest.js'}}"></script>
+    <script src="{{'js/vendor.js'}}"></script>
+    <script src="{{'js/app.js'}}"></script>
 @endsection

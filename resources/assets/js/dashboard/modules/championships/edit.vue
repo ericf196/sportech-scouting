@@ -164,7 +164,7 @@
     import vSelect from "base/components/forms/select/select.vue"
     import adminHeader from 'base/components/header/pageHeader.vue'
     import championshipService from 'base/dashboard/services/championships/championshipService'
-    import 'datetimepicker';
+
     import moment from 'moment';
 
     export default{

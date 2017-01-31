@@ -6,9 +6,9 @@ function loadAsset($path)
         $file = array_pop($pathArray);
         array_push($pathArray, 'build');
         array_push($pathArray, $file);
-        $path = url(implode('/', $pathArray));
+        $path = implode('/', $pathArray);
         return env('APP_VERSIONING') ? elixir($path) : $path;
     } else {
-        return url($path);
+        return $path;
     }
 }

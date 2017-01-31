@@ -119,7 +119,7 @@
         </div>
     </div>
 </template>
-<style lang="sass" rel="stylesheet/scss">
+<style lang="scss" rel="stylesheet/scss">
     .inspector-info {
         margin-left: 10px;
         .inspector-info--title {
