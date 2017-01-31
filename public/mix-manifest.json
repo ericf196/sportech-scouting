@@ -1,10 +1,10 @@
 {
-  "/js/build/app.js": "/js/build/app.js",
-  "/css/build/AdminLte.css": "/css/build/AdminLte.css",
-  "/css/build/skin-blue.css": "/css/build/skin-blue.css",
-  "/css/build/skin-black.css": "/css/build/skin-black.css",
-  "/css/build/vue-toastr.css": "/css/build/vue-toastr.css",
-  "/css/build/app.css": "/css/build/app.css",
-  "/js/build/vendor.js": "/js/build/vendor.js",
-  "/js/build/manifest.js": "/js/build/manifest.js"
+  "/js/app.js": "/js/app.js",
+  "/css/AdminLte.css": "/css/AdminLte.css",
+  "/css/skin-blue.css": "/css/skin-blue.css",
+  "/css/skin-black.css": "/css/skin-black.css",
+  "/css/vue-toastr.css": "/css/vue-toastr.css",
+  "/css/app.css": "/css/app.css",
+  "/js/vendor.js": "/js/vendor.js",
+  "/js/manifest.js": "/js/manifest.js"
 }

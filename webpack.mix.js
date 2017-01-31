@@ -30,11 +30,6 @@ var rootJs = 'resources/assets/js/';
 var rootCss = 'resources/assets/';
 var pathJs = 'public/js';
 var pathCss = 'public/css';
-if (inProduction) {
-    pathJs = 'public/js/build';
-    pathCss = 'public/css/build';
-}
-console.log(mix.config.inProduction);
 
 mix.less(rootCss + 'less/adminlte/AdminLte.less', pathCss)
     .less(rootCss + 'less/adminlte/skins/skin-blue.less', pathCss)
