@@ -21,7 +21,7 @@ mix.webpackConfig({
     },
     output: {
         filename: '[name].js',
-        chunkFilename: inProduction ? 'js/build/[name].app.js' : 'js/[name].app.js',
+        chunkFilename: 'js/[name].app.js',
         publicPath: '/'
     }
 });
@@ -43,10 +43,10 @@ mix.less(rootCss + 'less/adminlte/AdminLte.less', pathCss)
         '@websanova/vue-auth', '@websanova/vue-auth/drivers/auth/bearer.js',
         '@websanova/vue-auth/drivers/http/vue-resource.1.x.js',
         '@websanova/vue-auth/drivers/router/vue-router.2.x.js'])
-    .copy('node_modules/p5/lib/p5.min.js', pathJs + '/p5js/p5.min.js')
-    .copy('node_modules/p5/lib/addons/p5.dom.js', pathJs + '/p5js/addons/p5.dom.js')
-    .combine([rootJs + 'vendor/adminLte.js'], 'public/vendor/adminLte/adminLte.js')
-    .copy('node_modules/bootstrap-sass/assets/javascripts/bootstrap.min.js', 'public/vendor/bootstrap/bootstrap.min.js')
-    .copy('node_modules/videojs-externals/dist/videojs-externals.min.js', 'public/vendor/videojs/libs/videojs-externals.min.js')
-    .copy('node_modules/projectorjs/dist/js/projector.min.js', 'public/vendor/videojs/libs/projectorjs/projector.min.js')
-    .copy('node_modules/projectorjs/dist/css/projectorjs.min.css', 'public/vendor/videojs/libs/projectorjs/projectorjs.min.css')
+    .combine(['node_modules/p5/lib/p5.min.js',
+        'node_modules/p5/lib/addons/p5.dom.js',
+        'resources/assets/js/libs/p5js/addons/p5.collide.js'], 'public/vendor/p5js/p5.min.js')
+    .combine(['node_modules/video.js/dist/video.js',
+        'node_modules/videojs-youtube/dist/Youtube.js',
+        'node_modules/videojs-abloop/videojs-abloop.js',
+        'resources/assets/js/libs/videojs/libs/videojs-disable-progress.js'], 'public/vendor/videojs/video.min.js');

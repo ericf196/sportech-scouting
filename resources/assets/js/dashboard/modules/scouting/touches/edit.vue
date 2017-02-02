@@ -1,21 +1,16 @@
 <template>
     <div>
         <admin-header :title="title" :breadcrumbs="breadcrumbs"></admin-header>
-        <section class="content">
-            <div class="row" v-if="!playerReady">
-                <div class="col-xs-12 text-center">
-                    <h3>Loading....</h3>
-                </div>
-            </div>
+        <section class="content overlay-wrapper">
             <div class="row is-flex">
                 <div class="col-xs-12 col-md-6 player-container">
                     <dnc-player v-if="initialized" :source="source" ref="player"></dnc-player>
                 </div>
                 <div class="col-xs-12 col-md-6 touches-container">
-                    <touches-list v-if="playerReady"></touches-list>
+                    <touches-list></touches-list>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" v-show="playerReady">
                 <div class="col-xs-12">
                     <div class="mailbox-controls control-menu">
                         <div class="btn-group">
@@ -68,7 +63,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row" v-show="playerReady">
                 <div class="col-xs-6">
                     <button v-on:click="save" class="btn btn-success btn-block"> {{$t('forms.save')}}</button>
                 </div>
@@ -76,6 +71,10 @@
                     <button v-on:click="cancel" class="btn btn-danger btn-block">{{$t('forms.back')}}</button>
                 </div>
             </div>
+            <div class="overlay" v-if="!playerReady">
+                <i class="fa fa-refresh fa-spin"></i>
+            </div>
+
         </section>
     </div>
 </template>
@@ -170,7 +169,6 @@
             subscribe(this, (data) => {
                 if (data.action == 'playerReady') {
                     console.log('playerReady subscript', this.playerReady);
-
                     if (getState('*').playerReady && !this.playerReady) {
                         this.playerReady = getState('*').playerReady;
                         this.$nextTick(function () {

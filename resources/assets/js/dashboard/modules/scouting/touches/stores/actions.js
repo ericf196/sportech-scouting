@@ -2,6 +2,7 @@ import {dispatch} from 'mockstate';
 
 export const actions = {
     playerReady(state, ready){
+        console.log('playerReady');
         state.playerReady = ready;
         return ready;
     },

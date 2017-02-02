@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn upgrade vue
+  /usr/local/bin/node /usr/local/bin/yarn upgrade video.js
 
 PATH: 
   /usr/local/sbin:/usr/local/Cellar/android-sdk/24.4.1_1/tools:/usr/local/Cellar/android-sdk/24.4.1_1/platform-tools:/usr/local/Cellar/php70/7.0.15_8/bin:/usr/local/bin:/usr/local/heroku/bin:/Users/pedrogorrin/.composer/vendor/bin:/Applications/MAMP/bin/php/php5.5.3/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
@@ -46,11 +46,11 @@ npm manifest:
       "projectorjs": "^0.1.1",
       "slick-carousel": "^1.6.0",
       "vee-validate": "^2.0.0-beta.18",
-      "video.js": "^5.12.6",
+      "video.js": "^5.16.0",
       "videojs-externals": "^1.0.12",
       "videojs-record": "^1.5.0",
       "vis": "^4.17.0",
-      "vue": "2.0.8",
+      "vue": "^2.1.10",
       "vue-animate": "^0.0.4",
       "vue-axios": "^1.2.2",
       "vue-color": "^2.0.2",
@@ -66,7 +66,6 @@ npm manifest:
     },
     "devDependencies": {
       "babel-preset-stage-2": "^6.13.0",
-      "video.js": "^5.11.9"
     }
   }
 
@@ -7339,6 +7338,10 @@ Lockfile:
     dependencies:
       indexof "0.0.1"
   
+  vue:
+    version "2.1.10"
+    resolved "https://registry.yarnpkg.com/vue/-/vue-2.1.10.tgz#c9235ca48c7925137be5807832ac4e3ac180427b"
+  
   vue-animate:
     version "0.0.4"
     resolved "https://registry.yarnpkg.com/vue-animate/-/vue-animate-0.0.4.tgz#bf7afcdfec4694e4d19147a75f6761ecf3735f8f"
@@ -7428,10 +7431,6 @@ Lockfile:
   vue-toastr:
     version "2.0.5"
     resolved "https://registry.yarnpkg.com/vue-toastr/-/vue-toastr-2.0.5.tgz#d680d363730269703a69bda81a554a6ee278695c"
-  
-  vue@2.0.8:
-    version "2.0.8"
-    resolved "https://registry.yarnpkg.com/vue/-/vue-2.0.8.tgz#bbc191db5e1442f208604f994f03e49ac09e69d2"
   
   vuex@^2.0.0:
     version "2.0.0"
@@ -7841,5 +7840,14 @@ Lockfile:
       wrap-ansi "^2.0.0"
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/Users/pedrogorrin/Documents/Trabajo/sportech37/sportech-scouting/node_modules/.yarn-integrity'
-      at Error (native)
+  SyntaxError: /Users/pedrogorrin/Documents/Trabajo/sportech37/sportech-scouting/package.json: Unexpected token } in JSON at position 2180
+      at Object.parse (native)
+      at /usr/local/Cellar/yarn/0.16.1/libexec/lib/node_modules/yarn/lib/util/fs.js:271:57
+      at next (native)
+      at step (/usr/local/Cellar/yarn/0.16.1/libexec/lib/node_modules/yarn/node_modules/babel-runtime/helpers/asyncToGenerator.js:17:30)
+      at /usr/local/Cellar/yarn/0.16.1/libexec/lib/node_modules/yarn/node_modules/babel-runtime/helpers/asyncToGenerator.js:28:20
+      at run (/usr/local/Cellar/yarn/0.16.1/libexec/lib/node_modules/yarn/node_modules/core-js/library/modules/es6.promise.js:87:22)
+      at /usr/local/Cellar/yarn/0.16.1/libexec/lib/node_modules/yarn/node_modules/core-js/library/modules/es6.promise.js:100:28
+      at flush (/usr/local/Cellar/yarn/0.16.1/libexec/lib/node_modules/yarn/node_modules/core-js/library/modules/_microtask.js:18:9)
+      at _combinedTickCallback (internal/process/next_tick.js:67:7)
+      at process._tickCallback (internal/process/next_tick.js:98:9)

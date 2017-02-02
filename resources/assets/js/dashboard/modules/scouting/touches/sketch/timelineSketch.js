@@ -29,14 +29,6 @@ export default function sketch(p) {
 
         state.stage.instance.setup();
         p.colorMode(p.RGB, 255, 255, 255, 100)
-        state.player.instance.play();
-        state.player.instance.on('timeupdate', function durationSetter(event) {
-            if (!state.player.duration) {
-                dispatch('setDuration', state.player.instance.duration())
-                dispatch('setZoom', 1);
-                state.player.instance.off('timeupdate', durationSetter)
-            }
-        });
 
         configButtons();
         p.frameRate(10);

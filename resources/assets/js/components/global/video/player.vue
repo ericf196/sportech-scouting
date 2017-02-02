@@ -18,7 +18,7 @@
     }
 </style>
 <script>
-    import {dispatch} from 'mockstate';
+    import {dispatch, getState} from 'mockstate';
 
     export default{
         data(){
@@ -82,11 +82,23 @@
                         endOffset: this.offset.end
                     }
                 }
-                this.player = videojs(this.$refs.player, config, ()=> {
-                    console.log('palyerReady');
-                    dispatch('playerReady', true);
-                })
+                this.player = videojs(this.$refs.player, config);
                 dispatch('setPlayer', this.player);
+                this.player.play();
+                this.player.on('timeupdate', function durationSetter(event) {
+                    var state = getState('*');
+                    if (!state.player.duration) {
+                        dispatch('setDuration', state.player.instance.duration());
+                        dispatch('setZoom', 1);
+                        if (state.player.duration) {
+                            dispatch('playerReady', true);
+                            state.player.instance.off('timeupdate', durationSetter)
+                        }
+                    } else {
+                        dispatch('playerReady', true);
+                        state.player.instance.off('timeupdate', durationSetter)
+                    }
+                });
                 this.player.playbackRate(1);
                 this.player.on('timeupdate', ()=> {
                     dispatch('setCurrentTime', this.player.currentTime());
