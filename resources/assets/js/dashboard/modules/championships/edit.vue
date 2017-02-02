@@ -193,11 +193,11 @@
             breadcrumbs(){
                 return [
                     {
-                        href: '/',
+                        href: '/dashboard',
                         title: 'admin.home'
                     },
                     {
-                        href: '/championships/list',
+                        href: '/championships',
                         title: 'admin.championships'
                     },
                     {

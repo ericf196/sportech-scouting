@@ -15,6 +15,7 @@ return [
     'home'               => 'Home',
     'admin'              => 'Administrador',
     'user'               => 'Usuario',
+    'touches'            => 'Toques',
     'assistant'          => 'Asistente',
     'new'                => 'Nuevo',
     'update'             => 'Actualizar',

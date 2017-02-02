@@ -15,6 +15,7 @@ return [
     'home'               => 'Home',
     'admin'              => 'Administrator',
     'user'               => 'User',
+    'touches'            => 'Touches',
     'assistant'          => 'Assistant',
     'new'                => 'New',
     'update'             => 'Update',

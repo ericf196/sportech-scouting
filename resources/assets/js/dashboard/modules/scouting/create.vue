@@ -306,7 +306,7 @@
             breadcrumbs(){
                 return [
                     {
-                        href: '/',
+                        href: '/dashboard',
                         title: 'admin.home'
                     },
                     {

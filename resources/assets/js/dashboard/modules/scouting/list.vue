@@ -46,11 +46,11 @@
             return {
                 breadcrumbs: [
                     {
-                        href: '/',
+                        href: '/dashboard',
                         title: 'Home'
                     },
                     {
-                        href: 'scoutings',
+                        href: '/scoutings/list',
                         title: 'Scoutings'
                     }
                 ],

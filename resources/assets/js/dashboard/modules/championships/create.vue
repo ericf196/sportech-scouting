@@ -17,8 +17,10 @@
                                             <label for="nameen" data-error="">{{$t('championships.name')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i
-                                                        class="fa fa-user"></i></div>
+                                                <div class="input-group-addon">
+                                                    <i
+                                                            class="fa fa-user"></i>
+                                                </div>
                                                 <input id="nameen" name="championship.translation.name.en"
                                                        type="text"
                                                        :placeholder="$t('championships.name')"
@@ -29,7 +31,9 @@
                                                        class="form-control">
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('championship.translation.name.en')">{{ errors.first('championship.translation.name.en') }}</span>
+                                                  v-show="errors.has('championship.translation.name.en')">{{
+                                                errors.first('championship.translation.name.en') }}
+                                            </span>
                                         </div>
                                         <div class="form-group"
                                              :class="{'has-error': errors.has('championship.translation.description.en') }">
@@ -37,8 +41,10 @@
                                                 {{$t('championships.description')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i
-                                                        class="fa fa-user"></i></div>
+                                                <div class="input-group-addon">
+                                                    <i
+                                                            class="fa fa-user"></i>
+                                                </div>
                                                 <textarea id="descriptionen"
                                                           name="championship.translation.description.en"
                                                           type="text"
@@ -50,7 +56,9 @@
                                                           class="form-control"></textarea>
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('championship.translation.description.en')">{{ errors.first('championship.translation.description.en') }}</span>
+                                                  v-show="errors.has('championship.translation.description.en')">{{
+                                                errors.first('championship.translation.description.en') }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6 text-center">
@@ -80,7 +88,9 @@
                                                    :data-vv-as="$t('championships.sport')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('championship.sport')">{{ errors.first('championship.sport') }}</span>
+                                                  v-show="errors.has('championship.sport')">{{
+                                                errors.first('championship.sport') }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +115,9 @@
                                                    :data-vv-as="$t('championships.init_date')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('championship.init_date')">{{ errors.first('championship.init_date') }}</span>
+                                                  v-show="errors.has('championship.init_date')">{{
+                                                errors.first('championship.init_date') }}
+                                            </span>
 
                                         </div>
                                     </div>
@@ -128,7 +140,9 @@
                                                    :data-vv-as="$t('championships.end_date')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('championship.end_date')">{{ errors.first('championship.end_date') }}</span>
+                                                  v-show="errors.has('championship.end_date')">{{
+                                                errors.first('championship.end_date') }}
+                                            </span>
 
                                         </div>
                                     </div>
@@ -198,11 +212,11 @@
             breadcrumbs(){
                 return [
                     {
-                        href: '/',
+                        href: '/dashboard',
                         title: 'admin.home'
                     },
                     {
-                        href: '/championships/list',
+                        href: '/championships',
                         title: 'admin.championships'
                     },
                     {

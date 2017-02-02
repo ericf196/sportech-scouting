@@ -17,8 +17,10 @@
                                             <label for="nameen" data-error="">{{$t('events.name')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i
-                                                        class="fa fa-user"></i></div>
+                                                <div class="input-group-addon">
+                                                    <i
+                                                            class="fa fa-user"></i>
+                                                </div>
                                                 <input id="nameen" name="event.translation.name.en"
                                                        type="text"
                                                        :placeholder="$t('events.name')"
@@ -29,7 +31,9 @@
                                                        class="form-control">
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.translation.name.en')">{{ errors.first('event.translation.name.en') }}</span>
+                                                  v-show="errors.has('event.translation.name.en')">{{
+                                                errors.first('event.translation.name.en') }}
+                                            </span>
                                         </div>
                                         <div class="form-group"
                                              :class="{'has-error': errors.has('event.translation.description.en') }">
@@ -37,8 +41,10 @@
                                                 {{$t('events.description')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i
-                                                        class="fa fa-user"></i></div>
+                                                <div class="input-group-addon">
+                                                    <i
+                                                            class="fa fa-user"></i>
+                                                </div>
                                                 <textarea id="descriptionen"
                                                           name="event.translation.description.en"
                                                           type="text"
@@ -50,7 +56,9 @@
                                                           class="form-control"></textarea>
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.translation.description.en')">{{ errors.first('event.translation.description.en') }}</span>
+                                                  v-show="errors.has('event.translation.description.en')">{{
+                                                errors.first('event.translation.description.en') }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6 text-center">
@@ -80,7 +88,9 @@
                                                    :data-vv-as="$t('events.championship')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.championship')">{{ errors.first('event.championship') }}</span>
+                                                  v-show="errors.has('event.championship')">{{
+                                                errors.first('event.championship') }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
@@ -99,7 +109,9 @@
                                                    :data-vv-as="$t('events.specialty')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.specialty')">{{ errors.first('event.specialty') }}</span>
+                                                  v-show="errors.has('event.specialty')">{{
+                                                errors.first('event.specialty') }}
+                                            </span>
 
 
                                         </div>
@@ -123,7 +135,9 @@
                                                    :data-vv-as="$t('events.category')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.category')">{{ errors.first('event.category') }}</span>
+                                                  v-show="errors.has('event.category')">{{
+                                                errors.first('event.category') }}
+                                            </span>
 
                                         </div>
                                     </div>
@@ -143,7 +157,8 @@
                                                    :data-vv-as="$t('events.gender')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.gender')">{{ errors.first('event.gender') }}</span>
+                                                  v-show="errors.has('event.gender')">{{ errors.first('event.gender') }}
+                                            </span>
 
                                         </div>
                                     </div>
@@ -165,7 +180,8 @@
                                                    :data-vv-as="$t('events.type')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.type')">{{ errors.first('event.type') }}</span>
+                                                  v-show="errors.has('event.type')">{{ errors.first('event.type') }}
+                                            </span>
 
                                         </div>
 
@@ -187,7 +203,8 @@
                                                    :data-vv-as="$t('events.reach')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.reach')">{{ errors.first('event.reach') }}</span>
+                                                  v-show="errors.has('event.reach')">{{ errors.first('event.reach') }}
+                                            </span>
 
 
                                         </div>
@@ -213,7 +230,9 @@
                                                    :data-vv-as="$t('events.init_date')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.init_date')">{{ errors.first('event.init_date') }}</span>
+                                                  v-show="errors.has('event.init_date')">{{
+                                                errors.first('event.init_date') }}
+                                            </span>
 
                                         </div>
                                     </div>
@@ -236,7 +255,9 @@
                                                    :data-vv-as="$t('events.end_date')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.end_date')">{{ errors.first('event.end_date') }}</span>
+                                                  v-show="errors.has('event.end_date')">{{
+                                                errors.first('event.end_date') }}
+                                            </span>
 
                                         </div>
                                     </div>
@@ -313,11 +334,11 @@
             breadcrumbs(){
                 return [
                     {
-                        href: '/',
+                        href: '/dashboard',
                         title: 'admin.home'
                     },
                     {
-                        href: '/events/list',
+                        href: '/events',
                         title: 'admin.events'
                     },
                     {
