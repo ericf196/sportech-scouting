@@ -95,16 +95,16 @@ class Athlete extends Model implements HasMediaConversions
     public function registerMediaConversions()
     {
         $this->addMediaConversion('thumb')
-            ->setManipulations(['w' => 75, 'h' => 100, 'fit' => 'crop', 'bg' => 'white'])
+            ->setManipulations(['w' => 75, 'h' => 75, 'fit' => 'crop', 'bg' => 'white'])
             ->performOnCollections('profile');
         $this->addMediaConversion('small')
-            ->setManipulations(['w' => 150, 'h' => 200, 'fit' => 'crop', 'bg' => 'white'])
+            ->setManipulations(['w' => 150, 'h' => 150, 'fit' => 'crop', 'bg' => 'white'])
             ->performOnCollections('profile');
         $this->addMediaConversion('medium')
             ->setManipulations(['w' => 300, 'h' => 300, 'fit' => 'crop', 'bg' => 'white'])
             ->performOnCollections('profile');
         $this->addMediaConversion('large')
-            ->setManipulations(['w' => 600, 'h' => 800, 'fit' => 'crop', 'bg' => 'white'])
+            ->setManipulations(['w' => 600, 'h' => 600, 'fit' => 'crop', 'bg' => 'white'])
             ->performOnCollections('profile');
     }
 
