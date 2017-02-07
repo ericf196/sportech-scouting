@@ -7,6 +7,16 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Spatie\Translatable\HasTranslations;
 
+/**
+ * App\Scouting\Entities\Events\EventReach
+ *
+ * @property int $id
+ * @property array $reach
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Events\Event[] $events
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\EventReach whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\EventReach whereReach($value)
+ * @mixin \Eloquent
+ */
 class EventReach extends Model
 {
     use HasTranslations;

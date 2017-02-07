@@ -13,40 +13,47 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('athlete.first_name') }">
+                                             :class="{'has-error': errors.has('first_name') }">
                                             <label for="first_name" data-vv-error="">{{$t('athletes.first_name')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </div>
                                                 <input id="first_name"
                                                        type="text"
-                                                       name="athlete.first_name"
+                                                       name="first_name"
                                                        :placeholder="$t('athletes.first_name')"
-                                                       v-validate.initial="athlete.first_name"
-                                                       data-vv-rules="required"
+                                                       v-validate="'required'"
                                                        :data-vv-as="$t('athletes.first_name')"
                                                        v-model="athlete.first_name"
                                                        class="form-control">
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('athlete.first_name')">{{ errors.first('athlete.first_name') }}</span>
+                                                  v-show="errors.has('first_name')">{{
+                                                errors.first('first_name') }}
+                                            </span>
                                         </div>
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('athlete.last_name') }">
+                                             :class="{'has-error': errors.has('last_name') }">
                                             <label for="last_name" data-vv-error="">{{$t('athletes.last_name')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-user"></i>
+                                                </div>
                                                 <input id="last_name" type="text"
-                                                       name="athlete.last_name"
+                                                       name="last_name"
                                                        :placeholder="$t('athletes.last_name')"
                                                        v-model="athlete.last_name"
-                                                       v-validate.initial="athlete.last_name" data-vv-rules="required"
+                                                       v-validate.initial="'required'"
                                                        :data-vv-as="$t('athletes.last_name')"
                                                        class="form-control">
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('athlete.last_name')">{{ errors.first('athlete.last_name') }}</span>
+                                                  v-show="errors.has('last_name')">{{
+                                                errors.first('last_name') }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6 text-center">
@@ -65,7 +72,8 @@
                                                 {{$t('athletes.federation_code')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i class="fa fa-credit-card"></i>
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-credit-card"></i>
                                                 </div>
                                                 <input id="federation_code" name="federation_code" type="text"
                                                        :placeholder="$t('athletes.federation_code')"
@@ -80,7 +88,8 @@
                                                 {{$t('athletes.national_code')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i class="fa fa-credit-card"></i>
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-credit-card"></i>
                                                 </div>
                                                 <input id="national_code" name="national_code" type="text"
                                                        :placeholder="$t('athletes.national_code')"
@@ -92,7 +101,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
-                                        <div class="form-group" :class="{'has-error': errors.has('athlete.sport') }">
+                                        <div class="form-group" :class="{'has-error': errors.has('sport') }">
                                             <label for="sports" data-vv-error="">{{$t('athletes.sport')}}</label>
                                             <v-select :value="athlete.sport" label="name"
                                                       :on-change="sportChanged"
@@ -100,16 +109,18 @@
                                                       :options="sports"></v-select>
                                             <input id="sport_input" type="hidden"
                                                    v-model="athlete.sport"
-                                                   name="athlete.sport"
-                                                   v-validate.initial="athlete.sport" data-vv-rules="required"
+                                                   name="sport"
+                                                   v-validate.initial data-vv-rules="required"
                                                    :data-vv-as="$t('athletes.sport')"
                                                    class="form-control">
-                                            <span class="text-danger" v-show="errors.has('athlete.sport')">{{ errors.first('athlete.sport') }}</span>
+                                            <span class="text-danger" v-show="errors.has('sport')">{{
+                                                errors.first('sport') }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('athlete.specialty') }">
+                                             :class="{'has-error': errors.has('specialty') }">
                                             <label for="sports" data-vv-error="">{{$t('athletes.specialty')}}</label>
                                             <v-select :value="athlete.specialty" label="name"
                                                       :placeholder="$t('athletes.select_option')"
@@ -117,18 +128,20 @@
                                                       :options="specialties"></v-select>
                                             <input id="specialty_input" type="hidden"
                                                    v-model="athlete.specialty"
-                                                   name="athlete.specialty"
-                                                   v-validate.initial="athlete.specialty" data-vv-rules="required"
+                                                   name="specialty"
+                                                   v-validate.initial data-vv-rules="required"
                                                    :data-vv-as="$t('athletes.specialty')"
                                                    class="form-control">
-                                            <span class="text-danger" v-show="errors.has('athlete.specialty')">{{ errors.first('athlete.specialty') }}</span>
+                                            <span class="text-danger" v-show="errors.has('specialty')">{{
+                                                errors.first('specialty') }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('athlete.category') }">
+                                             :class="{'has-error': errors.has('category') }">
                                             <label for="sports" data-vv-error="">{{$t('athletes.category')}}</label>
                                             <v-select :value="athlete.category" label="name"
                                                       :placeholder="$t('athletes.select_option')"
@@ -136,16 +149,18 @@
                                                       :options="categories"></v-select>
                                             <input id="category_input" type="hidden"
                                                    v-model="athlete.category"
-                                                   name="athlete.category"
-                                                   v-validate.initial="athlete.category" data-vv-rules="required"
+                                                   name="category"
+                                                   v-validate.initial data-vv-rules="required"
                                                    :data-vv-as="$t('athletes.category')"
                                                    class="form-control">
-                                            <span class="text-danger" v-show="errors.has('athlete.category')">{{ errors.first('athlete.category') }}</span>
+                                            <span class="text-danger" v-show="errors.has('category')">{{
+                                                errors.first('category') }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('athlete.country') }">
+                                             :class="{'has-error': errors.has('country') }">
                                             <label for="sports" data-vv-error="">{{$t('athletes.country')}}</label>
                                             <v-select :value="athlete.country" label="name"
                                                       :on-change="countryChanged"
@@ -153,18 +168,20 @@
                                                       :options="countries"></v-select>
                                             <input id="country_input" type="hidden"
                                                    v-model="athlete.country"
-                                                   name="athlete.country"
-                                                   v-validate.initial="athlete.country" data-vv-rules="required"
+                                                   name="country"
+                                                   v-validate.initial data-vv-rules="required"
                                                    :data-vv-as="$t('athletes.country')"
                                                    class="form-control">
-                                            <span class="text-danger" v-show="errors.has('athlete.country')">{{ errors.first('athlete.country') }}</span>
+                                            <span class="text-danger" v-show="errors.has('country')">{{
+                                                errors.first('country') }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('athlete.gender') }">
+                                             :class="{'has-error': errors.has('gender') }">
                                             <label for="sports" data-vv-error="">{{$t('athletes.gender')}}</label>
                                             <v-select :value="athlete.gender" label="name"
                                                       :placeholder="$t('athletes.select_option')"
@@ -173,11 +190,13 @@
                                             <input id="gender_input"
                                                    type="hidden"
                                                    v-model="athlete.gender"
-                                                   name="athlete.gender"
-                                                   v-validate.initial="athlete.gender" data-vv-rules="required"
+                                                   name="gender"
+                                                   v-validate.initial data-vv-rules="required"
                                                    :data-vv-as="$t('athletes.gender')"
                                                    class="form-control">
-                                            <span class="text-danger" v-show="errors.has('athlete.gender')">{{ errors.first('athlete.gender') }}</span>
+                                            <span class="text-danger" v-show="errors.has('gender')">{{
+                                                errors.first('gender') }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -186,7 +205,9 @@
                                         <div class="form-group">
                                             <label for="height" data-vv-error="">{{$t('athletes.height')}}</label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i class="fa fa-arrows-v"></i></div>
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-arrows-v"></i>
+                                                </div>
                                                 <input id="height" name="height" type="text"
                                                        :placeholder="$t('athletes.height')"
                                                        field="height" initial="off" v-model="athlete.height"
@@ -198,7 +219,8 @@
                                         <div class="form-group">
                                             <label for="weight" data-vv-error="">{{$t('athletes.weight')}}</label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i class="fa fa-tachometer"></i>
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-tachometer"></i>
                                                 </div>
                                                 <input id="weight" name="weight" type="text"
                                                        :placeholder="$t('athletes.weight')"
@@ -213,7 +235,9 @@
                                         <div class="form-group">
                                             <label for="ranking" data-vv-error="">{{$t('athletes.ranking')}}</label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i class="fa fa-signal"></i></div>
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-signal"></i>
+                                                </div>
                                                 <input id="ranking" name="ranking" type="text"
                                                        :placeholder="$t('athletes.ranking')"
                                                        field="ranking" initial="off" v-model="athlete.ranking"
@@ -340,7 +364,7 @@
                 getGenders: 'common:getGenders',
             }),
             sportChanged(sport){
-                this.athlete.sport = sport
+                this.athlete.sport = sport;
                 var self = this;
                 if (this.athlete.sport) {
                     this.getSpecialties(this.athlete.sport.id, (data)=> {
@@ -372,7 +396,7 @@
                 this.athlete.events = events
             },
             championshipChanged(championship){
-                this.athlete.championship = championship
+                this.athlete.championship = championship;
                 var self = this;
                 if (this.athlete.championship) {
                     this.getChampionshipEvents(this.athlete.championship.id, (data)=> {
@@ -396,11 +420,8 @@
             },
             onSubmit(evt){
                 evt.preventDefault();
-                this.$validator.validateAll();
-                if (this.errors.any()) {
-                    this.$root.errorToast(this.$t('admin.validation_error'));
-                } else {
-                    var self = this
+                this.$validator.validateAll().then(() => {
+                    var self = this;
                     let file = self.$refs.uploader.getFile();
                     var formData = new FormData();
 
@@ -443,7 +464,9 @@
                                     self.$root.errorToast(response.errors)
                                 }
                             });
-                }
+                }).catch(bag => {
+                    this.$root.errorToast(this.$t('admin.validation_error'));
+                });
             }
         }
     }

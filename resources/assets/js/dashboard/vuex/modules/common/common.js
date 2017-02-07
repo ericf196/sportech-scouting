@@ -73,6 +73,9 @@ const actions = {
             // error callback
         });
     },
+    [types.actions.setSpecialties]: (context, sportId, successHandler) => {
+        context.commit(types.mutations.SET_SPECIALTIES, []);
+    },
     [types.actions.getCategories]: (context, successHandler) => {
         commonService.getCategories((response) => {
             context.commit(types.mutations.SET_CATEGORIES, response.data);

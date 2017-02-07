@@ -30,7 +30,7 @@ class AthleteTransformer extends TransformerAbstract
      * @param Athlete $model
      * @return array
      */
-    public function transform(Athlete $model)
+    public function transform(Athlete $model = null)
     {
         return [
             'id'              => $model->id,

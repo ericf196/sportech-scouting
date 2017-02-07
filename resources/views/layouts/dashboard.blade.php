@@ -10,8 +10,7 @@
     <link href="{{'css/skin-blue.css'}}" rel="stylesheet" type="text/css">
     <link href="{{'css/vue-toastr.css'}}" rel="stylesheet" type="text/css">
     <link href="{{'css/font-awesome.min.css'}}" rel="stylesheet" type="text/css"/>
-    <link href="//cdn.datatables.net/plug-ins/1.10.13/integration/font-awesome/dataTables.fontAwesome.css"
-          rel="stylesheet" type="text/css">
+    <link href="//cdn.datatables.net/plug-ins/1.10.13/integration/font-awesome/dataTables.fontAwesome.css" rel="stylesheet" type="text/css">
     @yield('head')
 </head>
 <body>

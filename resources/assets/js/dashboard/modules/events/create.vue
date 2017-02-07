@@ -13,7 +13,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.translation.name.en') }">
+                                             :class="{'has-error': errors.has('nameen') }">
                                             <label for="nameen" data-error="">{{$t('events.name')}}
                                             </label>
                                             <div class="input-group">
@@ -21,22 +21,22 @@
                                                     <i
                                                             class="fa fa-user"></i>
                                                 </div>
-                                                <input id="nameen" name="event.translation.name.en"
+                                                <input id="nameen" name="nameen"
                                                        type="text"
                                                        :placeholder="$t('events.name')"
                                                        v-model="event.translation.name.en"
-                                                       v-validate.initial="event.translation.name.en"
+                                                       v-validate.initial
                                                        data-vv-rules="required"
                                                        :data-vv-as="$t('events.name')"
                                                        class="form-control">
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.translation.name.en')">{{
-                                                errors.first('event.translation.name.en') }}
+                                                  v-show="errors.has('nameen')">{{
+                                                errors.first('nameen') }}
                                             </span>
                                         </div>
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.translation.description.en') }">
+                                             :class="{'has-error': errors.has('descriptionen') }">
                                             <label for="descriptionen" data-error="">
                                                 {{$t('events.description')}}
                                             </label>
@@ -46,18 +46,18 @@
                                                             class="fa fa-user"></i>
                                                 </div>
                                                 <textarea id="descriptionen"
-                                                          name="event.translation.description.en"
+                                                          name="descriptionen"
                                                           type="text"
                                                           :placeholder="$t('events.description')"
                                                           v-model="event.translation.description.en"
-                                                          v-validate.initial="event.translation.description.en"
+                                                          v-validate.initial
                                                           data-vv-rules="required"
                                                           :data-vv-as="$t('events.description')"
                                                           class="form-control"></textarea>
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.translation.description.en')">{{
-                                                errors.first('event.translation.description.en') }}
+                                                  v-show="errors.has('descriptionen')">{{
+                                                errors.first('descriptionen') }}
                                             </span>
                                         </div>
                                     </div>
@@ -73,7 +73,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.championship') }">
+                                             :class="{'has-error': errors.has('championship') }">
                                             <label for="sports" data-error="">{{$t('events.championship')}}</label>
                                             <v-select :value="event.championship" label="name"
                                                       :on-change="championshipChanged"
@@ -81,36 +81,36 @@
                                                       :options="championships"></v-select>
                                             <input id="championship_input"
                                                    type="hidden"
-                                                   name="event.championship"
+                                                   name="championship"
                                                    v-model="event.championship"
-                                                   v-validate.initial="event.championship"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.championship')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.championship')">{{
-                                                errors.first('event.championship') }}
+                                                  v-show="errors.has('championship')">{{
+                                                errors.first('championship') }}
                                             </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.specialty') }">
+                                             :class="{'has-error': errors.has('specialty') }">
                                             <label for="sports" data-error="">{{$t('events.specialty')}}</label>
                                             <v-select :value="event.specialty" label="name"
                                                       :on-change="specialtyChanged"
                                                       :placeholder="$t('events.select_option')"
                                                       :options="specialties"></v-select>
                                             <input id="specialty_input" type="hidden"
-                                                   name="event.specialty"
+                                                   name="specialty"
                                                    field="specialty_input" initial="off" v-model="event.specialty"
-                                                   v-validate.initial="event.specialty"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.specialty')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.specialty')">{{
-                                                errors.first('event.specialty') }}
+                                                  v-show="errors.has('specialty')">{{
+                                                errors.first('specialty') }}
                                             </span>
 
 
@@ -121,43 +121,43 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.category') }">
+                                             :class="{'has-error': errors.has('category') }">
                                             <label for="sports" data-error="">{{$t('events.category')}}</label>
                                             <v-select :value="event.category" label="name"
                                                       :on-change="categoryChanged"
                                                       :placeholder="$t('events.select_option')"
                                                       :options="categories"></v-select>
                                             <input id="category_input" type="hidden"
-                                                   name="event.category"
+                                                   name="category"
                                                    v-model="event.category"
-                                                   v-validate.initial="event.category"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.category')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.category')">{{
-                                                errors.first('event.category') }}
+                                                  v-show="errors.has('category')">{{
+                                                errors.first('category') }}
                                             </span>
 
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.gender') }">
+                                             :class="{'has-error': errors.has('gender') }">
                                             <label for="sports" data-error="">{{$t('events.gender')}}</label>
                                             <v-select :value="event.gender" label="name"
                                                       :on-change="genderChanged"
                                                       :placeholder="$t('events.select_option')"
                                                       :options="genders"></v-select>
                                             <input id="gender_input" type="hidden"
-                                                   name="event.gender"
+                                                   name="gender"
                                                    field="gender_input" initial="off" v-model="event.gender"
-                                                   v-validate.initial="event.gender"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.gender')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.gender')">{{ errors.first('event.gender') }}
+                                                  v-show="errors.has('gender')">{{ errors.first('gender') }}
                                             </span>
 
                                         </div>
@@ -166,7 +166,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.type') }">
+                                             :class="{'has-error': errors.has('type') }">
                                             <label for="sports" data-error="">{{$t('events.type')}}</label>
                                             <v-select :value="event.type" label="type"
                                                       :on-change="typeChanged"
@@ -174,13 +174,13 @@
                                                       :options="types"></v-select>
                                             <input id="type_input" type="hidden"
                                                    v-model="event.type"
-                                                   name="event.type"
-                                                   v-validate.initial="event.type"
+                                                   name="type"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.type')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.type')">{{ errors.first('event.type') }}
+                                                  v-show="errors.has('type')">{{ errors.first('type') }}
                                             </span>
 
                                         </div>
@@ -188,7 +188,7 @@
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.reach') }">
+                                             :class="{'has-error': errors.has('reach') }">
                                             <label for="reaches" data-error="">{{$t('events.reach')}}</label>
                                             <v-select :value="event.reach" label="reach"
                                                       :on-change="reachChanged"
@@ -196,14 +196,14 @@
                                                       :options="reaches"></v-select>
                                             <input id="reach_input"
                                                    type="hidden"
-                                                   name="event.reach"
+                                                   name="reach"
                                                    v-model="event.reach"
-                                                   v-validate.initial="event.reach"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.reach')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.reach')">{{ errors.first('event.reach') }}
+                                                  v-show="errors.has('reach')">{{ errors.first('reach') }}
                                             </span>
 
 
@@ -213,7 +213,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.init_date') }">
+                                             :class="{'has-error': errors.has('init_date') }">
                                             <label for="init_date" data-error="">{{$t('events.init_date')}}</label>
                                             <vue-datetime-picker class="vue-picker2" name="init_date"
                                                                  :model="event.init_date"
@@ -224,21 +224,21 @@
                                             </vue-datetime-picker>
                                             <input id="init_input" type="hidden"
                                                    v-model="event.init_date"
-                                                   name="event.init_date"
-                                                   v-validate.initial="event.init_date"
+                                                   name="init_date"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.init_date')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.init_date')">{{
-                                                errors.first('event.init_date') }}
+                                                  v-show="errors.has('init_date')">{{
+                                                errors.first('init_date') }}
                                             </span>
 
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('event.end_date') }">
+                                             :class="{'has-error': errors.has('end_date') }">
                                             <label for="end_date" data-error="">{{$t('events.end_date')}}</label>
                                             <vue-datetime-picker class="vue-picker3" name="end_date"
                                                                  :model="event.end_date"
@@ -249,14 +249,14 @@
                                             </vue-datetime-picker>
                                             <input id="end_input" type="hidden"
                                                    v-model="event.end_date"
-                                                   name="event.end_date"
-                                                   v-validate.initial="event.end_date"
+                                                   name="end_date"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.end_date')"
                                                    class="form-control">
                                             <span class="text-danger"
-                                                  v-show="errors.has('event.end_date')">{{
-                                                errors.first('event.end_date') }}
+                                                  v-show="errors.has('end_date')">{{
+                                                errors.first('end_date') }}
                                             </span>
 
                                         </div>
@@ -464,10 +464,7 @@
             onSubmit(evt){
                 evt.preventDefault();
                 var self = this
-                this.$validator.validateAll();
-                if (this.errors.any()) {
-                    this.$root.errorToast(this.$t('admin.validation_error'));
-                } else {
+                this.$validator.validateAll().then(()=> {
                     let file = self.$refs.uploader.getFile();
                     var formData = new FormData();
 
@@ -509,7 +506,9 @@
                                     self.$root.errorToast(response.errors)
                                 }
                             });
-                }
+                }).catch(bag => {
+                    this.$root.errorToast(this.$t('admin.validation_error'));
+                });
             }
         }
     }

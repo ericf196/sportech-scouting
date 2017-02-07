@@ -8,9 +8,7 @@
 </template>
 
 <script>
-    import dt from 'datatables.net';
     import 'datatables.net-bs';
-    import "datatables.net-select";
     import Vue from 'vue'
     export default{
         props: {

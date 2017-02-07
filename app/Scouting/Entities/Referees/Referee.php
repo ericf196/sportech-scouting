@@ -8,6 +8,31 @@ use Prettus\Repository\Traits\TransformableTrait;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Webpatser\Countries\Countries;
 
+/**
+ * App\Scouting\Entities\Referees\Referee
+ *
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property int $country_id
+ * @property string $federation_code
+ * @property string $gender
+ * @property \Carbon\Carbon $birth_date
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Webpatser\Countries\Countries $country
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\MediaLibrary\Media[] $media
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Referees\Referee whereBirthDate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Referees\Referee whereCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Referees\Referee whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Referees\Referee whereFederationCode($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Referees\Referee whereFirstName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Referees\Referee whereGender($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Referees\Referee whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Referees\Referee whereLastName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Referees\Referee whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Referee extends Model
 {
     use HasMediaTrait;

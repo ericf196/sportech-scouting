@@ -3,6 +3,7 @@
 namespace App\Scouting\Transformers\User;
 
 use App\Scouting\Entities\Users\User;
+use App\Scouting\Transformers\Athletes\AthleteTransformer;
 use League\Fractal\TransformerAbstract;
 use App\Scouting\Entities\Sports\Sport;
 
@@ -12,6 +13,11 @@ use App\Scouting\Entities\Sports\Sport;
  */
 class UserTransformer extends TransformerAbstract
 {
+
+    protected $availableIncludes = [
+        'athlete'
+    ];
+
     /**
      * Transform the User entity
      * @param User $model
@@ -25,8 +31,16 @@ class UserTransformer extends TransformerAbstract
             'username'   => $model->username,
             'full_name'  => $model->first_name . ' ' . $model->last_name,
             'first_name' => $model->first_name,
-            'last_name'  => $model->last_name
+            'last_name'  => $model->last_name,
+            'email'      => $model->email,
+            'image'      => $model->getFirstMediaUrl('profile', 'medium') ?: url('/images/missing/athlete/missing.png'),
         ];
+    }
+
+    public function includeAthlete(User $model)
+    {
+        if ($model->athlete)
+            return $this->item($model->athlete, new AthleteTransformer(), 'parent');
     }
 
 }

@@ -97,7 +97,7 @@ class AthletesController extends Controller
     public function destroy($id)
     {
         try {
-            $athlete = $this->athleteRepository->delete($id);
+            $this->athleteRepository->delete($id);
         } catch (ModelNotFoundException $e) {
             return response()->make(trans('admin/athletes/athletes.not_found'), 404);
         }

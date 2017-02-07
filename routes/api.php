@@ -18,6 +18,11 @@ Route::post('auth/login', 'Api\Auth\AuthController@login');
 Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::post('auth/logout', 'Api\Auth\AuthController@logout');
     Route::get('auth/user', 'Api\Auth\AuthController@user');
+    Route::put('user', 'Api\Users\UserController@update');
+
+    Route::get('user/challenges/completed', 'Api\Users\UserChallengeController@completed');
+    Route::get('user/challenges/in-progress', 'Api\Users\UserChallengeController@inProgress');
+    Route::get('user/challenges/available', 'Api\Users\UserChallengeController@available');
 
     Route::put('/scoutings/{scoutingId}/touches', 'Api\Scoutings\ScoutingsTouchesController@update');
     Route::resource('/scoutings', 'Api\Scoutings\ScoutingsController');
@@ -40,5 +45,5 @@ Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::get('/genders', 'Api\General\GenderController@index');
     Route::get('/countries', 'Api\Countries\CountriesController@index');
 
-    Route::get('/tags','Api\Tags\TagsController@index');
+    Route::get('/tags', 'Api\Tags\TagsController@index');
 });

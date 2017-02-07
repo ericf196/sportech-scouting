@@ -11,6 +11,46 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 use Spatie\Translatable\HasTranslations;
 
+/**
+ * App\Scouting\Entities\Events\Event
+ *
+ * @property int $id
+ * @property int $championship_id related championship id
+ * @property int $specialty_id
+ * @property int $category_id
+ * @property int $event_type_id
+ * @property int $event_reach_id
+ * @property array $name
+ * @property string $slug
+ * @property array $description
+ * @property string $gender gender F: female, M:male
+ * @property \Carbon\Carbon $init_date init date
+ * @property \Carbon\Carbon $end_date end date
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Athletes\Athlete[] $athletes
+ * @property-read \App\Scouting\Entities\Sports\Category $category
+ * @property-read \App\Scouting\Entities\Championships\Championship $championship
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\MediaLibrary\Media[] $media
+ * @property-read \App\Scouting\Entities\Events\EventReach $reach
+ * @property-read \App\Scouting\Entities\Sports\Specialty $specialty
+ * @property-read \App\Scouting\Entities\Events\EventType $type
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereCategoryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereChampionshipId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereDescription($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereEndDate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereEventReachId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereEventTypeId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereGender($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereInitDate($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereSlug($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereSpecialtyId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Event extends Model implements HasMediaConversions
 {
     use HasMediaTrait, HasTranslations;

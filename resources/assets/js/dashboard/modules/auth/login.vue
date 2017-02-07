@@ -11,7 +11,7 @@
                            class="form-control"
                            placeholder="Email"
                            v-model="data.email"
-                           v-validate.initial="data.email"
+                           v-validate.initial
                            data-vv-rules="required|email"
                            :class="{'input': true, 'is-danger': errors.has('email') }"
                            name="email"/>
@@ -24,7 +24,7 @@
                            class="form-control"
                            name="password"
                            v-model="data.password"
-                           v-validate.initial="data.password"
+                           v-validate.initial
                            data-vv-rules="required"
                            :class="{'input': true, 'is-danger': errors.has('password') }"
                            placeholder="Password"/>

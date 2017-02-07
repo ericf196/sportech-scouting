@@ -3,22 +3,22 @@
         <form action="" v-on:submit.prevent="onSubmit" class="form-horizontal form-touch">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group" :class="{'has-error': errors.has('touch.text') }">
+                    <div class="form-group" :class="{'has-error': errors.has('touchtext') }">
                         <label for="new-title" class="control-label col-xs-2">
                             {{$t('scoutings.title')}}
                         </label>
                         <div class="col-xs-10">
                             <input id="new-title"
-                                   name="touch.text"
+                                   name="touchtext"
                                    type="text"
-                                   v-validate.initial="touch.text"
+                                   v-validate.initial
                                    data-vv-rules="required"
                                    data-vv-as="Title"
                                    class="form-control"
                                    placeholder="Title"
                                    v-model="touch.text">
                             <span class="text-danger"
-                                  v-show="errors.has('touch.text')">{{ errors.first('touch.text') }}
+                                  v-show="errors.has('touchtext')">{{ errors.first('touchtext') }}
                             </span>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group" :class="{'has-error': errors.has('touch.start') }">
+                    <div class="form-group" :class="{'has-error': errors.has('touchstart') }">
                         <label for="new-start" class="control-label col-xs-2">
                             {{$t('scoutings.start')}}
                         </label>
@@ -44,9 +44,9 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <input id="new-start"
-                                           name="touch.start"
+                                           name="touchstart"
                                            type="text"
-                                           v-validate.initial="touch.start"
+                                           v-validate.initial
                                            data-vv-rules="required|numeric"
                                            data-vv-as="Start"
                                            class="form-control"
@@ -62,13 +62,13 @@
                                 </div>
                             </div>
                             <span class="text-danger"
-                                  v-show="errors.has('touch.start')">{{ errors.first('touch.start') }}
+                                  v-show="errors.has('touchstart')">{{ errors.first('touchstart') }}
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="form-group" :class="{'has-error': errors.has('touch.end') }">
+                    <div class="form-group" :class="{'has-error': errors.has('touchend') }">
                         <label for="new-end" class="control-label col-xs-2">
                             {{$t('scoutings.end')}}
                         </label>
@@ -76,9 +76,9 @@
                             <div class="row">
                                 <div class="col-xs-6">
                                     <input id="new-end"
-                                           name="touch.end"
+                                           name="touchend"
                                            type="text"
-                                           v-validate.initial="touch.end"
+                                           v-validate.initial
                                            data-vv-rules="required|numeric"
                                            data-vv-as="End"
                                            class="form-control"
@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                             <span class="text-danger"
-                                  v-show="errors.has('touch.end')">{{ errors.first('touch.end') }}
+                                  v-show="errors.has('touchend')">{{ errors.first('touchend') }}
                             </span>
                         </div>
                     </div>
@@ -242,10 +242,7 @@
                 this.touch.color = val
             },
             onSubmit(){
-                this.$validator.validateAll();
-                if (this.errors.any()) {
-
-                } else {
+                this.$validator.validateAll().then(()=> {
                     if (this.touch.start >= this.touch.end) {
                         this.endInvalid = true;
                     } else {
@@ -254,7 +251,9 @@
                             this.$emit('add-new-touch', this.touch);
                         }
                     }
-                }
+                }).catch(bag => {
+                    this.$root.errorToast(this.$t('admin.validation_error'));
+                });
             }
         }
     }

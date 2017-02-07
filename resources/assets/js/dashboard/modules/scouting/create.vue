@@ -13,56 +13,66 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('scouting.translation.name.en') }">
+                                             :class="{'has-error': errors.has('nameen') }">
                                             <label for="nameen" data-error="">{{$t('scoutings.name')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i
-                                                        class="fa fa-user"></i></div>
-                                                <input id="nameen" name="scouting.translation.name.en"
+                                                <div class="input-group-addon">
+                                                    <i
+                                                            class="fa fa-user"></i>
+                                                </div>
+                                                <input id="nameen" name="nameen"
                                                        type="text"
                                                        :placeholder="$t('scoutings.name')"
                                                        v-model="scouting.translation.name.en"
-                                                       v-validate.initial="scouting.translation.name.en"
+                                                       v-validate.initial
                                                        data-vv-rules="required"
                                                        :data-vv-as="$t('scoutings.name')"
                                                        class="form-control">
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('scouting.translation.name.en')">{{ errors.first('scouting.translation.name.en') }}</span>
+                                                  v-show="errors.has('nameen')">{{
+                                                errors.first('nameen') }}
+                                            </span>
                                         </div>
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('scouting.videoSrc') }">
+                                             :class="{'has-error': errors.has('videoSrc') }">
                                             <label for="videoSrc" data-error="">{{$t('scoutings.video_src')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i
-                                                        class="fa fa-video-camera"></i></div>
-                                                <input id="videoSrc" name="scouting.videoSrc"
+                                                <div class="input-group-addon">
+                                                    <i
+                                                            class="fa fa-video-camera"></i>
+                                                </div>
+                                                <input id="videoSrc" name="videoSrc"
                                                        type="text"
                                                        :placeholder="$t('scoutings.video_src')"
                                                        v-model="scouting.videoSrc"
-                                                       v-validate.initial="scouting.videoSrc"
+                                                       v-validate.initial
                                                        data-vv-rules="required"
                                                        :data-vv-as="$t('scoutings.video_src')"
                                                        class="form-control">
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('scouting.videoSrc')">{{ errors.first('scouting.videoSrc') }}</span>
+                                                  v-show="errors.has('videoSrc')">{{
+                                                errors.first('videoSrc') }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('scouting.translation.description.en') }">
+                                             :class="{'has-error': errors.has('translation.description.en') }">
                                             <label for="descriptionen" data-error="">
                                                 {{$t('scoutings.description')}}
                                             </label>
                                             <div class="input-group">
-                                                <div class="input-group-addon"><i
-                                                        class="fa fa-list"></i></div>
+                                                <div class="input-group-addon">
+                                                    <i
+                                                            class="fa fa-list"></i>
+                                                </div>
                                                 <textarea id="descriptionen"
                                                           rows="4"
-                                                          name="scouting.translation.description.en"
+                                                          name="descriptionen"
                                                           type="text"
                                                           :placeholder="$t('scoutings.description')"
                                                           v-model="scouting.translation.description.en"
@@ -75,114 +85,138 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('scouting.championship.name') }">
+                                             :class="{'has-error': errors.has('championshipname') }">
                                             <label for="sports" data-error="">{{$t('scoutings.championship')}}</label>
                                             <div class="input-group">
                                                 <input type="text"
                                                        disabled
-                                                       name="scouting.championship.name"
+                                                       name="championshipname"
                                                        v-model="scouting.championship.name"
-                                                       v-validate.initial="scouting.championship.name"
+                                                       v-validate.initial
                                                        data-vv-rules="required"
                                                        :data-vv-as="$t('scoutings.championship')"
                                                        class="form-control">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary" type="button"
-                                                            v-on:click="search('championship')"><i
-                                                            class="fa fa-search"></i></button>
+                                                            v-on:click="search('championship')">
+                                                        <i
+                                                                class="fa fa-search"></i>
+                                                    </button>
                                                     <button class="btn btn-success" type="button"
-                                                            v-on:click="add('championship')"><i
-                                                            class="fa fa-plus"></i></button>
+                                                            v-on:click="add('championship')">
+                                                        <i
+                                                                class="fa fa-plus"></i>
+                                                    </button>
                                                 </span>
                                             </div><!-- /input-group -->
                                             <span class="text-danger"
-                                                  v-show="errors.has('scouting.championship.name')">{{ errors.first('scouting.championship.name') }}</span>
+                                                  v-show="errors.has('championshipname')">{{
+                                                errors.first('championshipname') }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('scouting.event.name') }">
+                                             :class="{'has-error': errors.has('eventname') }">
                                             <label for="sports" data-error="">{{$t('scoutings.event')}}</label>
                                             <div class="input-group">
                                                 <input type="text"
                                                        disabled
-                                                       name="scouting.event.name"
+                                                       name="eventname"
                                                        v-model="scouting.event.name"
-                                                       v-validate.initial="scouting.event.name"
+                                                       v-validate.initial
                                                        data-vv-rules="required"
                                                        :data-vv-as="$t('scoutings.event')"
                                                        class="form-control">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary" type="button"
                                                             v-on:click="search('event')"
-                                                            :disabled="!scouting.championship.id"><i
-                                                            class="fa fa-search"></i></button>
+                                                            :disabled="!scouting.championship.id">
+                                                        <i
+                                                                class="fa fa-search"></i>
+                                                    </button>
                                                     <button class="btn btn-success" type="button"
                                                             v-on:click="add('event')"
-                                                            :disabled="!scouting.championship.name"><i
-                                                            class="fa fa-plus"></i></button>
+                                                            :disabled="!scouting.championship.name">
+                                                        <i
+                                                                class="fa fa-plus"></i>
+                                                    </button>
                                                 </span>
                                             </div><!-- /input-group -->
                                             <span class="text-danger"
-                                                  v-show="errors.has('scouting.event.name')">{{ errors.first('scouting.event.name') }}</span>
+                                                  v-show="errors.has('eventname')">{{
+                                                errors.first('eventname') }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('scouting.leftAthlete.name') }">
+                                             :class="{'has-error': errors.has('leftAthletename') }">
                                             <label for="sports" data-error="">{{$t('scoutings.left_athlete')}}</label>
                                             <div class="input-group">
                                                 <input type="text"
                                                        disabled
-                                                       name="scouting.leftAthlete.name"
+                                                       name="leftAthletename"
                                                        v-model="scouting.leftAthlete.name"
-                                                       v-validate.initial="scouting.leftAthlete.name"
+                                                       v-validate.initial
                                                        data-vv-rules="required"
                                                        :data-vv-as="$t('scoutings.left_athlete')"
                                                        class="form-control">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-primary" type="button"
                                                             v-on:click="search('left_athlete')"
-                                                            :disabled="!scouting.championship.name || !scouting.event.name"><i
-                                                            class="fa fa-search"></i></button>
+                                                            :disabled="!scouting.championship.name || !scouting.event.name">
+                                                        <i
+                                                                class="fa fa-search"></i>
+                                                    </button>
                                                     <button class="btn btn-success" type="button"
                                                             v-on:click="add('left_athlete')"
-                                                            :disabled="!scouting.championship.name || !scouting.event.name"><i
-                                                            class="fa fa-plus"></i></button>
+                                                            :disabled="!scouting.championship.name || !scouting.event.name">
+                                                        <i
+                                                                class="fa fa-plus"></i>
+                                                    </button>
                                                 </span>
                                             </div><!-- /input-group -->
                                             <span class="text-danger"
-                                                  v-show="errors.has('scouting.leftAthlete.name')">{{ errors.first('scouting.leftAthlete.name') }}</span>
+                                                  v-show="errors.has('leftAthletename')">{{
+                                                errors.first('leftAthletename') }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-6">
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('scouting.rightAthlete.name') }">
+                                             :class="{'has-error': errors.has('rightAthletename') }">
                                             <label for="sports" data-error="">{{$t('scoutings.right_athlete')}}</label>
                                             <div class="input-group">
                                                 <input type="text"
                                                        disabled
-                                                       name="scouting.rightAthlete.name"
+                                                       name="rightAthletename"
                                                        v-model="scouting.rightAthlete.name"
-                                                       v-validate.initial="scouting.rightAthlete.name"
+                                                       v-validate.initial
                                                        data-vv-rules="required"
                                                        :data-vv-as="$t('scoutings.right_athlete')"
                                                        class="form-control">
                                                 <span class="input-group-btn">
-                                                     <button class="btn btn-primary" type="button"
-                                                             v-on:click="search('right_athlete')"
-                                                             :disabled="!scouting.championship.name || !scouting.event.name"><i
-                                                             class="fa fa-search"></i></button>
+                                                    <button class="btn btn-primary" type="button"
+                                                            v-on:click="search('right_athlete')"
+                                                            :disabled="!scouting.championship.name || !scouting.event.name">
+                                                        <i
+                                                                class="fa fa-search"></i>
+                                                    </button>
                                                     <button class="btn btn-success" type="button"
                                                             v-on:click="add('right_athlete')"
-                                                            :disabled="!scouting.championship.name || !scouting.event.name"><i
-                                                            class="fa fa-plus"></i></button>
+                                                            :disabled="!scouting.championship.name || !scouting.event.name">
+                                                        <i
+                                                                class="fa fa-plus"></i>
+                                                    </button>
                                                 </span>
                                             </div><!-- /input-group -->
                                             <span class="text-danger"
-                                                  v-show="errors.has('scouting.rightAthlete.name')">{{ errors.first('scouting.rightAthlete.name') }}</span>
+                                                  v-show="errors.has('rightAthletename')">{{
+                                                errors.first('rightAthletename') }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -422,11 +456,9 @@
             },
             onSubmit(evt){
                 evt.preventDefault();
-                this.$validator.validateAll();
                 var self = this;
-                if (this.errors.any()) {
-                    this.$root.errorToast(this.$t('admin.validation_error'));
-                } else {
+                this.$validator.validateAll().then(()=> {
+
                     this.scouting.translation.name.es = this.scouting.translation.name.en;
                     this.scouting.translation.description.es = this.scouting.translation.description.en;
                     scoutingService.create(this.scouting, (response)=> {
@@ -448,7 +480,9 @@
                             self.$root.errorToast(response.errors)
                         }
                     })
-                }
+                }).catch(bag => {
+                    this.$root.errorToast(this.$t('admin.validation_error'));
+                });
             },
             modalDismiss(){
                 this.searchChampionshipOpen = false;

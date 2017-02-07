@@ -25,7 +25,7 @@
                                                        type="text"
                                                        :placeholder="$t('events.name')"
                                                        v-model="event.translation.name.en"
-                                                       v-validate.initial="event.translation.name.en"
+                                                       v-validate.initial
                                                        data-vv-rules="required"
                                                        :data-vv-as="$t('events.name')"
                                                        class="form-control">
@@ -50,7 +50,7 @@
                                                           type="text"
                                                           :placeholder="$t('events.description')"
                                                           v-model="event.translation.description.en"
-                                                          v-validate.initial="event.translation.description.en"
+                                                          v-validate.initial
                                                           data-vv-rules="required"
                                                           :data-vv-as="$t('events.description')"
                                                           class="form-control"></textarea>
@@ -83,7 +83,7 @@
                                                    type="hidden"
                                                    name="event.championship"
                                                    v-model="event.championship"
-                                                   v-validate.initial="event.championship"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.championship')"
                                                    class="form-control">
@@ -104,7 +104,7 @@
                                             <input id="specialty_input" type="hidden"
                                                    name="event.specialty"
                                                    field="specialty_input" initial="off" v-model="event.specialty"
-                                                   v-validate.initial="event.specialty"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.specialty')"
                                                    class="form-control">
@@ -130,7 +130,7 @@
                                             <input id="category_input" type="hidden"
                                                    name="event.category"
                                                    v-model="event.category"
-                                                   v-validate.initial="event.category"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.category')"
                                                    class="form-control">
@@ -152,7 +152,7 @@
                                             <input id="gender_input" type="hidden"
                                                    name="event.gender"
                                                    field="gender_input" initial="off" v-model="event.gender"
-                                                   v-validate.initial="event.gender"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.gender')"
                                                    class="form-control">
@@ -175,7 +175,7 @@
                                             <input id="type_input" type="hidden"
                                                    v-model="event.type"
                                                    name="event.type"
-                                                   v-validate.initial="event.type"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.type')"
                                                    class="form-control">
@@ -198,7 +198,7 @@
                                                    type="hidden"
                                                    name="event.reach"
                                                    v-model="event.reach"
-                                                   v-validate.initial="event.reach"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.reach')"
                                                    class="form-control">
@@ -225,7 +225,7 @@
                                             <input id="init_input" type="hidden"
                                                    v-model="event.init_date"
                                                    name="event.init_date"
-                                                   v-validate.initial="event.init_date"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.init_date')"
                                                    class="form-control">
@@ -250,7 +250,7 @@
                                             <input id="end_input" type="hidden"
                                                    v-model="event.end_date"
                                                    name="event.end_date"
-                                                   v-validate.initial="event.end_date"
+                                                   v-validate.initial
                                                    data-vv-rules="required"
                                                    :data-vv-as="$t('events.end_date')"
                                                    class="form-control">
@@ -437,11 +437,9 @@
             },
             onSubmit(evt){
                 evt.preventDefault();
-                var self = this
-                this.$validator.validateAll();
-                if (this.errors.any()) {
-                    this.$root.errorToast(this.$t('admin.validation_error'));
-                } else {
+                var self = this;
+                this.$validator.validateAll().then(()=> {
+
                     let file = self.$refs.uploader.getFile();
                     var formData = new FormData();
 
@@ -489,7 +487,9 @@
                                     self.$root.errorToast(response.errors)
                                 }
                             });
-                }
+                }).catch(bag => {
+                    this.$root.errorToast(this.$t('admin.validation_error'));
+                });
             }
         }
     }

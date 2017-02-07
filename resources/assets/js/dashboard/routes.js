@@ -32,10 +32,17 @@ export default {
             meta: {auth: true},
             children: [
                 {
-                    path: '/update',
+                    path: 'update',
                     name: 'user.update',
                     component: function (resolve) {
                         require(['./modules/profile/edit.vue'], resolve)
+                    }
+                },
+                {
+                    path: '/',
+                    name: 'user.view',
+                    component: function (resolve) {
+                        require(['./modules/profile/view.vue'], resolve)
                     }
                 }
             ]
@@ -133,7 +140,6 @@ export default {
         },
         {
             path: '/championships',
-            name: 'championships',
             component: function (resolve) {
                 require(['./modules/championships/championships.vue'], resolve)
             },

@@ -10,6 +10,28 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\Translatable\HasTranslations;
 use Webpatser\Countries\Countries;
 
+/**
+ * App\Scouting\Entities\Clubs\Club
+ *
+ * @property int $id
+ * @property array $name
+ * @property int $sport_id
+ * @property int $country_id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Athletes\Athlete[] $athletes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Championships\Championship[] $championships
+ * @property-read \Webpatser\Countries\Countries $country
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\MediaLibrary\Media[] $media
+ * @property-read \App\Scouting\Entities\Sports\Sport $sport
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Clubs\Club whereCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Clubs\Club whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Clubs\Club whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Clubs\Club whereName($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Clubs\Club whereSportId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Clubs\Club whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Club extends Model
 {
     use HasMediaTrait, HasTranslations;
