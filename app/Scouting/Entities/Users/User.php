@@ -76,8 +76,7 @@ class User extends Authenticatable implements HasMediaConversions
         $this->addMediaConversion('small')
             ->setManipulations(['w' => 150, 'h' => 150, 'fit' => 'crop', 'bg' => 'white'])
             ->performOnCollections('profile');
-        $this->addMediaConversion('medium')
-            ->setManipulations(['w' => 300, 'h' => 300, 'bg' => 'white'])
+        $this->addMediaConversion('medium')->setWidth(300)->setHeight(300)->setFit('crop')
             ->performOnCollections('profile');
         $this->addMediaConversion('large')
             ->setManipulations(['w' => 600, 'h' => 600, 'fit' => 'crop', 'bg' => 'white'])
