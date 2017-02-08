@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Scouting\Entities\Users\User;
 use App\Scouting\Repositories\Contracts\Challenges\ChallengeRepository;
 use App\Scouting\Transformers\Challenges\ChallengeTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\JWTAuth;
 use Yajra\Datatables\Datatables;
 
@@ -35,6 +36,18 @@ class UserChallengeController extends Controller
         return Datatables::of($repository->datatable($userChallengesIds))
             ->setTransformer(new ChallengeTransformer())
             ->make(true);
+    }
+
+    public function accept($challengeId, JWTAuth $jwt, ChallengeRepository $repository)
+    {
+        $user = $jwt->parseToken()->authenticate();
+        try {
+            $repository->find($challengeId);
+        } catch (ModelNotFoundException $e) {
+            response()->make(trans('admin/users/challenges.not_found'), 404);
+        }
+        $user->challenges()->attach($challengeId);
+        return response()->json(['message' => trans('admin/users/challenges.accepted_succesffully')]);
     }
 
 }

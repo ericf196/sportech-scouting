@@ -10,5 +10,5 @@ export default {
         return Vue.http.put('/api/user', user, {emulateHTTP: true})
             .then((response) => successCalback(response.body))
             .catch((error) => errorCallback(error.body));
-    }
+    },
 }

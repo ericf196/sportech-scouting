@@ -24,16 +24,16 @@ class ChallengeTransformer extends TransformerAbstract
      */
     public function transform(Challenge $model)
     {
-        $difficultyColor = 'danger';
-        $difficultyColor = $model->difficulty == 0 ? 'success' : $difficultyColor;
-        $difficultyColor = $model->difficulty == 1 ? 'warning' : $difficultyColor;
+        $difficultyColor = 'red';
+        $difficultyColor = $model->difficulty == 0 ? 'aqua' : $difficultyColor;
+        $difficultyColor = $model->difficulty == 1 ? 'yellow' : $difficultyColor;
 
 
         $data = [
             'id'              => $model->id,
             'name'            => $model->name,
             'description'     => $model->description,
-            'difficulty'      => trans('admin/challenges/challenges.difficulty' . $model->difficulty),
+            'difficulty'      => trans('admin/users/challenges.difficulty' . $model->difficulty),
             'difficultyColor' => $difficultyColor,
             'points'          => $model->points,
             'translation'     => [

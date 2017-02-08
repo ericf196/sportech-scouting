@@ -54,4 +54,6 @@ class UserController extends Controller
 
         return response()->json(['message' => trans('admin/users/users.updated_successfully')]);
     }
+
+
 }

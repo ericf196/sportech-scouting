@@ -24,6 +24,7 @@ use App\Scouting\Repositories\Contracts\Scoutings\TagRepository;
 use App\Scouting\Repositories\Contracts\Sports\CategoryRepository;
 use App\Scouting\Repositories\Contracts\Sports\SpecialtyRepository;
 use App\Scouting\Repositories\Contracts\Sports\SportRepository;
+use App\Scouting\Repositories\Contracts\Users\UserRepository;
 use App\Scouting\Repositories\Events\EventReachRepositoryEloquent;
 use App\Scouting\Repositories\Events\EventRepositoryEloquent;
 use App\Scouting\Repositories\Events\EventTypeRepositoryEloquent;
@@ -38,6 +39,7 @@ use App\Scouting\Repositories\Scoutings\TagRepositoryEloquent;
 use App\Scouting\Repositories\Sports\CategoryRepositoryEloquent;
 use App\Scouting\Repositories\Sports\SpecialtyRepositoryEloquent;
 use App\Scouting\Repositories\Sports\SportRepositoryEloquent;
+use App\Scouting\Repositories\Users\UserRepositoryEloquent;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -77,6 +79,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(TagOptionRepository::class, TagOptionRepositoryEloquent::class);
         $this->app->bind(CountryRepository::class, CountryRepositoryEloquent::class);
         $this->app->bind(ChallengeRepository::class, ChallengeRepositoryEloquent::class);
+        $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
+        $this->app->bind(\App\Scouting\Repositories\Contracts\Reports\ReportRepository::class, \App\Scouting\Repositories\Reports\ReportRepositoryEloquent::class);
+        $this->app->bind(\App\Scouting\Repositories\Contracts\Rankings\RankingRepository::class, \App\Scouting\Repositories\Rankings\RankingRepositoryEloquent::class);
         //:end-bindings:
     }
 }

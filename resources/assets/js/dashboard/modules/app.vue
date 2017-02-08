@@ -1,4 +1,4 @@
-<template>
+<template xmlns:v-on="http://www.w3.org/1999/xhtml">
     <div id="app">
         <div class="skin-blue sidebar-collapse" id="sidebar"
              :class="{'sidebar-mini':$auth.check(),'layout-top-nav':!$auth.check()}">
@@ -25,7 +25,48 @@
                         <div class="navbar-custom-menu">
                             <ul class="nav navbar-nav">
                                 <li v-show="!$auth.check()">
-                                    <router-link :to="{name: 'login'}">login</router-link>
+                                    <router-link :to="{name: 'login'}">{{$t('admin.login')}}</router-link>
+                                </li>
+                                <li class="dropdown tasks-menu" v-show="$auth.check()">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                        <i class="fa fa-flag-o"></i>
+                                        <span class="label label-danger">3</span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="header">{{$t('admin.number_challenges_in_progress',{count:challenges.lenght})}}</li>
+                                        <li>
+                                            <ul class="menu">
+                                                <li v-for="challenge in challenges"><!-- Task item -->
+                                                    <a href="#">
+                                                        <h3>
+                                                            {{challenge.name}}
+                                                            <small class="pull-right">
+                                                                {{challenge.completion_percentage}}%
+                                                            </small>
+                                                        </h3>
+                                                        <div class="progress xs">
+                                                            <div class="progress-bar"
+                                                                 :class="'progress-bar-'+challenge.difficultyColor"
+                                                                 :style="{width: challenge.completion_percentage+'%'}"
+                                                                 role="progressbar"
+                                                                 :aria-valuenow="challenge.completion_percentage"
+                                                                 aria-valuemin="0"
+                                                                 aria-valuemax="100">
+                                                                <span class="sr-only">
+                                                                    {{challenge.completion_percentage}}%
+                                                                    {{$t('admin.complete')}}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="footer">
+                                            <router-link :to="{name:'user.view'}">{{$t('admin.view_all_challenges')}}
+                                            </router-link>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li class="dropdown user user-menu" v-show="$auth.check()">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -35,14 +76,35 @@
                                     <ul class="dropdown-menu">
                                         <!-- User image -->
                                         <li class="user-header">
+                                            <img :src="$auth.user().image" class="img-circle"
+                                                 alt="User Image">
+
                                             <p>
-                                                {{$auth.user().full_name}}
+                                                {{$auth.user().full_name}} - {{userTitle}}
                                             </p>
                                         </li>
-                                        <!-- Menu Footer-->
+                                        <li class="user-body">
+                                            <div class="row">
+                                                <div class="col-xs-6 text-center">
+                                                    <router-link :to="{name:'scoutings.list'}">
+                                                        {{$t('admin.scoutings')}}
+                                                    </router-link>
+                                                </div>
+                                                <div class="col-xs-6 text-center">
+                                                    <a href="#"> {{$t('admin.reports')}}</a>
+                                                </div>
+                                            </div>
+                                            <!-- /.row -->
+                                        </li>
                                         <li class="user-footer">
+                                            <div class="pull-left">
+                                                <router-link :to="{name:'user.view'}" class="btn btn-default btn-flat">
+                                                    {{$t('admin.my_profile')}}
+                                                </router-link>
+                                            </div>
                                             <div class="pull-right">
-                                                <button class="btn btn-default btn-flat" v-on:click="logout">Sign out
+                                                <button class="btn btn-default btn-flat" v-on:click="logout">
+                                                    {{$t('admin.sign_out')}}
                                                 </button>
                                             </div>
                                         </li>
@@ -122,6 +184,7 @@
 <script>
     import vueToastr from 'vue-toastr';
     import store from '../vuex/store';
+    import userChallengeService from 'base/dashboard/services/user/userChallengeService'
 
     export default{
         components: {
@@ -129,6 +192,7 @@
         },
         data(){
             return {
+                challenges: [],
                 sideMenu: {
                     items: [
                         {
@@ -170,6 +234,14 @@
                 }
             }
         },
+        computed: {
+            userTitle(){
+                return this.$auth.user().athlete ? this.$auth.user().athlete.sport.name + ' ' + this.$auth.user().athlete.specialty.name : ''
+            },
+        },
+        mounted(){
+            this.loadChallengesInProgress();
+        },
         store,
         methods: {
             toggleSidebar(){
@@ -183,6 +255,13 @@
                     position: 'toast-bottom-right',
                     timeout: 5000
                 });
+            },
+            loadChallengesInProgress(){
+                userChallengeService.inProgress((response)=> {
+                    this.challenges = response.data;
+                }, (response)=> {
+
+                })
             },
             successToast(msg, title){
                 this.$refs.toastr.Add({

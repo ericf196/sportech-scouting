@@ -3,6 +3,8 @@ namespace App\Scouting\Entities\Users;
 
 use App\Scouting\Entities\Athletes\Athlete;
 use App\Scouting\Entities\Challenges\Challenge;
+use App\Scouting\Entities\Reports\Report;
+use App\Scouting\Entities\Scoutings\Scouting;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Kodeine\Acl\Models\Eloquent\Permission;
@@ -93,6 +95,16 @@ class User extends Authenticatable implements HasMediaConversions
         return $this->hasOne(Athlete::class);
     }
 
+    public function scoutings()
+    {
+        return $this->hasMany(Scouting::class, 'scouter_id');
+    }
+
+    public function reports()
+    {
+        return $this->hasMany(Report::class);
+    }
+
     public function challenges()
     {
         return $this->belongsToMany(Challenge::class, 'users_challenges')->withPivot(['completion_percentage', 'completed']);
@@ -106,6 +118,15 @@ class User extends Authenticatable implements HasMediaConversions
     public function inProgressChallenges()
     {
         return $this->belongsToMany(Challenge::class, 'users_challenges')->withPivot(['completion_percentage', 'completed'])->wherePivot('completed', '=', 0);
+    }
+
+    public function totalPoints()
+    {
+        if ($this->relationLoaded('completedChallenges')) {
+            return $this->completedChallenges->sum('points');
+        }
+
+        return $this->completedChallenges()->sum('points');
     }
 
 

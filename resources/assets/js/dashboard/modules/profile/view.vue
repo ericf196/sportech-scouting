@@ -66,8 +66,8 @@
                         <div class="col-xs-12 col-md-3">
                             <div class="small-box bg-aqua">
                                 <div class="inner">
-                                    <h3>1st</h3>
-                                    <h5>2500pts</h5>
+                                    <h3>{{summary.ranking}}</h3>
+                                    <h5>{{summary.points}}pts</h5>
 
                                     <p>{{$t('users.overall_ranking')}}</p>
                                 </div>
@@ -82,8 +82,8 @@
                         <div class="col-xs-12 col-md-3">
                             <div class="small-box bg-green">
                                 <div class="inner">
-                                    <h3>3</h3>
-                                    <h5>of 5</h5>
+                                    <h3>{{summary.completedChallenges}}</h3>
+                                    <h5>&nbsp;</h5>
                                     <p>{{$t('challenges.completed_challenges')}}</p>
                                 </div>
                                 <div class="icon">
@@ -97,7 +97,7 @@
                         <div class="col-xs-12 col-md-3">
                             <div class="small-box bg-yellow">
                                 <div class="inner">
-                                    <h3>5</h3>
+                                    <h3>{{summary.scoutings}}</h3>
                                     <h5>&nbsp;</h5>
                                     <p>{{$t('users.scoutings')}}</p>
                                 </div>
@@ -112,7 +112,7 @@
                         <div class="col-xs-12 col-md-3">
                             <div class="small-box bg-blue">
                                 <div class="inner">
-                                    <h3>6</h3>
+                                    <h3>{{summary.reports}}</h3>
                                     <h5>&nbsp;</h5>
                                     <p>{{$t('users.reports')}}</p>
                                 </div>
@@ -131,62 +131,34 @@
                                 <div class="col-xs-12 col-md-6">
                                     <div class="box box-primary">
                                         <div class="box-header with-border">
-                                            <h3 class="box-title">Challenges in Progress</h3>
+                                            <h3 class="box-title">{{$t('challenges.in_progress_challenges')}}
+                                                {{inProgress.length}}/5</h3>
                                         </div>
                                         <!-- /.box-header -->
                                         <div class="box-body">
                                             <ul class="products-list product-list-in-box">
-                                                <li class="item">
+                                                <li class="item" v-for="challenge in inProgress">
                                                     <div class="product-info">
-                                                        <a href="javascript:void(0)" class="product-title">Challenge 4
-                                                            <span class="label label-info pull-right">+500Pts
+                                                        <a href="javascript:void(0)" class="product-title">
+                                                            {{challenge.name}}
+                                                            <span class="label"
+                                                                  :class="'bg-'+challenge.difficultyColor">
+                                                                {{challenge.difficulty}}
+                                                            </span>
+                                                            <span class="label pull-right"
+                                                                  :class="'bg-'+challenge.difficultyColor">
+                                                                +{{challenge.points}}Pts
                                                             </span>
                                                         </a>
                                                         <span class="product-description">
                                                             <div class="progress-group">
                                                                 <span class="progress-text">&nbsp;</span>
-                                                                <span class="progress-number"><b>55</b>/100%</span>
+                                                                <span class="progress-number"><b>{{challenge.completion_percentage}}</b>/100%
+                                                                </span>
                                                                 <div class="progress sm">
-                                                                    <div class="progress-bar progress-bar-aqua"
-                                                                         style="width: 55%"></div>
-                                                                </div>
-                                                            </div>
-                                                        </span>
-                                                    </div>
-                                                </li>
-                                                <!-- /.item -->
-                                                <li class="item">
-                                                    <div class="product-info">
-                                                        <a href="javascript:void(0)" class="product-title">Challenge 5
-                                                            <span class="label label-danger pull-right">+500Pts
-                                                            </span>
-                                                        </a>
-                                                        <span class="product-description">
-                                                            <div class="progress-group">
-                                                                <span class="progress-text">&nbsp;</span>
-                                                                <span class="progress-number"><b>43</b>/100%</span>
-                                                                <div class="progress sm">
-                                                                    <div class="progress-bar progress-bar-red"
-                                                                         style="width: 43%"></div>
-                                                                </div>
-                                                            </div>
-                                                        </span>
-                                                    </div>
-                                                </li>
-                                                <!-- /.item -->
-                                                <li class="item">
-                                                    <div class="product-info">
-                                                        <a href="javascript:void(0)" class="product-title">Challenge 6
-                                                            <span class="label label-warning pull-right">+500Pts
-                                                            </span>
-                                                        </a>
-                                                        <span class="product-description">
-                                                            <div class="progress-group">
-                                                                <span class="progress-text">&nbsp;</span>
-                                                                <span class="progress-number"><b>20</b>/100%</span>
-                                                                <div class="progress sm">
-                                                                    <div class="progress-bar progress-bar-yellow"
-                                                                         style="width: 20%"></div>
+                                                                    <div class="progress-bar"
+                                                                         :class="'progress-bar-'+challenge.difficultyColor"
+                                                                         :style="{width: challenge.completion_percentage+'%'}"></div>
                                                                 </div>
                                                             </div>
                                                         </span>
@@ -200,67 +172,36 @@
                                 <div class="col-xs-12 col-md-6">
                                     <div class="box box-primary">
                                         <div class="box-header with-border">
-                                            <h3 class="box-title">Completed Challenges</h3>
+                                            <h3 class="box-title">{{$t('challenges.completed_challenges')}}</h3>
                                         </div>
                                         <div class="box-body">
                                             <ul class="products-list product-list-in-box">
-                                                <li class="item">
+                                                <li class="item" v-for="challenge in completed">
                                                     <div class="product-info">
-                                                        <a href="javascript:void(0)" class="product-title">Challenge 1
-                                                            <span class="label label-success pull-right">+1000Pts
+                                                        <a href="javascript:void(0)" class="product-title">
+                                                            {{challenge.name}}
+                                                            <span class="label"
+                                                                  :class="'bg-'+challenge.difficultyColor">
+                                                                {{challenge.difficulty}}
+                                                            </span>
+                                                            <span class="label pull-right"
+                                                                  :class="'bg-'+challenge.difficultyColor">
+                                                                +{{challenge.points}}Pts
                                                             </span>
                                                         </a>
                                                         <span class="product-description">
                                                             <div class="progress-group">
                                                                 <span class="progress-text">&nbsp;</span>
-                                                                <span class="progress-number"><b>100</b>/100%</span>
+                                                                <span class="progress-number"><b>{{challenge.completion_percentage}}</b>/100%
+                                                                </span>
                                                                 <div class="progress sm">
                                                                     <div class="progress-bar progress-bar-green"
-                                                                         style="width: 100%"></div>
+                                                                         :style="{width: challenge.completion_percentage+'%'}"></div>
                                                                 </div>
                                                             </div>
                                                         </span>
                                                     </div>
                                                 </li>
-                                                <li class="item">
-                                                    <div class="product-info">
-                                                        <a href="javascript:void(0)" class="product-title">Challenge 2
-                                                            <span class="label label-success pull-right">+500Pts
-                                                            </span>
-                                                        </a>
-                                                        <span class="product-description">
-                                                            <div class="progress-group">
-                                                                <span class="progress-text">&nbsp;</span>
-                                                                <span class="progress-number"><b>100</b>/100%</span>
-                                                                <div class="progress sm">
-                                                                    <div class="progress-bar progress-bar-green"
-                                                                         style="width: 100%"></div>
-                                                                </div>
-                                                            </div>
-                                                        </span>
-                                                    </div>
-                                                </li>
-                                                <!-- /.item -->
-                                                <li class="item">
-                                                    <div class="product-info">
-                                                        <a href="javascript:void(0)" class="product-title">Challenge 3
-                                                            <span class="label label-success pull-right">+1000Pts
-                                                            </span>
-                                                        </a>
-                                                        <span class="product-description">
-                                                            <div class="progress-group">
-                                                                <span class="progress-text">&nbsp;</span>
-                                                                <span class="progress-number"><b>100</b>/100%</span>
-                                                                <div class="progress sm">
-                                                                    <div class="progress-bar progress-bar-green"
-                                                                         style="width: 100%"></div>
-                                                                </div>
-                                                            </div>
-                                                        </span>
-                                                    </div>
-                                                </li>
-                                                <!-- /.item -->
-
                                             </ul>
                                         </div>
                                     </div>
@@ -298,12 +239,27 @@
     import usersLocales from 'base/lang/admin/users/users.js';
     import pageHeader from 'base/components/header/pageHeader.vue'
     import dncTable from 'base/components/table/dnc-datatable.vue';
+    import userChallengeService from 'base/dashboard/services/user/userChallengeService'
+    import userStatisticsService from 'base/dashboard/services/user/userStatisticsService'
 
     export default{
         locales: usersLocales,
         components: {
             pageHeader,
             dncTable
+        },
+        data(){
+            return {
+                completed: [],
+                inProgress: [],
+                summary: {
+                    scountings: 0,
+                    reports: 0,
+                    completedChallenges: 0,
+                    rank: 0,
+                    points: 0
+                }
+            }
         },
         computed: {
             breadcrumbs(){
@@ -345,6 +301,7 @@
                     {data: 'points', name: 'points', title: this.$t('challenges.points')},
                     {
                         title: this.$t('challenges.difficulty'),
+                        data: 'difficulty',
                         render: this.renderDifficulty
                     },
                     {
@@ -361,6 +318,11 @@
                 }
             },
         },
+        mounted(){
+            this.loadInProgress();
+            this.loadCompleted();
+            this.loadStatistics();
+        },
         methods: {
             dataLoaded(data){
 
@@ -370,10 +332,49 @@
                 return `<div class="action-buttons"><a class="btn btn-sm btn-success"  v-on:click="$parent.acceptChallenge(${full.id})">Accept Challenge</a>`
             },
             renderDifficulty(data, type, full, meta){
-                return `<span class="label label-${full.difficultyColor}">${full.difficulty} </span>`
+                return `<span class="label bg-${full.difficultyColor}">${full.difficulty} </span>`
+            },
+            loadInProgress(){
+                userChallengeService.inProgress((response)=> {
+                    this.inProgress = response.data;
+                }, (response)=> {
+
+                })
+            },
+            loadCompleted(){
+                userChallengeService.completed((response)=> {
+                    this.completed = response.data;
+                }, (response)=> {
+
+                })
+            },
+            loadStatistics(){
+                userStatisticsService.summary((response)=> {
+                    this.summary = response.data;
+                }, (response)=> {
+
+                })
             },
             acceptChallenge(challengeId){
-
+                userChallengeService.acceptChallenge(challengeId,
+                        (response)=> {
+                            this.$root.successToast(response.message);
+                            this.$refs.table.reload();
+                            this.loadInProgress();
+                        },
+                        (response)=> {
+                            if (response.validation) {
+                                for (var error in response.errors) {
+                                    if (response.errors.hasOwnProperty(error)) {
+                                        response.errors[error].forEach((validationError) => {
+                                            self.$root.errorToast(validationError)
+                                        })
+                                    }
+                                }
+                            } else {
+                                self.$root.errorToast(response.errors)
+                            }
+                        })
             }
         }
     }

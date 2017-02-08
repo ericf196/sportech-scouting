@@ -15,7 +15,7 @@ class UserTransformer extends TransformerAbstract
 {
 
     protected $availableIncludes = [
-        'athlete'
+        'athlete',
     ];
 
     /**

@@ -9,7 +9,10 @@ export default {
             "difficulty": "Difficulty",
             "actions": "Actions",
             "available_challenges": "Available Challenges",
-            "completed_challenges": "Completed Challenges"
+            "completed_challenges": "Completed Challenges",
+            "in_progress_challenges": "Challenges In Progress",
+            "not_found": "The Challenge doesn't exist",
+            "accepted_succesffully": "Challenge Accepted"
         },
         "users": {
             "first_name": "First Name",
@@ -62,7 +65,10 @@ export default {
             "difficulty": "Dificultad",
             "actions": "Acciones",
             "available_challenges": "Desafios Disponibles",
-            "completed_challenges": "Desafios Completados"
+            "completed_challenges": "Desafios Completados",
+            "in_progress_challenges": "Desafios En Progreso",
+            "not_found": "El Desafio no existe",
+            "accepted_succesffully": "Desafio Aceptado"
         },
         "users": {
             "first_name": "Nombre",
