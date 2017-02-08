@@ -26,6 +26,18 @@ return [
     'block_user'           => 'Block user',
     'unblock_user'         => 'Unblock user',
     'block_message'        => 'Are you sure? This will prevent the user logs on to the application',
-    'unblock_message'      => 'Are you sure? This will grant access to the user to the application'
+    'unblock_message'      => 'Are you sure? This will grant access to the user to the application',
+    'update_profile'       => 'Update Profile',
+    'about_me'             => 'About Me',
+    'country'              => 'Country',
+    'sport'                => 'Sport',
+    'specialty'            => 'Specialty',
+    'category'             => 'Category',
+    'gender'               => 'Gender',
+    'overall_ranking'      => 'Overall Ranking',
+    'more_info'            => 'More Info',
+    'scoutings'            => 'Scoutings',
+    'reports'              => 'Reports',
+    'my_profile'           => 'My Profile'
 
 ];

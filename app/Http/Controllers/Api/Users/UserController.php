@@ -26,6 +26,9 @@ class UserController extends Controller
         $user->save();
 
         if ($request->file('profile_picture')) {
+            if ($user->getMedia('profile')->count()) {
+                $user->clearMediaCollection('profile');
+            }
             $user->addMedia($request->file('profile_picture'))->preservingOriginal()->toCollection('profile');
         }
 
@@ -36,6 +39,9 @@ class UserController extends Controller
             $athlete->fill($athleteData);
             $athlete->save();
             if ($request->file('profile_picture')) {
+                if ($athlete->getMedia('profile')->count()) {
+                    $athlete->clearMediaCollection('profile');
+                }
                 $athlete->addMedia($request->file('profile_picture'))->preservingOriginal()->toCollection('profile');
             }
             return response()->json(['message' => trans('admin/users/users.updated_successfully')]);

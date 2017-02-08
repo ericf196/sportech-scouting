@@ -1,5 +1,16 @@
 export default {
     "en": {
+        "challenges": {
+            "difficulty0": "low",
+            "difficulty1": "medium",
+            "difficulty2": "high",
+            "name": "Name",
+            "points": "Points",
+            "difficulty": "Difficulty",
+            "actions": "Actions",
+            "available_challenges": "Available Challenges",
+            "completed_challenges": "Completed Challenges"
+        },
         "users": {
             "first_name": "First Name",
             "last_name": "Last Name",
@@ -14,7 +25,7 @@ export default {
             "role": "Role",
             "actions": "Actions",
             "choose": "Choose an option",
-            "user_updated": "The user was updated successfully",
+            "updated_successfully": "Your profile has been updated successfully",
             "delete_message": "Are you sure? this action cannot be undone",
             "delete_user": "Delete User",
             "user_info": "User Information",
@@ -26,10 +37,33 @@ export default {
             "block_user": "Block user",
             "unblock_user": "Unblock user",
             "block_message": "Are you sure? This will prevent the user logs on to the application",
-            "unblock_message": "Are you sure? This will grant access to the user to the application"
+            "unblock_message": "Are you sure? This will grant access to the user to the application",
+            "update_profile": "Update Profile",
+            "about_me": "About Me",
+            "country": "Country",
+            "sport": "Sport",
+            "specialty": "Specialty",
+            "category": "Category",
+            "gender": "Gender",
+            "overall_ranking": "Overall Ranking",
+            "more_info": "More Info",
+            "scoutings": "Scoutings",
+            "reports": "Reports",
+            "my_profile": "My Profile"
         }
     },
     "es": {
+        "challenges": {
+            "difficulty0": "low",
+            "difficulty1": "medium",
+            "difficulty2": "high",
+            "name": "Nombre",
+            "points": "Puntos",
+            "difficulty": "Dificultad",
+            "actions": "Acciones",
+            "available_challenges": "Desafios Disponibles",
+            "completed_challenges": "Desafios Completados"
+        },
         "users": {
             "first_name": "Nombre",
             "last_name": "Apellido",
@@ -56,7 +90,20 @@ export default {
             "block_user": "Bloquear usuario",
             "unblock_user": "Desbloquear usuario",
             "block_message": "¿Estas Seguro? Esto hara que el usuario no pueda iniciar sesión en la apliación",
-            "unblock_message": "¿Estas Seguro? Esto permitira al usuario iniciar sesión en la apliación"
+            "unblock_message": "¿Estas Seguro? Esto permitira al usuario iniciar sesión en la apliación",
+            "update_profile": "Actualizar Perfil",
+            "updated_successfully": "Tu perfil fue actualizado satisfactoriamente",
+            "about_me": "Acerca de Mí",
+            "country": "País",
+            "sport": "Deporte",
+            "specialty": "Especialidad",
+            "category": "Categoría",
+            "gender": "Genero",
+            "overall_ranking": "Ranking General",
+            "more_info": "Más Info",
+            "scoutings": "Scoutings",
+            "reports": "Reportes",
+            "my_profile": "Mi Perfil"
         }
     }
 }

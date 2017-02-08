@@ -444,7 +444,7 @@
             onBack(evt){
                 evt.preventDefault();
                 this.$router.push({
-                    name: 'profile.view'
+                    name: 'user.view'
                 })
             },
             championshipChanged(championship){
@@ -495,6 +495,7 @@
 
                     userService.update(self.user.id, formData,
                             (response) => {
+                                this.$auth.fetch()
                                 self.$root.successToast(response.message);
                                 self.$router.push({
                                     name: 'user.view'

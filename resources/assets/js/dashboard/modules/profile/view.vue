@@ -1,10 +1,9 @@
 <template>
     <div>
-        <page-header title="My Profile" :breadcrumbs="breadcrumbs"></page-header>
+        <page-header :title="$t('users.my_profile')" :breadcrumbs="breadcrumbs"></page-header>
         <section class="content">
             <div class="row">
                 <div class="col-md-3">
-                    <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle"
@@ -13,32 +12,33 @@
                             <h3 class="profile-username text-center">{{$auth.user().full_name}}</h3>
 
                             <p class="text-muted text-center">{{userTitle}}</p>
+                            <router-link :to="{name:'user.update'}" class="btn btn-primary btn-block">
+                                <b>
+                                    <i class="fa fa-pencil"></i>
+                                    {{$t('users.update_profile')}}
+                                </b>
+                            </router-link>
                         </div>
-                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box -->
-
-                    <!-- About Me Box -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">About Me</h3>
+                            <h3 class="box-title"> {{$t('users.about_me')}}</h3>
                         </div>
-                        <!-- /.box-header -->
                         <div class="box-body">
                             <p class="text-muted">
                                 <strong>
                                     <i class="fa fa-soccer-ball-o margin-r-5"></i>
-                                    Sport</strong>
+                                    {{$t('users.sport')}}</strong>
                                 {{userSport}}
                             </p>
                             <p class="text-muted"><strong>
                                 <i class="fa fa-star margin-r-5"></i>
-                                Specialty</strong> {{userSpecialty}}
+                                {{$t('users.specialty')}}</strong> {{userSpecialty}}
                             </p>
                             <p>
                                 <strong>
                                     <i class="fa fa-map-marker margin-r-5"></i>
-                                    Country</strong>
+                                    {{$t('users.country')}}</strong>
 
                                 <img v-if="userCountryFlag" class="athlete-country-flag" :src="userCountryFlag" alt="">
                                 {{userCountry}}
@@ -46,24 +46,21 @@
                             <p>
                                 <strong>
                                     <i class="fa fa-map-marker margin-r-5"></i>
-                                    Category</strong>
+                                    {{$t('users.category')}}</strong>
 
                                 {{userCategory}}
                             </p>
                             <p>
                                 <strong>
                                     <i class="fa fa-map-marker margin-r-5"></i>
-                                    Gender</strong>
+                                    {{$t('users.gender')}}</strong>
 
                                 {{userGender}}
                             </p>
 
                         </div>
-                        <!-- /.box-body -->
                     </div>
-                    <!-- /.box -->
                 </div>
-                <!-- /.col -->
                 <div class="col-md-9">
                     <div class="row">
                         <div class="col-xs-12 col-md-3">
@@ -72,12 +69,12 @@
                                     <h3>1st</h3>
                                     <h5>2500pts</h5>
 
-                                    <p>Overall Ranking</p>
+                                    <p>{{$t('users.overall_ranking')}}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-trophy"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info
+                                <a href="#" class="small-box-footer">{{$t('users.more_info')}}
                                     <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -87,12 +84,12 @@
                                 <div class="inner">
                                     <h3>3</h3>
                                     <h5>of 5</h5>
-                                    <p>Completed Challenges</p>
+                                    <p>{{$t('challenges.completed_challenges')}}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info
+                                <a href="#" class="small-box-footer">{{$t('users.more_info')}}
                                     <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -102,12 +99,12 @@
                                 <div class="inner">
                                     <h3>5</h3>
                                     <h5>&nbsp;</h5>
-                                    <p>Scoutings</p>
+                                    <p>{{$t('users.scoutings')}}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-video-camera"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info
+                                <a href="#" class="small-box-footer">{{$t('users.more_info')}}
                                     <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -117,12 +114,12 @@
                                 <div class="inner">
                                     <h3>6</h3>
                                     <h5>&nbsp;</h5>
-                                    <p>Reports</p>
+                                    <p>{{$t('users.reports')}}</p>
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-pie-chart"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">More info
+                                <a href="#" class="small-box-footer">{{$t('users.more_info')}}
                                     <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -205,7 +202,6 @@
                                         <div class="box-header with-border">
                                             <h3 class="box-title">Completed Challenges</h3>
                                         </div>
-                                        <!-- /.box-header -->
                                         <div class="box-body">
                                             <ul class="products-list product-list-in-box">
                                                 <li class="item">
@@ -226,7 +222,6 @@
                                                         </span>
                                                     </div>
                                                 </li>
-                                                <!-- /.item -->
                                                 <li class="item">
                                                     <div class="product-info">
                                                         <a href="javascript:void(0)" class="product-title">Challenge 2
@@ -276,9 +271,8 @@
                                 <div class="col-xs-12">
                                     <div class="box box-primary">
                                         <div class="box-header with-border">
-                                            <h3 class="box-title">Available Challenges</h3>
+                                            <h3 class="box-title">{{$t('challenges.available_challenges')}}</h3>
                                         </div>
-                                        <!-- /.box-header -->
                                         <div class="box-body">
                                             <div class="responsive-table">
                                                 <dnc-table ref="table" v-on:data-loaded="dataLoaded" :ajax="ajax"
@@ -301,31 +295,29 @@
     }
 </style>
 <script>
-    import scoutingsLocales from 'base/lang/admin/scoutings/scoutings.js';
+    import usersLocales from 'base/lang/admin/users/users.js';
     import pageHeader from 'base/components/header/pageHeader.vue'
     import dncTable from 'base/components/table/dnc-datatable.vue';
 
     export default{
-        locales: scoutingsLocales,
-        data(){
-            return {
-                breadcrumbs: [
-                    {
-                        href: '/dashboard',
-                        title: 'Home'
-                    },
-                    {
-                        href: '/my-profile',
-                        title: 'My Profile'
-                    }
-                ],
-            }
-        },
+        locales: usersLocales,
         components: {
             pageHeader,
             dncTable
         },
         computed: {
+            breadcrumbs(){
+                return [
+                    {
+                        href: '/dashboard',
+                        title: this.$t('admin.home')
+                    },
+                    {
+                        href: '/my-profile',
+                        title: this.$t('users.my_profile')
+                    }
+                ]
+            },
             userTitle(){
                 return this.$auth.user().athlete ? this.$auth.user().athlete.sport.name + ' ' + this.$auth.user().athlete.specialty.name : ''
             },
@@ -349,14 +341,14 @@
             },
             columns(){
                 return [
-                    {data: 'name', name: 'name', title: this.$t('challenge.name')},
-                    {data: 'points', name: 'points', title: this.$t('challenge.points')},
+                    {data: 'name', name: 'name', title: this.$t('challenges.name')},
+                    {data: 'points', name: 'points', title: this.$t('challenges.points')},
                     {
-                        title: this.$t('challenge.difficulty'),
+                        title: this.$t('challenges.difficulty'),
                         render: this.renderDifficulty
                     },
                     {
-                        title: this.$t('user.actions'),
+                        title: this.$t('challenges.actions'),
                         orderable: false,
                         searchable: false,
                         render: this.renderActions
