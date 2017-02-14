@@ -60,16 +60,16 @@ class CombatStatusDataGenerator implements GlobalDataGeneratorContract
         return [
             [
                 'name'  => 'EQUAL',
-                'y'     => $equal / $total * 100,
+                'y'     => $total ? $equal / $total * 100 : 0,
                 'color' => 'blue'
             ], [
                 'name'  => 'UP',
-                'y'     => $up / $total * 100,
+                'y'     => $total ? $up / $total * 100 : 0,
                 'color' => 'green'
 
             ], [
                 'name'  => 'DOWN',
-                'y'     => $down / $total * 100,
+                'y'     => $total ? $down / $total * 100 : 0,
                 'color' => 'red'
 
             ]

@@ -52,9 +52,9 @@ class OffensiveDevensiveDataGenerator implements GlobalDataGeneratorContract
 
 
         return [
-            'defensive'        => $defensiveCount / $totalCount * 100,
-            'offensive'        => $offesiveCount / $totalCount * 100,
-            'counterOffensive' => $counterOffesiveCount / $totalCount * 100,
+            'defensive'        => $totalCount ? $defensiveCount / $totalCount * 100 : 0,
+            'offensive'        => $totalCount ? $offesiveCount / $totalCount * 100 : 0,
+            'counterOffensive' => $totalCount ? $counterOffesiveCount / $totalCount * 100 : 0,
         ];
     }
 }
