@@ -7,7 +7,9 @@ use App\Http\Requests;
 use App\Http\Requests\Scoutings\ScoutingTouchesUpdateRequest;
 use App\Scouting\Entities\Scoutings\ScoutingTouchAction;
 use App\Scouting\Repositories\Contracts\Athletes\AthleteRepository;
+use App\Scouting\Repositories\Contracts\Reports\ReportRepository;
 use App\Scouting\Repositories\Contracts\Scoutings\ScoutingRepository;
+use App\Scouting\Services\Reports\ReportDataGenerator;
 use App\Scouting\Transformers\Scoutings\ScoutingTransformer;
 use Illuminate\Http\Response;
 
@@ -37,7 +39,7 @@ class ScoutingsTouchesController extends Controller
      * @param  string $id
      * @return \Illuminate\Http\RedirectResponse|Response
      */
-    public function update(ScoutingTouchesUpdateRequest $request, $id)
+    public function update(ScoutingTouchesUpdateRequest $request, $id, ReportRepository $reportRepository)
     {
         $touches = collect($request->get('touches'));
         $scouting = $this->repository->find($id);
@@ -77,7 +79,18 @@ class ScoutingsTouchesController extends Controller
                 });
             });
         });
-
+        $report = $reportRepository->findWhere(['scouting_id' => $id, 'auto_generated' => true]);
+        if ($report->count()) {
+            $reportData = (new ReportDataGenerator($report))->generate();
+            $report->data = $reportData['data'];
+            $report->data_offensive = $reportData['data_offensive'];
+            $report->data_defensive = $reportData['data_defensive'];
+            $report->data_counteroffensive = $reportData['data_counteroffensive'];
+            $report->data_combat_status = $reportData['data_combat_status'];
+            $report->data_parry = $reportData['data_parry'];
+            $report->data_summary = $reportData['data_summary'];
+            $report->save();
+        }
         return $this->createItem($scouting, new ScoutingTransformer(), 'data', ['message' => 'Scouting updated.']);
     }
 }
