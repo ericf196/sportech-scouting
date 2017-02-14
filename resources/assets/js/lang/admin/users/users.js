@@ -52,7 +52,10 @@ export default {
             "more_info": "More Info",
             "scoutings": "Scoutings",
             "reports": "Reports",
-            "my_profile": "My Profile"
+            "my_profile": "My Profile",
+            "level": "Level",
+            "suggested_challenge": "Suggested Challenge",
+            "accept_challenge": "Accept Challenge"
         }
     },
     "es": {
@@ -109,7 +112,10 @@ export default {
             "more_info": "Más Info",
             "scoutings": "Scoutings",
             "reports": "Reportes",
-            "my_profile": "Mi Perfil"
+            "my_profile": "Mi Perfil",
+            "level": "Nivel",
+            "suggested_challenge": "Desafio Sugerido",
+            "accept_challenge": "Aceptar Desafio"
         }
     }
 }

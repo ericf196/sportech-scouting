@@ -10,6 +10,7 @@
                                  :src="$auth.user().image" alt="User profile picture">
 
                             <h3 class="profile-username text-center">{{$auth.user().full_name}}</h3>
+                            <h3 class="profile-level text-center"><b>{{$t('users.level')}}:</b> 1</h3>
 
                             <p class="text-muted text-center">{{userTitle}}</p>
                             <router-link :to="{name:'user.update'}" class="btn btn-primary btn-block">
@@ -58,6 +59,34 @@
                                 {{userGender}}
                             </p>
 
+                        </div>
+                    </div>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"> {{$t('users.suggested_challenge')}}</h3>
+                        </div>
+                        <div class="box-body">
+                            <div class="info-box bg-red">
+                                <span class="info-box-icon">
+                                    <i class="fa fa-bookmark-o"></i>
+                                </span>
+
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{suggestedChallenge.name}}</span>
+                                    <span class="info-box-number">{{suggestedChallenge.points}} Pts</span>
+
+                                    <div class="progress progress-suggested">
+                                        <div class="progress-bar" style="width: 0%"></div>
+                                    </div>
+                                    <span class="progress-description">
+                                        <button class="btn btn-sm btn-success btn-suggested btn-block"
+                                                v-on:click="acceptChallenge(suggestedChallenge.id)">
+                                            {{$t('users.accept_challenge')}}
+                                        </button>
+                                    </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -222,6 +251,19 @@
     .products-list .product-info {
         margin-left: 0 !important;
     }
+
+    .profile-level {
+        font-size: 17px;
+        margin-top: 5px;
+    }
+
+    .btn-suggested {
+        padding: 0 10px !important;
+    }
+
+    .progress-suggested {
+        margin: 0 -10px 5px -10px !important;
+    }
 </style>
 <script>
     import usersLocales from 'base/lang/admin/users/users.js';
@@ -240,6 +282,8 @@
             return {
                 completed: [],
                 inProgress: [],
+                suggestedChallenge: {
+                },
                 summary: {
                     scountings: 0,
                     reports: 0,
@@ -296,6 +340,7 @@
                         title: this.$t('challenges.actions'),
                         orderable: false,
                         searchable: false,
+                        width: '100px',
                         render: this.renderActions
                     },
                 ]
@@ -310,14 +355,15 @@
             this.loadInProgress();
             this.loadCompleted();
             this.loadStatistics();
+            this.loadSuggestedChallenge();
         },
         methods: {
             dataLoaded(data){
 
             },
             renderActions(data, type, full, meta){
-                const blockedClass = !full.blocked ? "red" : "green"
-                return `<div class="action-buttons"><a class="btn btn-sm btn-success"  v-on:click="$parent.acceptChallenge(${full.id})">Accept Challenge</a>`
+                const accept = this.$t('users.accept_challenge')
+                return `<div class="action-buttons"><a class="btn btn-sm btn-success"  v-on:click="$parent.acceptChallenge(${full.id})">${accept}</a>`
             },
             renderDifficulty(data, type, full, meta){
                 return `<span class="label bg-${full.difficultyColor}">${full.difficulty} </span>`
@@ -325,6 +371,13 @@
             loadInProgress(){
                 userChallengeService.inProgress((response)=> {
                     this.inProgress = response.data;
+                }, (response)=> {
+
+                })
+            },
+            loadSuggestedChallenge(){
+                userChallengeService.suggested((response)=> {
+                    this.suggestedChallenge = response.data;
                 }, (response)=> {
 
                 })

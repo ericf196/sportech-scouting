@@ -51,5 +51,9 @@ return [
     'scoutings'              => 'Scoutings',
     'making_report'          => 'Processing Report please wait',
     'report'                 => 'See Report',
-    'error_report'           => 'An error ocurred while creating the report'
+    'error_report'           => 'An error ocurred while creating the report',
+    'list'                   => 'Data List',
+    'results'                => 'Results',
+    'app_mobile'             => 'Mobile App',
+    'other_sources'          => 'Other Sources'
 ];

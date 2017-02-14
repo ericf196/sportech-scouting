@@ -10,7 +10,9 @@ export default {
             "add_scouting": "Add Scouting",
             "description": "Description",
             "reports_scoutings": "Report Scoutings",
-            "report": "Report"
+            "report": "Report",
+            "actions": "Actions",
+            "scouting_added": "Scouting Added"
         }
     },
     "es": {
@@ -24,7 +26,9 @@ export default {
             "add_scouting": "Añadir Scouting",
             "description": "Descripción",
             "reports_scoutings": "Scoutings del reporte",
-            "report": "Reporte"
+            "report": "Reporte",
+            "actions": "Acciones",
+            "scouting_added": "Scouting Añadido"
         }
     }
 }

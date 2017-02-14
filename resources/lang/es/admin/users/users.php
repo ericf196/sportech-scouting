@@ -39,6 +39,10 @@ return [
     'more_info'            => 'Más Info',
     'scoutings'            => 'Scoutings',
     'reports'              => 'Reportes',
-    'my_profile'           => 'Mi Perfil'
+    'my_profile'           => 'Mi Perfil',
+    'level'                => 'Nivel',
+    'suggested_challenge'  => 'Desafio Sugerido',
+    'accept_challenge'     => 'Aceptar Desafio'
+
 
 ];

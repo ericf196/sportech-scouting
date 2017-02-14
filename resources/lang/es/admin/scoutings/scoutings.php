@@ -51,5 +51,10 @@ return [
     'scoutings'              => 'Scoutings',
     'making_report'          => 'Procesando Reporte por favor espera',
     'report'                 => 'Ver Reporte',
-    'error_report'           => 'Ocurrio un error inesperado al procesar el reporte'
+    'error_report'           => 'Ocurrio un error inesperado al procesar el reporte',
+    'list'                   => 'Lista de Datos',
+    'results'                => 'Resultados',
+    'app_mobile'             => 'App Móvil',
+    'other_sources'          => 'Otras Fuentes'
+
 ];

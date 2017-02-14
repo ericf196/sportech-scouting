@@ -24,8 +24,12 @@ Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::get('user/challenges/completed', 'Api\Users\UserChallengeController@completed');
     Route::get('user/challenges/in-progress', 'Api\Users\UserChallengeController@inProgress');
     Route::get('user/challenges/available', 'Api\Users\UserChallengeController@available');
+    Route::get('user/challenges/suggested', 'Api\Users\UserChallengeController@suggested');
     Route::post('user/challenges/{challengeId}/accept', 'Api\Users\UserChallengeController@accept');
 
+    Route::get('/scoutings/app', 'Api\Scoutings\ScoutingsController@app');
+    Route::get('/scoutings/results', 'Api\Scoutings\ScoutingsController@results');
+    Route::get('/scoutings/other-sources', 'Api\Scoutings\ScoutingsController@otherSources');
     Route::get('/scoutings/{scoutingId}/report', 'Api\Scoutings\ScoutingsReportsController@report');
     Route::put('/scoutings/{scoutingId}/touches', 'Api\Scoutings\ScoutingsTouchesController@update');
     Route::resource('/scoutings', 'Api\Scoutings\ScoutingsController');

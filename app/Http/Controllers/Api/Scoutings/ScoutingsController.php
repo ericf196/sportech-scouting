@@ -178,4 +178,28 @@ class ScoutingsController extends Controller
         }
         return $formattedData;
     }
+
+    public function app()
+    {
+        $data = collect();
+        return Datatables::of($data)
+            ->setTransformer(new ScoutingTransformer())
+            ->make(true);
+    }
+
+    public function results()
+    {
+        $data = collect();
+        return Datatables::of($data)
+            ->setTransformer(new ScoutingTransformer())
+            ->make(true);
+    }
+
+    public function otherSources()
+    {
+        $data = collect();
+        return Datatables::of($data)
+            ->setTransformer(new ScoutingTransformer())
+            ->make(true);
+    }
 }

@@ -32,7 +32,7 @@ return [
     'videos'                        => 'Videos',
     'results'                       => 'Resultados',
     'arbiters'                      => 'Arbitros',
-    'scoutings'                     => 'Scoutings',
+    'scoutings'                     => 'Datos',
     'token_invalid'                 => 'Tus credenciales no son correctas',
     'token_expired'                 => 'Tu sesión ha expirado',
     'token_not_provided'            => 'No has iniciado sesión',

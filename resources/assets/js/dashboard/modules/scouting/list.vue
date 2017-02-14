@@ -1,6 +1,6 @@
 <template>
     <div>
-        <page-header title="Scoutings List" :breadcrumbs="breadcrumbs"></page-header>
+        <page-header :title="$t('scoutings.list')" :breadcrumbs="breadcrumbs"></page-header>
         <section class="content overlay-wrapper">
             <div class="row">
                 <div class="col-xs-12">
@@ -23,6 +23,51 @@
                                         <router-link :to="{name:'scoutings.create'}" class="btn btn-success">
                                             {{$t('scoutings.create')}}
                                         </router-link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">{{$t('scoutings.results')}}</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="responsive-table">
+                                        <dnc-table ref="table-results" v-on:data-loaded="dataLoaded" :ajax="ajaxResults"
+                                                   :columns="columns"></dnc-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">{{$t('scoutings.app_mobile')}}</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="responsive-table">
+                                        <dnc-table ref="table-app" v-on:data-loaded="dataLoaded" :ajax="ajaxApp"
+                                                   :columns="columns"></dnc-table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">{{$t('scoutings.other_sources')}}</h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="responsive-table">
+                                        <dnc-table ref="table-other" v-on:data-loaded="dataLoaded" :ajax="ajaxOther"
+                                                   :columns="columns"></dnc-table>
                                     </div>
                                 </div>
                             </div>
@@ -71,6 +116,7 @@
                         title: 'Actions',
                         orderable: false,
                         searchable: false,
+                        width: '230px',
                         render: this.renderActions
                     },
                 ]
@@ -78,6 +124,21 @@
             ajax() {
                 return {
                     url: 'api/scoutings?token=' + this.$auth.token()
+                }
+            },
+            ajaxResults() {
+                return {
+                    url: 'api/scoutings/results?token=' + this.$auth.token()
+                }
+            },
+            ajaxApp() {
+                return {
+                    url: 'api/scoutings/app?token=' + this.$auth.token()
+                }
+            },
+            ajaxOther() {
+                return {
+                    url: 'api/scoutings/other-sources?token=' + this.$auth.token()
                 }
             },
         },

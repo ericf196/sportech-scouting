@@ -38,6 +38,10 @@ return [
     'more_info'            => 'More Info',
     'scoutings'            => 'Scoutings',
     'reports'              => 'Reports',
-    'my_profile'           => 'My Profile'
+    'my_profile'           => 'My Profile',
+    'level'                => 'Level',
+    'suggested_challenge'  => 'Suggested Challenge',
+    'accept_challenge'     => 'Accept Challenge'
+
 
 ];

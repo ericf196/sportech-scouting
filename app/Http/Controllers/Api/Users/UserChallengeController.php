@@ -50,4 +50,11 @@ class UserChallengeController extends Controller
         return response()->json(['message' => trans('admin/users/challenges.accepted_succesffully')]);
     }
 
+    public function suggested(ChallengeRepository $repository)
+    {
+        $challenges = $repository->all();
+        $suggested = $challenges->last();
+        return $this->createItem($suggested, new ChallengeTransformer(), 'data');
+    }
+
 }

@@ -52,7 +52,11 @@ export default {
             "scoutings": "Scoutings",
             "making_report": "Processing Report please wait",
             "report": "See Report",
-            "error_report": "An error ocurred while creating the report"
+            "error_report": "An error ocurred while creating the report",
+            "list": "Data List",
+            "results": "Results",
+            "app_mobile": "Mobile App",
+            "other_sources": "Other Sources"
         }
     },
     "es": {
@@ -108,7 +112,11 @@ export default {
             "scoutings": "Scoutings",
             "making_report": "Procesando Reporte por favor espera",
             "report": "Ver Reporte",
-            "error_report": "Ocurrio un error inesperado al procesar el reporte"
+            "error_report": "Ocurrio un error inesperado al procesar el reporte",
+            "list": "Lista de Datos",
+            "results": "Resultados",
+            "app_mobile": "App Móvil",
+            "other_sources": "Otras Fuentes"
         }
     }
 }

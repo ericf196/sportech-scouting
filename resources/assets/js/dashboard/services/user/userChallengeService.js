@@ -16,4 +16,9 @@ export default {
             .then((response) => successCalback(response.body))
             .catch((error) => errorCallback(error.body));
     },
+    suggested(successCalback, errorCallback){
+        return Vue.http.get('/api/user/challenges/suggested')
+            .then((response) => successCalback(response.body))
+            .catch((error) => errorCallback(error.body));
+    },
 }

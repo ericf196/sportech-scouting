@@ -10,6 +10,8 @@ return [
     'add_scouting'         => 'Add Scouting',
     'description'          => 'Description',
     'reports_scoutings'    => 'Report Scoutings',
-    'report'               => 'Report'
+    'report'               => 'Report',
+    'actions'              => 'Actions',
+    'scouting_added'       => 'Scouting Added'
 
 ];
