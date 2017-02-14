@@ -89,9 +89,12 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
         });
 
         $this->dataConsumedTime = $this->consumedTime();
-        $this->dataValid['percentage'] = number_format($this->dataValid['valid'] / ($this->dataValid['valid'] + $this->dataValid['noValid']) * 100,2);
-        $this->dataEffectiveness['percentage'] = number_format($this->dataEffectiveness['victories'] / ($this->dataEffectiveness['victories'] + $this->dataEffectiveness['defeats']) * 100,2);
-        $this->dataPerfection['percentage'] = number_format($this->dataPerfection['perfect'] / ($this->dataPerfection['perfect'] + $this->dataPerfection['imperfect']) * 100,2);
+        $totalValidInvalidTouches = $this->dataValid['valid'] + $this->dataValid['noValid'];
+        $totalCombats = $this->dataEffectiveness['victories'] + $this->dataEffectiveness['defeats'];
+        $totalPerfection = $this->dataPerfection['perfect'] + $this->dataPerfection['imperfect'];
+        $this->dataValid['percentage'] = $totalValidInvalidTouches ? number_format($this->dataValid['valid'] / ($totalValidInvalidTouches) * 100, 2) : 0;
+        $this->dataEffectiveness['percentage'] = $totalCombats ? number_format($this->dataEffectiveness['victories'] / ($totalCombats) * 100, 2) : 0;
+        $this->dataPerfection['percentage'] = $totalPerfection ? number_format($this->dataPerfection['perfect'] / ($totalPerfection) * 100, 2) : 0;
 
         return [
             'consumedTime'  => $this->dataConsumedTime,
