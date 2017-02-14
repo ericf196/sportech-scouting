@@ -81,6 +81,7 @@ class ScoutingsTouchesController extends Controller
         });
         $report = $reportRepository->findWhere(['scouting_id' => $id, 'auto_generated' => true]);
         if ($report->count()) {
+            $report = $report->first();
             $reportData = (new ReportDataGenerator($report))->generate();
             $report->data = $reportData['data'];
             $report->data_offensive = $reportData['data_offensive'];
