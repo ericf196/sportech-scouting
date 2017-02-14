@@ -51,7 +51,7 @@ class ScoutingsReportsController extends Controller
 
         } catch (Exception $e) {
             DB::rollBack();
-            \Log::error($e->getMessage() . EOL . ' file:' . $e->getFile() . EOL . 'line:' . $e->getLine() . EOL . $e->getTraceAsString());
+            \Log::error($e->getMessage() . PHP_EOL . ' file:' . $e->getFile() . PHP_EOL . 'line:' . $e->getLine() . PHP_EOL . $e->getTraceAsString());
             return response()->json(['message' => trans('admin/scoutings/scoutings.error_report')]);
         }
 
