@@ -43,6 +43,11 @@ use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereUsername($value)
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Challenges\Challenge[] $challenges
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Challenges\Challenge[] $completedChallenges
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Challenges\Challenge[] $inProgressChallenges
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Reports\Report[] $reports
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Scoutings\Scouting[] $scoutings
  */
 class User extends Authenticatable implements HasMediaConversions
 {

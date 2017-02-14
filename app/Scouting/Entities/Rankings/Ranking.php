@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
+/**
+ * App\Scouting\Entities\Rankings\Ranking
+ *
+ * @property-read \App\Scouting\Entities\Users\User $user
+ * @mixin \Eloquent
+ */
 class Ranking extends Model implements Transformable
 {
     use TransformableTrait;

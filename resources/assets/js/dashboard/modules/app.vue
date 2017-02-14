@@ -30,10 +30,12 @@
                                 <li class="dropdown tasks-menu" v-show="$auth.check()">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                         <i class="fa fa-flag-o"></i>
-                                        <span class="label label-danger">3</span>
+                                        <span class="label label-danger">{{challenges.length}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li class="header">{{$t('admin.number_challenges_in_progress',{count:challenges.lenght})}}</li>
+                                        <li class="header">
+                                            {{$t('admin.number_challenges_in_progress',{count:challenges.lenght})}}
+                                        </li>
                                         <li>
                                             <ul class="menu">
                                                 <li v-for="challenge in challenges"><!-- Task item -->
@@ -208,6 +210,13 @@
                             divider: false,
                             icon: 'fa-list',
                             title: 'admin.scoutings'
+                        },
+                        {
+                            url: 'reports',
+                            dropdown: false,
+                            divider: false,
+                            icon: 'fa-file-text',
+                            title: 'admin.reports'
                         },
                         {
                             url: 'athletes',

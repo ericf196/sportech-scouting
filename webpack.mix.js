@@ -40,6 +40,7 @@ mix.less(rootCss + 'less/adminlte/AdminLte.less', pathCss)
     .extract(['vue', 'jquery', 'lodash',
         'bootstrap-sass', 'vue-resource', 'vee-validate',
         'vue-router', 'vuex', 'vue-i18n', 'vue-dragula',
+        'vue-highcharts', 'highcharts',
         '@websanova/vue-auth', '@websanova/vue-auth/drivers/auth/bearer.js',
         '@websanova/vue-auth/drivers/http/vue-resource.1.x.js',
         '@websanova/vue-auth/drivers/router/vue-router.2.x.js'])

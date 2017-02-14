@@ -74,9 +74,6 @@
                                 <div class="icon">
                                     <i class="fa fa-trophy"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">{{$t('users.more_info')}}
-                                    <i class="fa fa-arrow-circle-right"></i>
-                                </a>
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-3">
@@ -89,9 +86,6 @@
                                 <div class="icon">
                                     <i class="fa fa-star"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">{{$t('users.more_info')}}
-                                    <i class="fa fa-arrow-circle-right"></i>
-                                </a>
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-3">
@@ -104,9 +98,6 @@
                                 <div class="icon">
                                     <i class="fa fa-video-camera"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">{{$t('users.more_info')}}
-                                    <i class="fa fa-arrow-circle-right"></i>
-                                </a>
                             </div>
                         </div>
                         <div class="col-xs-12 col-md-3">
@@ -119,9 +110,6 @@
                                 <div class="icon">
                                     <i class="fa fa-pie-chart"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">{{$t('users.more_info')}}
-                                    <i class="fa fa-arrow-circle-right"></i>
-                                </a>
                             </div>
                         </div>
                     </div>

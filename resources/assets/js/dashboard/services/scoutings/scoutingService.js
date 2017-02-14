@@ -20,5 +20,10 @@ export default {
         return Vue.http.delete('/api/scoutings/' + id)
             .then((response) => successCalback(response.body))
             .catch((error) => errorCallback(error.body));
+    },
+    report(id, successCalback, errorCallback){
+        return Vue.http.get('/api/scoutings/' + id + '/report')
+            .then((response) => successCalback(response.body))
+            .catch((error) => errorCallback(error));
     }
 }

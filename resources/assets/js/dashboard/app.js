@@ -7,14 +7,21 @@ import Vuex from 'vuex';
 import messages_es from 'base/lang/forms/es.js';
 import messages_en from 'base/lang/forms/en.js';
 import adminTranslation from 'base/lang/admin/admin.js';
+import Highcharts from 'highcharts';
+import highchartsMore from 'highcharts/highcharts-more';
+import solidGauge from 'highcharts/modules/solid-gauge';
 
+import VueHighcharts from 'vue-highcharts';
 var VueI18n = require('vue-i18n');
 var VueDragula = require('vue-dragula');
-
+highchartsMore(Highcharts);
+solidGauge(Highcharts);
 Vue.use(VueI18n);
 Vue.use(VueDragula);
 Vue.use(Vuex);
 Vue.use(VueRouter);
+Vue.use(VueHighcharts);
+
 
 Vue.vueDragula.options('first-bag', {
     direction: 'horizontal'

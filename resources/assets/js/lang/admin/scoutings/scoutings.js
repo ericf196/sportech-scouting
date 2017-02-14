@@ -46,7 +46,13 @@ export default {
             "touches": "Touches",
             "start_at": "Start at {start}",
             "end_at": "End at {end}",
-            "no_touches": "There are no registered tocuhes"
+            "no_touches": "There are no registered tocuhes",
+            "select": "Select Scoutings",
+            "create": "Create Scouting",
+            "scoutings": "Scoutings",
+            "making_report": "Processing Report please wait",
+            "report": "See Report",
+            "error_report": "An error ocurred while creating the report"
         }
     },
     "es": {
@@ -96,7 +102,13 @@ export default {
             "touches": "Toques",
             "start_at": "Inicia en {start}",
             "end_at": "Finaliza en {end}",
-            "no_touches": "No hay toques registrados"
+            "no_touches": "No hay toques registrados",
+            "select": "Seleccionar Scoutings",
+            "create": "Crear Scouting",
+            "scoutings": "Scoutings",
+            "making_report": "Procesando Reporte por favor espera",
+            "report": "Ver Reporte",
+            "error_report": "Ocurrio un error inesperado al procesar el reporte"
         }
     }
 }

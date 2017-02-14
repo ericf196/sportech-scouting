@@ -12,6 +12,7 @@ use App\Scouting\Repositories\Contracts\Championships\ChampionshipRepository;
 use App\Scouting\Repositories\Contracts\Events\EventRepository;
 use App\Scouting\Transformers\Scoutings\ScoutingTransformer;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Scouting\Repositories\Contracts\Scoutings\ScoutingRepository;
 use Yajra\Datatables\Datatables;
@@ -52,11 +53,18 @@ class ScoutingsController extends Controller
     /**
      * Display a listing of scoutings.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Datatables::of(Scouting::query())
+        $except = $request->get('except');
+        $query = Scouting::query();
+
+        if ($except) {
+            $query = $query->whereNotIn('id', explode(',', $except));
+        }
+        return Datatables::of($query)
             ->setTransformer(new ScoutingTransformer())
             ->make(true);
     }
@@ -129,7 +137,7 @@ class ScoutingsController extends Controller
     {
         $deleted = $this->repository->delete($id);
 
-        return $this->createItem($scouting, new ScoutingTransformer(), 'data', ['message' => trans('admin/scoutings/scoutings.deleted_successfully')]);
+        return response()->json(['message' => trans('admin/scoutings/scoutings.deleted_succesfully')]);
     }
 
     private function formatScoutingData($data)

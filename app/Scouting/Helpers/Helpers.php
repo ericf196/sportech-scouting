@@ -13,10 +13,18 @@ function loadAsset($path)
     }
 }
 
-function ordinal($number) {
-    $ends = array('th','st','nd','rd','th','th','th','th','th','th');
-    if ((($number % 100) >= 11) && (($number%100) <= 13))
-        return $number. 'th';
+function ordinal($number)
+{
+    $ends = array('th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th');
+    if ((($number % 100) >= 11) && (($number % 100) <= 13))
+        return $number . 'th';
     else
-        return $number. $ends[$number % 10];
+        return $number . $ends[$number % 10];
+}
+
+function toHHMMSS($init)
+{
+    $h = floor($init / 3600);
+    return $h ? gmdate('H:i:s', $init) : gmdate('i:s', $init);
+
 }

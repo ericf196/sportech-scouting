@@ -41,7 +41,8 @@ return [
     'login'                         => 'Iniciar Sesión',
     'view_all_challenges'           => 'Ver todos los desafios',
     'number_challenges_in_progress' => 'Tienes :count Desafios en progreso',
-    'complete'                      => 'Completado'
+    'complete'                      => 'Completado',
+    'view'                          => 'Ver',
 
 
 ];

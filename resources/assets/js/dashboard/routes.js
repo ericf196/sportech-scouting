@@ -76,6 +76,34 @@ export default {
             ]
         },
         {
+            path: '/reports',
+            component: function (resolve) {
+                require(['./modules/reports/reports.vue'], resolve)
+            },
+            meta: {auth: true},
+            children: [
+                {
+                    path: ':id',
+                    name: 'reports.view',
+                    component: function (resolve) {
+                        require(['./modules/reports/view.vue'], resolve)
+                    }
+                }, {
+                    path: 'create',
+                    name: 'reports.create',
+                    component: function (resolve) {
+                        require(['./modules/reports/create.vue'], resolve)
+                    }
+                }, {
+                    path: '/',
+                    name: 'reports.list',
+                    component: function (resolve) {
+                        require(['./modules/reports/list.vue'], resolve)
+                    }
+                },
+            ]
+        },
+        {
             path: '/athletes',
             component: function (resolve) {
                 require(['./modules/athletes/athletes.vue'], resolve)

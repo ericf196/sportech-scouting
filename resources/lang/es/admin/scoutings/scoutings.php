@@ -45,6 +45,11 @@ return [
     'touches'                => 'Toques',
     'start_at'               => 'Inicia en :start',
     'end_at'                 => 'Finaliza en :end',
-    'no_touches'             => 'No hay toques registrados'
-
+    'no_touches'             => 'No hay toques registrados',
+    'select'                 => 'Seleccionar Scoutings',
+    'create'                 => 'Crear Scouting',
+    'scoutings'              => 'Scoutings',
+    'making_report'          => 'Procesando Reporte por favor espera',
+    'report'                 => 'Ver Reporte',
+    'error_report'           => 'Ocurrio un error inesperado al procesar el reporte'
 ];

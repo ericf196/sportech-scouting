@@ -11,4 +11,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface ReportRepository extends RepositoryInterface
 {
     //
+    public function datatable();
 }

@@ -21,14 +21,23 @@ Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::put('user', 'Api\Users\UserController@update');
 
     Route::get('user/statistics/summary', 'Api\Users\UserStatisticsController@summary');
-
     Route::get('user/challenges/completed', 'Api\Users\UserChallengeController@completed');
     Route::get('user/challenges/in-progress', 'Api\Users\UserChallengeController@inProgress');
     Route::get('user/challenges/available', 'Api\Users\UserChallengeController@available');
     Route::post('user/challenges/{challengeId}/accept', 'Api\Users\UserChallengeController@accept');
 
+    Route::get('/scoutings/{scoutingId}/report', 'Api\Scoutings\ScoutingsReportsController@report');
     Route::put('/scoutings/{scoutingId}/touches', 'Api\Scoutings\ScoutingsTouchesController@update');
     Route::resource('/scoutings', 'Api\Scoutings\ScoutingsController');
+
+    Route::get('/reports/{id}/summary', 'Api\Reports\ReportsDataController@summary');
+    Route::get('/reports/{id}/parry', 'Api\Reports\ReportsDataController@parry');
+    Route::get('/reports/{id}/combat-status', 'Api\Reports\ReportsDataController@combatStatus');
+    Route::get('/reports/{id}/point-vs-time', 'Api\Reports\ReportsDataController@pointVsTime');
+    Route::get('/reports/{id}/offensive-defensive', 'Api\Reports\ReportsDataController@offensiveDefensive');
+    Route::get('/reports', 'Api\Reports\ReportsController@index');
+    Route::get('/reports/{id}', 'Api\Reports\ReportsController@show');
+    Route::post('/reports', 'Api\Reports\ReportsController@store');
 
     Route::resource('/athletes', 'Api\Athletes\AthletesController');
 

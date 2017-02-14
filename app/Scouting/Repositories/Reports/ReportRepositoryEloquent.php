@@ -24,13 +24,13 @@ class ReportRepositoryEloquent extends BaseRepository implements ReportRepositor
         return Report::class;
     }
 
-    
 
     /**
      * Boot up the repository, pushing criteria
      */
-    public function boot()
+    public function datatable()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
+        return $this->model->select('reports.*');
+
     }
 }

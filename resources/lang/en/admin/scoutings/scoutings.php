@@ -45,6 +45,11 @@ return [
     'touches'                => 'Touches',
     'start_at'               => 'Start at :start',
     'end_at'                 => 'End at :end',
-    'no_touches'             => 'There are no registered tocuhes'
-
+    'no_touches'             => 'There are no registered tocuhes',
+    'select'                 => 'Select Scoutings',
+    'create'                 => 'Create Scouting',
+    'scoutings'              => 'Scoutings',
+    'making_report'          => 'Processing Report please wait',
+    'report'                 => 'See Report',
+    'error_report'           => 'An error ocurred while creating the report'
 ];

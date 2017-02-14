@@ -89,6 +89,8 @@
                         redirect: {name: 'dashboard'},
                         success() {
                             self.$root.successToast('User LoggedIn');
+                            self.$root.loadChallengesInProgress()
+
                         },
                         error(res) {
                             if (res.data.hasOwnProperty('error')) {

@@ -33,8 +33,5 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         return view('dashboard');
     });
 
-    Route::get('/test', function () {
-
-        return view('test');
-    });
+    Route::get('/test', 'Api\Reports\ReportsController@test');
 });

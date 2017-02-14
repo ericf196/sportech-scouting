@@ -57,6 +57,8 @@ class EventsController extends Controller
             $data['init_date'] = Carbon::parse($data['init_date']);
             $data['name'] = $request->get('translation')['name'];
             $data['description'] = $request->get('translation')['description'];
+            $data['description']['es'] = $data['description']['en'];
+            $data['name']['es'] = $data['name']['en'];
             $event = $this->eventRepository->create($data);
             if ($request->file('poster'))
                 $event->addMedia($request->file('poster'))->preservingOriginal()->toCollection('poster');
@@ -76,6 +78,9 @@ class EventsController extends Controller
             $data['init_date'] = Carbon::parse($data['init_date']);
             $data['name'] = $request->get('translation')['name'];
             $data['description'] = $request->get('translation')['description'];
+            $data['description']['es'] = $data['description']['en'];
+            $data['name']['es'] = $data['name']['en'];
+
             $event = $this->eventRepository->update($data, $id);
             if ($request->file('poster')) {
                 if ($event->getMedia('poster')->count()) {
