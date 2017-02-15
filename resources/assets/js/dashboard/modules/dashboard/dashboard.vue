@@ -90,7 +90,7 @@
                                             <div class="product-info">
                                                 <h4 class="pull-left">{{rank.user.full_name}}</h4>
                                                 <img :src="rank.user.athlete.country.flag" class="product-flag" alt="">
-                                                <span class="label label-success label-lg pull-right">{{rank.points}}
+                                                <span class="product-points pull-right">{{rank.points}} pts
                                                 </span>
                                             </div>
                                         </li>
@@ -144,6 +144,16 @@
         color: #AAA;
     }
 
+    .product-points {
+        font-size: 20px;
+        background: #00c0ef;
+        margin: 9px;
+        padding: 0 5px;
+        min-width: 61px;
+        text-align: center;
+        color: white;
+    }
+
     .product-img {
         padding-right: 5px;
     }
@@ -168,7 +178,7 @@
         padding-top: 0 !important;
     }
 
-    .product-flag{
+    .product-flag {
         padding: 10px;
     }
 </style>
