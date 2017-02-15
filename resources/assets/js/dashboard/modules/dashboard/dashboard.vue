@@ -89,6 +89,7 @@
                                             </div>
                                             <div class="product-info">
                                                 <h4 class="pull-left">{{rank.user.full_name}}</h4>
+                                                <img :src="rank.user.athlete.country.flag" class="product-flag" alt="">
                                                 <span class="label label-success label-lg pull-right">{{rank.points}}
                                                 </span>
                                             </div>
@@ -165,6 +166,10 @@
 
     .latest-box-body {
         padding-top: 0 !important;
+    }
+
+    .product-flag{
+        padding: 10px;
     }
 </style>
 <script>
