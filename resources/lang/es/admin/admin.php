@@ -43,6 +43,7 @@ return [
     'number_challenges_in_progress' => 'Tienes :count Desafios en progreso',
     'complete'                      => 'Completado',
     'view'                          => 'Ver',
-
+    'main_navigation'               => 'Navegación Principal',
+    'quick_navigation'              => 'Navegación Rapida'
 
 ];

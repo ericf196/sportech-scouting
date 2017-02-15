@@ -24,7 +24,6 @@ class RankingRepositoryEloquent extends BaseRepository implements RankingReposit
         return Ranking::class;
     }
 
-    
 
     /**
      * Boot up the repository, pushing criteria
@@ -32,5 +31,10 @@ class RankingRepositoryEloquent extends BaseRepository implements RankingReposit
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function ranking($perPage = 10)
+    {
+        return $this->model->newQuery()->orderBy('points', 'desc')->getWithRowNumber(['*'], $perPage);
     }
 }

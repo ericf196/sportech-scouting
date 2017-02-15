@@ -12,4 +12,6 @@ interface ReportRepository extends RepositoryInterface
 {
     //
     public function datatable();
+
+    public function latest();
 }

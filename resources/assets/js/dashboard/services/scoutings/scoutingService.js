@@ -25,5 +25,10 @@ export default {
         return Vue.http.get('/api/scoutings/' + id + '/report')
             .then((response) => successCalback(response.body))
             .catch((error) => errorCallback(error));
-    }
+    },
+    latest(successCalback, errorCallback){
+        return Vue.http.get('/api/scoutings/latest')
+            .then((response) => successCalback(response.body))
+            .catch((error) => errorCallback(error));
+    },
 }

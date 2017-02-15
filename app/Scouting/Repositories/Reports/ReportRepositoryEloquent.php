@@ -33,4 +33,9 @@ class ReportRepositoryEloquent extends BaseRepository implements ReportRepositor
         return $this->model->select('reports.*');
 
     }
+
+    public function latest()
+    {
+        return $this->model->newQuery()->orderBy('created_at','desc')->first();
+    }
 }

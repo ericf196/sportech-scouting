@@ -42,7 +42,9 @@ export default {
             "view_all_challenges": "View all challenges",
             "view": "View",
             "number_challenges_in_progress": "You have {count} Challenges in progress",
-            "complete": "Complete"
+            "complete": "Complete",
+            "main_navigation": "Main Navigation",
+            "quick_navigation": "Quick Navigation"
         },
         "forms": {
             "save": "Save",
@@ -108,7 +110,9 @@ export default {
             "view_all_challenges": "Ver todos los desafios",
             "number_challenges_in_progress": "Tienes {count} Desafios en progreso",
             "complete": "Completado",
-            "view": "Ver"
+            "view": "Ver",
+            "main_navigation": "Navegación Principal",
+            "quick_navigation": "Navegación Rapida"
         },
         "forms": {
             "save": "Guardar",

@@ -42,5 +42,7 @@ return [
     'view_all_challenges'           => 'View all challenges',
     'view'                          => 'View',
     'number_challenges_in_progress' => 'You have :count Challenges in progress',
-    'complete'                      => 'Complete'
+    'complete'                      => 'Complete',
+    'main_navigation'               => 'Main Navigation',
+    'quick_navigation'              => 'Quick Navigation'
 ];

@@ -90,4 +90,13 @@ class ReportsController extends Controller
         return $data;
     }
 
+    public function latest()
+    {
+        $report = $this->repository->latest();
+        if ($report)
+            return $this->createItem($report, new ReportTransformer());
+
+        return response()->json(['data' => []]);
+    }
+
 }

@@ -11,4 +11,9 @@ export default {
             .then((response) => successCalback(response.body))
             .catch((error) => errorCallback(error));
     },
+    latest(successCalback, errorCallback){
+        return Vue.http.get('/api/reports/latest')
+            .then((response) => successCalback(response.body))
+            .catch((error) => errorCallback(error));
+    },
 }

@@ -63,7 +63,14 @@ Vue.use(require('@websanova/vue-auth'), {
     refreshData: {
         enabled: false // true by default.
     },
-    fetchData: {url: 'auth/user?include=athlete.sport,athlete.specialty,athlete.country,athlete.category,athlete.gender', method: 'GET', enabled: true}
+    fetchData: {
+        url: 'auth/user?include=athlete.sport,athlete.specialty,athlete.country,athlete.category,athlete.gender',
+        method: 'GET',
+        enabled: true
+    },
+    forbiddenRedirect: {path: '/my-profile'},
+    notFoundRedirect: {path: '/my-profile'},
+    loginData: {url: 'auth/login', method: 'POST', redirect: '/my-profile', fetchUser: true}
 });
 
 const app = new Vue(App).$mount('#app');

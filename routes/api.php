@@ -27,6 +27,9 @@ Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::get('user/challenges/suggested', 'Api\Users\UserChallengeController@suggested');
     Route::post('user/challenges/{challengeId}/accept', 'Api\Users\UserChallengeController@accept');
 
+    Route::get('ranking', 'Api\Ranking\RankingController@index');
+
+    Route::get('/scoutings/latest', 'Api\Scoutings\ScoutingsController@latest');
     Route::get('/scoutings/app', 'Api\Scoutings\ScoutingsController@app');
     Route::get('/scoutings/results', 'Api\Scoutings\ScoutingsController@results');
     Route::get('/scoutings/other-sources', 'Api\Scoutings\ScoutingsController@otherSources');
@@ -34,6 +37,7 @@ Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::put('/scoutings/{scoutingId}/touches', 'Api\Scoutings\ScoutingsTouchesController@update');
     Route::resource('/scoutings', 'Api\Scoutings\ScoutingsController');
 
+    Route::get('/reports/latest', 'Api\Reports\ReportsController@latest');
     Route::get('/reports/{id}/summary', 'Api\Reports\ReportsDataController@summary');
     Route::get('/reports/{id}/parry', 'Api\Reports\ReportsDataController@parry');
     Route::get('/reports/{id}/combat-status', 'Api\Reports\ReportsDataController@combatStatus');

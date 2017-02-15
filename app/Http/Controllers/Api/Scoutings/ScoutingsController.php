@@ -202,4 +202,13 @@ class ScoutingsController extends Controller
             ->setTransformer(new ScoutingTransformer())
             ->make(true);
     }
+
+    public function latest()
+    {
+        $scouting = $this->repository->latest();
+        if ($scouting)
+            return $this->createItem($scouting, new ScoutingTransformer());
+
+        return response()->json(['data' => []]);
+    }
 }

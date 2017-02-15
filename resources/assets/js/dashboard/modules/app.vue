@@ -135,11 +135,11 @@
                         <!-- /.search form -->
                         <!-- sidebar menu: : style can be found in sidebar.less -->
                         <ul class="sidebar-menu">
-                            <li class="header">MAIN NAVIGATION</li>
+                            <li class="header">{{$t('admin.main_navigation')}}</li>
                             <li v-for="menuItem in sideMenu.items"
                                 :class="{'active':isActive(menuItem),'treeview':menuItem.dropdown}">
                                 <router-link v-if="!menuItem.dropdown && !menuItem.divider"
-                                             :to="{path:'/'+menuItem.url}"
+                                             :to="{path:menuItem.url}"
                                              active-class="active" class="truncate">
                                     <i v-if="menuItem.icon" :class="['fa',menuItem.icon]"></i>
                                     <span>{{$t(menuItem.title)}}</span>
@@ -198,42 +198,49 @@
                 sideMenu: {
                     items: [
                         {
-                            url: 'my-profile',
+                            url: '/dashboard',
+                            dropdown: false,
+                            divider: false,
+                            icon: 'fa-home',
+                            title: 'admin.home'
+                        },
+                        {
+                            url: '/my-profile',
                             dropdown: false,
                             divider: false,
                             icon: 'fa-user',
                             title: 'admin.my_profile'
                         },
                         {
-                            url: 'scoutings/list',
+                            url: '/scoutings/list',
                             dropdown: false,
                             divider: false,
                             icon: 'fa-list',
                             title: 'admin.scoutings'
                         },
                         {
-                            url: 'reports',
+                            url: '/reports',
                             dropdown: false,
                             divider: false,
                             icon: 'fa-file-text',
                             title: 'admin.reports'
                         },
                         {
-                            url: 'athletes',
+                            url: '/athletes',
                             dropdown: false,
                             divider: false,
                             icon: 'fa-users',
                             title: 'admin.athletes'
                         },
                         {
-                            url: 'events',
+                            url: '/events',
                             dropdown: false,
                             divider: false,
                             icon: 'fa-calendar',
                             title: 'admin.events'
                         },
                         {
-                            url: 'championships',
+                            url: '/championships',
                             dropdown: false,
                             divider: false,
                             icon: 'fa-trophy',

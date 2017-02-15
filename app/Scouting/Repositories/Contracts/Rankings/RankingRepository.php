@@ -10,5 +10,5 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface RankingRepository extends RepositoryInterface
 {
-    //
+    public function ranking($perPage = 10);
 }

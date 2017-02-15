@@ -10,5 +10,6 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface ScoutingRepository extends RepositoryInterface
 {
-    //
+
+    public function latest();
 }

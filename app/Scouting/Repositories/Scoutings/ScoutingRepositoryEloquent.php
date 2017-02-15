@@ -68,4 +68,8 @@ class ScoutingRepositoryEloquent extends BaseRepository implements ScoutingRepos
         return parent::update($attributes, $id);
     }
 
+    public function latest()
+    {
+        return $this->model->newQuery()->orderBy('created_at','desc')->first();
+    }
 }
