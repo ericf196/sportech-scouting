@@ -19,7 +19,40 @@
                 </div>
             </div>
         </div>
+    </div>
 </template>
+
+<script>
+
+    import tag from './tag.vue'
+    export default{
+        props: {
+            selected: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            },
+            tags: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            }
+        },
+        components: {
+            tag
+        },
+        methods: {
+            tagSelected(tag){
+                this.$emit('tag-selected', tag);
+            },
+            deleteTag(tag){
+                this.$emit('tag-deleted', tag);
+            }
+        }
+    }
+</script>
 <style lang="scss" rel="stylesheet/scss">
     .tags {
         a {
@@ -130,34 +163,3 @@
         cursor: move;
     }
 </style>
-<script>
-
-    import tag from './tag.vue'
-    export default{
-        props: {
-            selected: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
-            },
-            tags: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
-            }
-        },
-        components: {
-            tag
-        },
-        methods: {
-            tagSelected(tag){
-                this.$emit('tag-selected', tag);
-            },
-            deleteTag(tag){
-                this.$emit('tag-deleted', tag);
-            }
-        }
-    }
-</script>

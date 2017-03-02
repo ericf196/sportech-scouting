@@ -69,10 +69,12 @@
         },
         methods: {
             dropdownOptionClicked(tag){
-                this.$emit('tag-clicked', tag)
+                let tagDropdown = _.cloneDeep(tag);
+                this.$emit('tag-clicked', tagDropdown)
             },
             tagClicked(){
-                this.$emit('tag-clicked', this.tag)
+                let tag = _.cloneDeep(this.tag);
+                this.$emit('tag-clicked', tag)
             }
         }
     }
