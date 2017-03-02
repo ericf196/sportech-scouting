@@ -174,29 +174,33 @@
                 })
             },
             goToReport(){
-                this.loading = true;
-                const selected = JSON.parse(JSON.stringify(this.$refs.table.table.row(event.currentTarget.parentElement.parentElement.parentElement).data()));
-                scoutingService.report(selected.id, (response)=> {
-                    this.loading = false;
-                    this.$router.push({
-                        name: 'reports.view',
-                        params: {id: response.data.id}
-                    })
-                }, (response)=> {
-                    this.loading = false;
-                    response = response.body;
-                    if (response.validation) {
-                        for (var error in response.errors) {
-                            if (response.errors.hasOwnProperty(error)) {
-                                response.errors[error].forEach((validationError)=> {
-                                    self.$root.errorToast(validationError)
-                                })
+                if (this.$auth.user().superUser) {
+                    this.loading = true;
+                    const selected = JSON.parse(JSON.stringify(this.$refs.table.table.row(event.currentTarget.parentElement.parentElement.parentElement).data()));
+                    scoutingService.report(selected.id, (response)=> {
+                        this.loading = false;
+                        this.$router.push({
+                            name: 'reports.view',
+                            params: {id: response.data.id}
+                        })
+                    }, (response)=> {
+                        this.loading = false;
+                        response = response.body;
+                        if (response.validation) {
+                            for (var error in response.errors) {
+                                if (response.errors.hasOwnProperty(error)) {
+                                    response.errors[error].forEach((validationError)=> {
+                                        self.$root.errorToast(validationError)
+                                    })
+                                }
                             }
+                        } else {
+                            self.$root.errorToast(response.errors)
                         }
-                    } else {
-                        self.$root.errorToast(response.errors)
-                    }
-                })
+                    })
+                } else {
+                    this.$root.errorToast('No tienes permiso para ver el informe');
+                }
             }
         }
     }

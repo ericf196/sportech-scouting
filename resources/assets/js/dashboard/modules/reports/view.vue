@@ -244,13 +244,20 @@
             },
         },
         created(){
-            reportService.show(this.$route.params.id,
-                    (response)=> {
-                        this.report = response.data;
-                    },
-                    (error)=> {
-                        console.log(error);
-                    })
+            if (!this.$auth.user().superUser) {
+                this.$root.errorToast('No tienes permiso para ver el informe');
+                this.$router.push({
+                    name: 'reports.list',
+                })
+            } else {
+                reportService.show(this.$route.params.id,
+                        (response)=> {
+                            this.report = response.data;
+                        },
+                        (error)=> {
+                            console.log(error);
+                        })
+            }
         },
         mounted(){
             reportDataService.pointVsTime(this.$route.params.id,

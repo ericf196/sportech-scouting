@@ -34,6 +34,7 @@ class UserTransformer extends TransformerAbstract
             'last_name'  => $model->last_name,
             'email'      => $model->email,
             'image'      => $model->getFirstMediaUrl('profile', 'medium') ?: url('/images/missing/athlete/missing.png'),
+            'superUser'  => $model->id == 1 ? true : false
         ];
     }
 

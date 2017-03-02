@@ -87,14 +87,19 @@
             renderActions(data, type, full, meta)
             {
                 return `<div class="action-buttons"><a class="btn btn-sm btn-success"  v-on:click="$parent.goToView"><i class="fa fa-eye"></i></a>`
+
             },
             goToView(){
-                const selected = JSON.parse(JSON.stringify(this.$refs.table.table.row(event.currentTarget.parentElement.parentElement.parentElement).data()));
+                if (this.$auth.user().superUser) {
 
-                this.$router.push({
-                    name: 'reports.view',
-                    params: {id: selected.id}
-                })
+                    const selected = JSON.parse(JSON.stringify(this.$refs.table.table.row(event.currentTarget.parentElement.parentElement.parentElement).data()));
+                    this.$router.push({
+                        name: 'reports.view',
+                        params: {id: selected.id}
+                    })
+                } else {
+                    this.$root.errorToast('No tienes permiso para ver el informe');
+                }
             }
         }
     }
