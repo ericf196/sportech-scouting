@@ -14,9 +14,13 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 |
 */
 Route::post('auth/login', 'Api\Auth\AuthController@login');
+//Route::post('user/create', 'Api\Users\UserController@create');
+Route::post('accept', 'Api\Invites\InviteController@accept');
 
 Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::post('auth/logout', 'Api\Auth\AuthController@logout');
+    Route::get('password/email', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail');
+
     Route::get('auth/user', 'Api\Auth\AuthController@user');
     Route::put('user', 'Api\Users\UserController@update');
 
@@ -66,4 +70,7 @@ Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::get('/countries', 'Api\Countries\CountriesController@index');
 
     Route::get('/tags', 'Api\Tags\TagsController@index');
+
+    //Route::get('invite', 'InviteController@invite')->name('invite');
+    Route::post('user/invite/process', 'Api\Invites\InviteController@process');
 });

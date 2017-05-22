@@ -89,10 +89,58 @@
                             </div>
                         </div>
                     </div>
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"> {{$t('users.invite')}}</h3>
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <input type="email" v-model="invitation.email"/>
+                            <button type="submit" v-on:click="invite()"
+                                    class="btn btn-success">
+                                {{$t('users.btn_invite')}}
+                            </button>
+                        </div>
+                        <div class="box-body">
+                            <div class="info-box bg-navy">
+                                <span class="info-box-icon">
+                                    <i class="fa fa-facebook"></i>
+                                </span>
+                                <div class="info-box-content">
+                                    <span class="progress-description">
+                                        <button class="btn btn-sm btn-success btn-suggested btn-block"
+                                                v-on:click="acceptChallenge(suggestedChallenge.id)">
+                                            {{$t('users.invite_facebook')}}
+                                        </button>
+                                    </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <div class="info-box bg-red">
+                                <span class="info-box-icon">
+                                    <i class="fa fa-google"></i>
+                                </span>
+
+                                <div class="info-box-content">
+                                    <span class="progress-description">
+                                        <button class="btn btn-sm btn-success btn-suggested btn-block"
+                                                v-on:click="acceptChallenge(suggestedChallenge.id)">
+                                            {{$t('users.invite_google')}}
+                                        </button>
+                                    </span>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-9">
                     <div class="row">
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-2">
                             <div class="small-box bg-aqua">
                                 <div class="inner">
                                     <h3>{{summary.ranking}}</h3>
@@ -117,7 +165,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-2">
                             <div class="small-box bg-yellow">
                                 <div class="inner">
                                     <h3>{{summary.scoutings}}</h3>
@@ -129,7 +177,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-2">
                             <div class="small-box bg-blue">
                                 <div class="inner">
                                     <h3>{{summary.reports}}</h3>
@@ -138,6 +186,18 @@
                                 </div>
                                 <div class="icon">
                                     <i class="fa fa-pie-chart"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>{{summary.invitations}}</h3>
+                                    <h5>&nbsp;</h5>
+                                    <p>{{$t('users.invitations')}}</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fa fa-share"></i>
                                 </div>
                             </div>
                         </div>
@@ -271,6 +331,7 @@
     import dncTable from 'base/components/table/dnc-datatable.vue';
     import userChallengeService from 'base/dashboard/services/user/userChallengeService'
     import userStatisticsService from 'base/dashboard/services/user/userStatisticsService'
+    import userInviteService from 'base/dashboard/services/user/userInviteService'
 
     export default{
         locales: usersLocales,
@@ -289,8 +350,11 @@
                     reports: 0,
                     completedChallenges: 0,
                     rank: 0,
-                    points: 0
-                }
+                    points: 0,
+                    invitations: 0,
+                },
+                invitation:{email:''}
+
             }
         },
         computed: {
@@ -416,6 +480,25 @@
                                 self.$root.errorToast(response.errors)
                             }
                         })
+            },
+
+            invite(){
+                userInviteService.sendInvite(this.invitation,
+                        (response)=> {
+                    this.$root.successToast(response.message);
+            },
+                (response)=> {
+                    if (response.validation) {
+                        for (var error in response.errors) {
+                            if (response.errors.hasOwnProperty(error)) {
+                                response.errors[error].forEach((validationError) => {
+                            })
+                            }
+                        }
+                    } else {
+                        self.$root.errorToast(response.errors)
+                    }
+                })
             }
         }
     }

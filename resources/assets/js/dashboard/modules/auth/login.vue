@@ -44,6 +44,9 @@
                         <button type="submit"
                                 class="btn btn-primary btn-block btn-flat">Log In
                         </button>
+                        <a class="btn btn-link" href="">
+                            Forgot Your Password?
+                        </a>
                     </div><!-- /.col -->
                 </div>
             </form>

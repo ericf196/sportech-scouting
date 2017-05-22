@@ -6,6 +6,8 @@ use App\Http\Requests\User\UserUpdateRequest;
 use App\Scouting\Transformers\User\UserTransformer;
 use Tymon\JWTAuth\JWTAuth;
 use App\Scouting\Entities\Athletes\Athlete;
+use Illuminate\Http\Request;
+use App\Scouting\Entities\Users\User;
 
 class UserController extends Controller
 {
@@ -53,6 +55,19 @@ class UserController extends Controller
         }
 
         return response()->json(['message' => trans('admin/users/users.updated_successfully')]);
+    }
+
+    public function create(Request $request)
+    {
+        return User::create([
+            'username' => $request['user_name'],
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'email' => $request['email'],
+            'password' => bcrypt($request['password']),
+            'number_invitations' => 10,
+            'active' => 1,
+        ]);
     }
 
 

@@ -11,4 +11,14 @@ export default {
             .then((response) => successCalback(response.body))
             .catch((error) => errorCallback(error.body));
     },
+    create(user,successCalback, errorCallback){
+           return Vue.http.post('/api/accept',user)
+               .then((response) => successCalback(response.body))
+                .catch((error) => errorCallback(error));
+    },
+    send(user,successCalback, errorCallback){
+        return Vue.http.post('/api/password/email',user)
+                .then((response) => successCalback(response.body))
+    .catch((error) => errorCallback(error));
+    },
 }

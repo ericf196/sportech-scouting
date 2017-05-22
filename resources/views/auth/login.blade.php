@@ -1,78 +1,68 @@
-@extends('layouts.auth')
-
-@section('htmlheader_title')
-    Log in
-@endsection
+@extends('layouts.app')
 
 @section('content')
-    <body class="hold-transition login-page">
-    <div class="login-box">
-        <div class="login-logo">
-            <a href="{{ url('/home') }}">
-                <img src="/images/brand/sportech-logo-texto.png" alt="">
-            </a>
-        </div><!-- /.login-logo -->
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                {{ trans('message.validationerror') }}<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                        {{ csrf_field() }}
 
-        <div class="login-box-body">
-            <p class="login-box-msg"> {{ trans('message.siginsession') }} </p>
-            <form action="{{ url(LaravelLocalization::getLocalizedURL(null,'/login')) }}" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <div class="form-group has-feedback">
-                    <input type="email" class="form-control" placeholder="{{ trans('message.email') }}"
-                           name="email"/>
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
-                <div class="form-group has-feedback">
-                    <input type="password" class="form-control"
-                           placeholder="{{ trans('message.password') }}" name="password"/>
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                    <div class="col-xs-5">
-                        <div class="checkbox icheck">
-                            <label>
-                                <input type="checkbox" name="remember"> {{ trans('message.remember') }}
-                            </label>
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                    </div><!-- /.col -->
-                    <div class="col-xs-7">
-                        <button type="submit"
-                                class="btn btn-primary btn-block btn-flat">{{ trans('message.buttonsign') }}</button>
-                    </div><!-- /.col -->
+
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-4 control-label">Password</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" required>
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Login
+                                </button>
+
+                                <a class="btn btn-link" href="{{ url('/password/reset') }}">
+                                    Forgot Your Password?
+                                </a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
-
-
-            <a href="{{ url('/password/reset') }}">{{ trans('message.forgotpassword') }}</a>
-            <br>
-            <a href="{{ url('/register') }}"
-               class="text-center">{{ trans('message.registermember') }}</a>
-
-        </div><!-- /.login-box-body -->
-
-    </div><!-- /.login-box -->
-
-    @include('layouts.partials.scripts_auth')
-
-    <script>
-        $(function () {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' // optional
-            });
-        });
-    </script>
-    </body>
-
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

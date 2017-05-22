@@ -17,6 +17,22 @@ export default {
             meta: {auth: false}
         },
         {
+            path: '/reset',
+            name: 'password.reset',
+            component: function (resolve) {
+                require(['./modules/auth/password/email.vue'], resolve)
+            },
+            meta: {auth: false}
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: function (resolve) {
+                require(['./modules/auth/register.vue'], resolve)
+            },
+            meta: {auth: false}
+        },
+        {
             path: '/dashboard',
             name: 'dashboard',
             component: function (resolve) {

@@ -2,4 +2,4 @@
 
 <p>Alguien te ha invitado a Registrarte.</p>
 
-<a href="{{ route('accept', $invite->token) }}">Click</a>  para activar!!
+<a href="{{ url('register?token='.$invite->token) }}">Click</a>  para activar!!

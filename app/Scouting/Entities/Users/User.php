@@ -3,6 +3,7 @@ namespace App\Scouting\Entities\Users;
 
 use App\Scouting\Entities\Athletes\Athlete;
 use App\Scouting\Entities\Challenges\Challenge;
+use App\Scouting\Entities\Invites\Invitation;
 use App\Scouting\Entities\Reports\Report;
 use App\Scouting\Entities\Scoutings\Scouting;
 use Illuminate\Notifications\Notifiable;
@@ -59,7 +60,7 @@ class User extends Authenticatable implements HasMediaConversions
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'active',
+        'username','first_name','last_name', 'email', 'password', 'number_invitations', 'active',
     ];
 
     /**
@@ -134,5 +135,9 @@ class User extends Authenticatable implements HasMediaConversions
         return $this->completedChallenges()->sum('points');
     }
 
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class, 'user_id');
+    }
 
 }
