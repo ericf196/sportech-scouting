@@ -25,10 +25,6 @@ class ScoutingCreateRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'championship'     => 'required',
-            'event'            => 'required',
-            'leftAthlete'      => 'required',
-            'rightAthlete'     => 'required',
             'translation.name' => 'required',
             'videoSrc'         => 'required|url'
         ];
