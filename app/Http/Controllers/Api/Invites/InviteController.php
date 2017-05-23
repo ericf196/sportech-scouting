@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Invites;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Scouting\Entities\Invites\Invite;
+use Tymon\JWTAuth\JWTAuth;
 
 use App\Mail\InviteCreated;
 use Illuminate\Support\Facades\Mail;
@@ -29,6 +30,7 @@ class InviteController extends Controller
     public function process(Request $request)
     {
         try {
+            $user = \Auth::user();
             $token = str_random();
             if(!Invite::where('token', $token)->first()){
                 $invite = Invite::create([
@@ -37,11 +39,23 @@ class InviteController extends Controller
                 ]);
             }
             Mail::to($request->get('email'))->send(new InviteCreated($invite));
+            $this->updateNumberInvitations($user);
         } catch (ModelNotFoundException $e) {
             //response()->make(trans('admin/users/users.sms_invite'), 404);
         }
 
         return response()->json(['message' => trans('admin/users/users.sms_invite')]);
+    }
+
+    public function updateNumberInvitations($user)
+    {
+        try {
+            $user->number_invitations = ($user['number_invitations'] - 1);
+            $user->save();
+        } catch (ModelNotFoundException $e) {
+        }
+
+        return response()->json(['message' => trans('prueba')]);
     }
 
     public function accept(Request $request)

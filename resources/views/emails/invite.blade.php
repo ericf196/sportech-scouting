@@ -1,5 +1,5 @@
 <p>Hola,</p>
 
-<p>Alguien te ha invitado a Registrarte.</p>
+<p>Alguien le ha invitado a Registrarse en Scouting.</p>
 
-<a href="{{ url('register?token='.$invite->token) }}">Click</a>  para activar!!
+<a href="{{ url('es#/register?token='.$invite->token) }}">Click</a>  para registrarse!!

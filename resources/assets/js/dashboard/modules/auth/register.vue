@@ -114,7 +114,11 @@
                 this.data.token=this.$route.query.token;
                 userService.create(this.data,
                         (response)=> {
+                    this.$router.push({
+                    name: 'login'
+                })
                     this.$root.successToast(response.message);
+
             },
                 (response)=> {
                     if (response.validation) {
