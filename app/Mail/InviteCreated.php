@@ -28,7 +28,7 @@ class InviteCreated extends Mailable
      */
     public function build()
     {
-        return $this->from('scouting37.marketing@gmail.com')->subject('Invitación Scouting')
+        return $this->from('contact@scouting37.com')->subject('Invitación Scouting')
         ->view('emails.invite')->with('invite',$this->invite);
     }
 }
