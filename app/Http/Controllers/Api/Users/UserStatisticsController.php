@@ -41,7 +41,9 @@ class UserStatisticsController extends Controller
                 'reports'             => $user['reports_count'],
                 'completedChallenges' => $user['completed_challenges_count'],
                 'ranking'             => ordinal($rank->rank),
-                'points'              => $rank->points
+                'points'              => $rank->points,
+                'invitations'              => $user['number_invitations']
+
             ];
         });
     }
