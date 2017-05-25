@@ -14,12 +14,12 @@ class UserUpdateRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'first_name'   => 'required',
-            'last_name'    => 'required',
-            'sport_id'     => 'required',
-            'specialty_id' => 'required',
-            'category_id'  => 'required',
-            'country_id'   => 'required',
+            'first_name'           => 'required',
+            'last_name'            => 'required',
+            'athlete.sport_id'     => 'required',
+            'athlete.specialty_id' => 'required',
+            'athlete.category_id'  => 'required',
+            'athlete.country_id'   => 'required',
         ];
     }
 }

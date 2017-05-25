@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Api\Championships;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Championship\ChampionshipStoreRequest;
 use App\Http\Requests\Championship\ChampionshipUpdateRequest;
+use App\Scouting\Entities\Championships\Championship;
+use App\Scouting\Entities\Events\Event;
 use App\Scouting\Repositories\Contracts\Athletes\AthleteRepository;
 use App\Scouting\Repositories\Contracts\Championships\ChampionshipRepository;
 use App\Scouting\Repositories\Contracts\Events\EventRepository;
 use App\Scouting\Transformers\Championships\ChampionshipTransformer;
 use App\Scouting\Transformers\Events\EventTransformer;
 use Carbon\Carbon;
+use DB;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -48,7 +51,8 @@ class ChampionshipsController extends Controller
 
     public function datatable()
     {
-        return Datatables::of($this->championshipRepository->datatable())
+        $user = $this->loggedInUser();
+        return Datatables::of(Championship::with('sport')->where('created_by', $user->id)->select('championships.*'))
             ->setTransformer(new ChampionshipTransformer())
             ->make(true);
     }
@@ -68,21 +72,52 @@ class ChampionshipsController extends Controller
     public function store(ChampionshipStoreRequest $request)
     {
         $data = $request->all();
+        $subevents = collect($request->get('events'));
+        $user = \Auth::user();
+        $data['created_by'] = $user->id;
+        DB::beginTransaction();
         try {
             $data['end_date'] = Carbon::parse($data['end_date']);
             $data['init_date'] = Carbon::parse($data['init_date']);
-            $data['name'] = $request->get('translation')['name'];
-            $data['name']['es'] = $data['name']['en'];
-            $data['description'] = $request->get('translation')['description'];
-            $data['description']['es'] = $data['description']['en'];
-            $data['slug'] = str_slug($data['name']['en']);
+            $data['translation']['name'] = ['en' => $data['name'], 'es' => $data['name']];
+            if (array_key_exists('description', $data)) {
+                $data['translation']['description'] = ['en' => $data['description'], 'es' => $data['description']];
+            }
+            $data['slug'] = str_slug($data['name']);
+            /** @var Championship $event */
             $event = $this->championshipRepository->create($data);
-            if ($request->file('poster'))
-                $event->addMedia($request->file('poster'))->preservingOriginal()->toCollection('poster');
+            if ($request->hasFile('image')) {
+                $event->clearMediaCollection('poster');
+                $event->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('poster');
+            } elseif ($request->has('removeImage')) {
+                $event->clearMediaCollection('poster');
+            }
+
+            $subevents->each(function ($subevent) use ($event, $user) {
+                $dataEvent = $subevent;
+                $dataEvent['created_by'] = $user->id;
+                $dataEvent['specialty_id'] = $dataEvent['specialty']['id'];
+                $dataEvent['category_id'] = $dataEvent['category']['id'];
+                $dataEvent['event_reach_id'] = $dataEvent['reach']['id'];
+                $dataEvent['event_type_id'] = $dataEvent['type']['id'];
+                $dataEvent['gender'] = $dataEvent['gender']['gender'];
+                unset($dataEvent['id']);
+                $dataEvent['name'] = ['en' => $dataEvent['name'], 'es' => $dataEvent['name']];
+                if (array_key_exists('description', $dataEvent)) {
+                    $dataEvent['description'] = ['en' => $dataEvent['description'], 'es' => $dataEvent['description']];
+                }
+                $dataEvent['end_date'] = Carbon::parse($dataEvent['end_date']);
+                $dataEvent['init_date'] = Carbon::parse($dataEvent['init_date']);
+                $event->events()->create($dataEvent);
+            });
+
+
         } catch (Exception $e) {
+            DB::rollBack();
             return response()->make($e->getMessage() . $e->getFile() . $e->getLine(), 404);
         }
 
+        DB::commit();
         return response()->json(['message' => trans('admin/championships/championships.created_successfully')]);
 
     }
@@ -90,26 +125,56 @@ class ChampionshipsController extends Controller
     public function update(ChampionshipUpdateRequest $request, $id)
     {
         $data = $request->all();
+        $subevents = collect($request->get('events'));
+        $user = \Auth::user();
+        $data['created_by'] = $user->id;
+        DB::beginTransaction();
         try {
             $data['end_date'] = Carbon::parse($data['end_date']);
             $data['init_date'] = Carbon::parse($data['init_date']);
-            $data['name'] = $request->get('translation')['name'];
-            $data['name']['es'] = $data['name']['en'];
-            $data['description'] = $request->get('translation')['description'];
-            $data['description']['es'] = $data['description']['en'];
-            $data['slug'] = str_slug($data['name']['en']);
-            $event = $this->championshipRepository->update($data, $id);
-            if ($request->file('poster')) {
-                if ($event->getMedia('poster')->count()) {
-                    $event->getMedia('poster')->first()->delete();
-                }
-                $event->addMedia($request->file('poster'))->preservingOriginal()->toCollection('poster');
+            $data['translation']['name'] = ['en' => $data['name'], 'es' => $data['name']];
+            if (array_key_exists('description', $data)) {
+                $data['translation']['description'] = ['en' => $data['description'], 'es' => $data['description']];
             }
+            $data['slug'] = str_slug($data['name']);
+            /** @var Championship $event */
+            $event = $this->championshipRepository->update($data, $id);
+            if ($request->hasFile('image')) {
+                $event->clearMediaCollection('poster');
+                $event->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('poster');
+            } elseif ($request->has('removeImage')) {
+                $event->clearMediaCollection('poster');
+            }
+            $event->events()->delete();
+            $subevents->each(function ($subevent) use ($event, $user) {
+                $dataEvent = $subevent;
+                $dataEvent['created_by'] = $user->id;
+                $dataEvent['specialty_id'] = $dataEvent['specialty']['id'];
+                $dataEvent['category_id'] = $dataEvent['category']['id'];
+                $dataEvent['event_reach_id'] = $dataEvent['reach']['id'];
+                $dataEvent['event_type_id'] = $dataEvent['type']['id'];
+                $dataEvent['gender'] = $dataEvent['gender']['gender'];
+                unset($dataEvent['id']);
+                $dataEvent['name'] = ['en' => $dataEvent['name'], 'es' => $dataEvent['name']];
+                if (array_key_exists('description', $dataEvent)) {
+                    $dataEvent['description'] = ['en' => $dataEvent['description'], 'es' => $dataEvent['description']];
+                }
+                $dataEvent['end_date'] = Carbon::parse($dataEvent['end_date']);
+                $dataEvent['init_date'] = Carbon::parse($dataEvent['init_date']);
+                /*
+                 * TODO: falta verificar que los eventos no esten asociados a ningún scouting
+                 */
+                $event->events()->create($dataEvent);
+            });
+
+
         } catch (Exception $e) {
+            DB::rollBack();
             return response()->make($e->getMessage() . $e->getFile() . $e->getLine(), 404);
         }
 
-        return response()->json(['message' => trans('admin/championships/championships.updated_successfully')]);
+        DB::commit();
+        return response()->json(['message' => trans('admin/championships/championships.created_successfully')]);
     }
 
     public function destroy($id)

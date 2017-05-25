@@ -36,6 +36,8 @@ class EventTransformer extends TransformerAbstract
             'year_init'      => $model->init_date ? $model->init_date->format('Y') : '',
             'day_month_init' => $model->init_date ? $model->init_date->format('d/m') : '',
             'end_date'       => $model->end_date ? $model->end_date->toDateTimeString() : '',
+            'init_date_utc'   => $model->init_date ? $model->init_date->toAtomString() : '',
+            'end_date_utc'    => $model->end_date ? $model->end_date->toAtomString() : '',
             'image'          => $model->getFirstMediaUrl('poster', 'medium') ?: url('/images/missing/event/missing.png'),
             'result_url'     => $model->result_url ?: null,
             'translation'    => [

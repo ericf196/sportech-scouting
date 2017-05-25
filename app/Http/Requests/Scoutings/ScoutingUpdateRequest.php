@@ -24,8 +24,8 @@ class ScoutingUpdateRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'translation.name' => 'required',
-            'videoSrc'         => 'required|url'
+            'name'      => 'required',
+            'video_src' => 'required|url'
         ];
     }
 }

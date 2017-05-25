@@ -120,11 +120,7 @@
                 return [
                     {data: 'name', name: 'name', title: 'Name'},
                     {data: 'description', name: 'description', title: 'Description'},
-                    {data: 'championship', name: 'campeonato', title: 'Campeonato'},
-                    {data: 'event', name: 'evento', title: 'Evento'},
-                    {data: 'leftAthleteWhole' , name: 'atleta_1', title: 'Atleta izquierda'},
-                    {data: 'rightAthleteWhole' , name: 'atleta_2', title: 'Atleta derecha'},
-                    {data: 'videoSrc', name: 'video_src', title: 'Video Source'},
+                    {data: 'video_src', name: 'video_src', title: 'Video Source'},
                     {
                         title: 'Actions',
                         orderable: false,

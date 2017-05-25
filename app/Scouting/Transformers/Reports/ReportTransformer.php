@@ -21,16 +21,16 @@ class ReportTransformer extends TransformerAbstract
     public function transform(Report $model)
     {
         return [
-            'id'            => (int)$model->id,
-            'name'          => $model->name,
-            'description'   => $model->description,
-            'data'          => $model->data,
-            'translation'   => [
+            'id'          => (int)$model->id,
+            'name'        => $model->name,
+            'description' => $model->description,
+            'data'        => $model->data,
+            'translation' => [
                 'name'        => $model->getTranslations('name'),
                 'description' => $model->getTranslations('description')
             ],
-            'created_at' => $model->created_at,
-            'updated_at'    => $model->updated_at
+            'created_at'  => $model->created_at->format('d/m/Y'),
+            'updated_at'  => $model->updated_at
         ];
     }
 }

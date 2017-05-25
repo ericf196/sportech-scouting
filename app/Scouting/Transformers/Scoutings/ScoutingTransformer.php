@@ -37,15 +37,12 @@ class ScoutingTransformer extends TransformerAbstract
             'id'          => (int)$model->id,
             'name'        => $model->name,
             'description' => $model->description,
-            'videoSrc'    => $model->video_src,
-            'event'    => $model->event->name,
-            'championship'    => $model->championship->name,
-            'leftAthleteWhole'    => $model->leftAthlete->first_name . " " . $model->leftAthlete->last_name,
-            'rightAthleteWhole'    => $model->rightAthlete->first_name . " " . $model->rightAthlete->last_name,
+            'video_src'   => $model->video_src,
             'translation' => [
                 'name'        => $model->getTranslations('name'),
                 'description' => $model->getTranslations('description')
-            ]
+            ],
+            'created_at'  => $model->created_at->format('d/m/Y')
         ];
     }
 

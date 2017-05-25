@@ -76,7 +76,7 @@ class Athlete extends Model implements HasMediaConversions
     protected $table = 'athletes';
 
     protected $guarded = ['id', 'created_at', 'updated_at'];
-    protected $fillable = ['first_name', 'last_name', 'sport_id', 'specialty_id',
+    protected $fillable = ['created_by', 'first_name', 'last_name', 'sport_id', 'specialty_id',
                            'category_id', 'country_id', 'alias',
                            'gender', 'condition', 'professional',
                            'ranking', 'height', 'weight', 'active',

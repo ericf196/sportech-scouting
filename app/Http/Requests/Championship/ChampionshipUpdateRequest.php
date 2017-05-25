@@ -14,10 +14,10 @@ class ChampionshipUpdateRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'translation' => 'required',
-            'sport_id'    => 'required',
-            'init_date'   => 'required',
-            'end_date'    => 'required',
+            'name'      => 'required',
+            'sport_id'  => 'required',
+            'init_date' => 'required',
+            'end_date'  => 'required',
         ];
     }
 

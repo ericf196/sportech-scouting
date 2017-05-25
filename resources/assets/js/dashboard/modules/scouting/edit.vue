@@ -36,26 +36,26 @@
                                             </span>
                                         </div>
                                         <div class="form-group"
-                                             :class="{'has-error': errors.has('videoSrc') }">
-                                            <label for="videoSrc" data-error="">{{$t('scoutings.video_src')}}
+                                             :class="{'has-error': errors.has('video_src') }">
+                                            <label for="video_src" data-error="">{{$t('scoutings.video_src')}}
                                             </label>
                                             <div class="input-group">
                                                 <div class="input-group-addon">
                                                     <i
                                                             class="fa fa-video-camera"></i>
                                                 </div>
-                                                <input id="videoSrc" name="videoSrc"
+                                                <input id="video_src" name="video_src"
                                                        type="text"
                                                        :placeholder="$t('scoutings.video_src')"
-                                                       v-model="scouting.videoSrc"
+                                                       v-model="scouting.video_src"
                                                        v-validate.initial
                                                        data-vv-rules="required"
                                                        :data-vv-as="$t('scoutings.video_src')"
                                                        class="form-control">
                                             </div>
                                             <span class="text-danger"
-                                                  v-show="errors.has('videoSrc')">{{
-                                                errors.first('videoSrc') }}
+                                                  v-show="errors.has('video_src')">{{
+                                                errors.first('video_src') }}
                                             </span>
                                         </div>
                                     </div>
@@ -100,38 +100,6 @@
                     </div>
                 </div>
             </form>
-            <search-championship :open="searchChampionshipOpen"
-                                 v-on:championship-selected="championshipSelected"
-                                 v-on:championship-close="modalDismiss">
-            </search-championship>
-            <search-event :open="searchEventOpen" :championship-id="scouting.championship.id"
-                          v-on:event-selected="eventSelected"
-                          v-on:event-close="modalDismiss">
-            </search-event>
-            <search-athlete :open="searchLeftAthleteOpen" :except="exceptAthlete"
-                            type="left"
-                            v-on:left-athlete-selected="leftAthleteSelected"
-                            v-on:athlete-close="modalDismiss">
-            </search-athlete>
-            <search-athlete :open="searchRightAthleteOpen" :except="exceptAthlete"
-                            type="right"
-                            v-on:right-athlete-selected="rightAthleteSelected"
-                            v-on:athlete-close="modalDismiss">
-            </search-athlete>
-            <new-championship :open="newChampionshipOpen"
-                              v-on:championship-created="championshipCreated"
-                              v-on:championship-new-close="modalDismiss">
-
-            </new-championship>
-            <new-event :open="newEventOpen" :championship="scouting.championship"
-                       v-on:event-created="eventCreated"
-                       v-on:event-new-close="modalDismiss"></new-event>
-            <new-athlete :open="newLeftAthleteOpen" type="left"
-                         v-on:left-athlete-created="leftAthleteCreated"
-                         v-on:athlete-new-close="modalDismiss"></new-athlete>
-            <new-athlete :open="newRightAthleteOpen" type="right"
-                         v-on:right-athlete-created="rightAthleteCreated"
-                         v-on:athlete-new-close="modalDismiss"></new-athlete>
         </section>
     </div>
 </template>
@@ -142,38 +110,20 @@
 <script>
     import scoutingsLocales from 'base/lang/admin/scoutings/scoutings.js';
     import formDataObjectParser from 'base/mixins/ajax/formDataParser'
-    import {mapActions} from 'vuex'
     import vSelect from "base/components/forms/select/select.vue"
     import adminHeader from 'base/components/header/pageHeader.vue'
-    import searchChampionship from './modals/searchChampionship.vue'
-    import searchEvent from './modals/searchEvent.vue'
-    import newChampionship from './modals/newChampionship.vue'
-    import newEvent from './modals/newEvent.vue'
-    import searchAthlete from './modals/searchAthlete.vue'
-    import newAthlete from './modals/newAthlete.vue'
     import scoutingService from 'base/dashboard/services/scoutings/scoutingService'
 
     export default{
         components: {
             vSelect,
             adminHeader,
-            searchChampionship,
-            newChampionship,
-            searchEvent,
-            newEvent,
-            searchAthlete,
-            newAthlete
         },
         mixins: [formDataObjectParser],
         data(){
             return {
                 scouting: {
-                    championship: {name: null, id: null},
-                    event: {name: null},
-                    leftAthlete: {name: null},
-                    rightAthlete: {name: null},
-                    sport: null,
-                    videoSrc: '',
+                    video_src: '',
                     translation: {
                         name: {
                             es: '',
@@ -186,14 +136,6 @@
                     }
                 },
                 updating: false,
-                searchChampionshipOpen: false,
-                newChampionshipOpen: false,
-                searchEventOpen: false,
-                newEventOpen: false,
-                searchRightAthleteOpen: false,
-                newRightAthleteOpen: false,
-                searchLeftAthleteOpen: false,
-                newLeftAthleteOpen: false,
             }
         },
         computed: {
@@ -213,33 +155,6 @@
                     }
                 ]
             },
-            championships() {
-                return this.$store.state.common.championships
-            },
-            events() {
-                return this.$store.state.common.events
-            },
-            athletes() {
-                return this.$store.state.common.athletes
-            },
-            exceptAthlete(){
-                var id = null;
-                if (this.scouting.leftAthlete) {
-                    if (this.scouting.leftAthlete.hasOwnProperty('id')) {
-                        id = this.scouting.leftAthlete.id
-                    }
-                }
-                if (this.scouting.rightAthlete) {
-                    if (this.scouting.rightAthlete.hasOwnProperty('id')) {
-                        if (id) {
-                            id += ',' + this.scouting.rightAthlete.id
-                        } else {
-                            id = this.scouting.rightAthlete.id
-                        }
-                    }
-                }
-                return id;
-            }
         },
         locales: scoutingsLocales,
         created(){
@@ -252,75 +167,6 @@
                     })
         },
         methods: {
-            ...mapActions({
-                getSports: 'common:getChampionships',
-            }),
-            championshipSelected(championship){
-                console.log(championship);
-                this.searchChampionshipOpen = false;
-                this.scouting.championship = championship
-            },
-            championshipCreated(championship){
-                this.newChampionshipOpen = false;
-                this.scouting.championship = championship;
-            },
-            eventSelected(event){
-                this.searchEventOpen = false;
-                this.scouting.event = event
-            },
-            eventCreated(event){
-                this.newEventOpen = false;
-                this.scouting.event = event;
-            },
-            leftAthleteSelected(athlete){
-                this.searchLeftAthleteOpen = false;
-                this.scouting.leftAthlete = athlete
-            },
-            leftAthleteCreated(athlete){
-                this.newLeftAthleteOpen = false;
-                this.scouting.leftAthlete = athlete;
-            },
-            rightAthleteSelected(athlete){
-                this.searchRightAthleteOpen = false;
-                this.scouting.rightAthlete = athlete
-            },
-            rightAthleteCreated(athlete){
-                this.newRightAthleteOpen = false;
-                this.scouting.rightAthlete = athlete
-            },
-            search(type){
-                switch (type) {
-                    case 'championship':
-                        this.searchChampionshipOpen = true;
-                        break;
-                    case 'event':
-                        this.searchEventOpen = true;
-                        break;
-                    case 'left_athlete':
-                        this.searchLeftAthleteOpen = true;
-                        break;
-                    case 'right_athlete':
-                        this.searchRightAthleteOpen = true;
-                        break;
-                }
-                console.log(type);
-            },
-            add(type){
-                switch (type) {
-                    case 'championship':
-                        this.newChampionshipOpen = true;
-                        break;
-                    case 'event':
-                        this.newEventOpen = true;
-                        break;
-                    case 'left_athlete':
-                        this.newLeftAthleteOpen = true;
-                        break;
-                    case 'right_athlete':
-                        this.newRightAthleteOpen = true;
-                        break;
-                }
-            },
             onBack(evt){
                 evt.preventDefault();
                 this.$router.push({
@@ -357,16 +203,6 @@
                     this.$root.errorToast(this.$t('admin.validation_error'));
                 });
             },
-            modalDismiss(){
-                this.searchChampionshipOpen = false;
-                this.newChampionshipOpen = false;
-                this.searchEventOpen = false;
-                this.newEventOpen = false;
-                this.searchLeftAthleteOpen = false;
-                this.newLeftAthleteOpen = false;
-                this.searchRightAthleteOpen = false;
-                this.newRightAthleteOpen = false;
-            }
         }
 
     }

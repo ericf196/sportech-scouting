@@ -62,7 +62,11 @@
                     <timeline v-if="playerReady"></timeline>
                 </div>
             </div>
-
+            <div class="row">
+                <div class="col-xs-12">
+                    <global-timeline v-if="playerReady"></global-timeline>
+                </div>
+            </div>
             <div class="row" v-show="playerReady">
                 <div class="col-xs-6">
                     <button v-on:click="save" class="btn btn-success btn-block"> {{$t('forms.save')}}</button>
@@ -90,6 +94,7 @@
     import touchesList from './lists/touchesList.vue';
     import timeline from './canvas/timeline.vue';
     import inspector from './canvas/inspector.vue';
+    import globalTimeline from './canvas/globalTimeline.vue';
     import collideMixin from 'base/mixins/collide';
     import adminHeader from 'base/components/header/pageHeader.vue'
     import scoutingService from 'base/dashboard/services/scoutings/scoutingService'
@@ -107,7 +112,8 @@
             touchesList,
             timeline,
             inspector,
-            adminHeader
+            adminHeader,
+            globalTimeline
         },
         mixins: [collideMixin, uuidMixin, errorPresenter],
         locales: scoutingsLocales,
@@ -186,7 +192,7 @@
                             'sources': [
                                 {
                                     'type': "video/youtube",
-                                    'src': response.data.videoSrc
+                                    'src': response.data.video_src
                                 }
                             ]
                         }

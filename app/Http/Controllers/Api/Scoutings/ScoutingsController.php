@@ -82,8 +82,9 @@ class ScoutingsController extends Controller
         $data = $request->all();
         $leftAthlete = null;
         $rightAthlete = null;
-        $data = $this->formatScoutingData($data);
-
+        $data['scouter_id'] = \Auth::user()->id;
+        $data['name'] = ['es' => $data['name'], 'en' => $data['name']];
+        $data['description'] = ['es' => $data['description'], 'en' => $data['description']];
         $scouting = $this->repository->create($data);
 
         return $this->createItem($scouting, new ScoutingTransformer(), 'data', ['message' => trans('admin/scoutings/scoutings.created_successfully')]);
@@ -118,8 +119,8 @@ class ScoutingsController extends Controller
         $data = $request->all();
         $leftAthlete = null;
         $rightAthlete = null;
-        $data = $this->formatScoutingData($data);
-
+        $data['name'] = ['es' => $data['name'], 'en' => $data['name']];
+        $data['description'] = ['es' => $data['description'], 'en' => $data['description']];
         $scouting = $this->repository->update($data, $id);
 
         return $this->createItem($scouting, new ScoutingTransformer(), 'data', ['message' => trans('admin/scoutings/scoutings.updated_successfully')]);
@@ -140,44 +141,6 @@ class ScoutingsController extends Controller
         return response()->json(['message' => trans('admin/scoutings/scoutings.deleted_succesfully')]);
     }
 
-    private function formatScoutingData($data)
-    {
-        $formattedData = $data;
-        if (!array_key_exists('id', $data['championship'])) {
-            $formattedData['championship']['sport_id'] = $data['championship']['sport']['id'];
-            $championship = $this->championshipRepository->create($formattedData['championship']);
-            $formattedData['championship'] = $championship->toArray();
-        }
-
-        if (!array_key_exists('id', $data['event'])) {
-            $formattedData['event']['championship_id'] = $formattedData['championship']['id'];
-            $formattedData['event']['category_id'] = $data['event']['category']['id'];
-            $formattedData['event']['specialty_id'] = $data['event']['specialty']['id'];
-            $event = $this->eventRepository->create($formattedData['event']);
-            $formattedData['event'] = $event->toArray();
-        }
-
-        if (!array_key_exists('id', $data['leftAthlete'])) {
-            $formattedData['leftAthlete']['gender'] = $data['leftAthlete']['gender']['gender'];
-            $formattedData['leftAthlete']['country_id'] = $data['leftAthlete']['country']['id'];
-            $formattedData['leftAthlete']['sport_id'] = $data['championship']['sport']['id'];
-            $formattedData['leftAthlete']['category_id'] = $data['event']['category']['id'];
-            $formattedData['leftAthlete']['specialty_id'] = $data['event']['specialty']['id'];
-            $leftAthlete = $this->athleteRepository->create($formattedData['leftAthlete']);
-            $formattedData['leftAthlete'] = $leftAthlete->toArray();
-        }
-
-        if (!array_key_exists('id', $data['rightAthlete'])) {
-            $formattedData['rightAthlete']['gender'] = $data['rightAthlete']['gender']['gender'];
-            $formattedData['rightAthlete']['country_id'] = $data['rightAthlete']['country']['id'];
-            $formattedData['rightAthlete']['sport_id'] = $data['championship']['sport']['id'];
-            $formattedData['rightAthlete']['category_id'] = $data['event']['category']['id'];
-            $formattedData['rightAthlete']['specialty_id'] = $data['event']['specialty']['id'];
-            $rightAthlete = $this->athleteRepository->create($formattedData['rightAthlete']);
-            $formattedData['rightAthlete'] = $rightAthlete->toArray();
-        }
-        return $formattedData;
-    }
 
     public function app()
     {
@@ -210,5 +173,24 @@ class ScoutingsController extends Controller
             return $this->createItem($scouting, new ScoutingTransformer());
 
         return response()->json(['data' => []]);
+    }
+
+    public function search(Request $request)
+    {
+        $name = $request->get('name');
+        $except = $request->get('except');
+        $user = $this->loggedInUser();
+        $scoutings = Scouting::where('scouter_id', $user->id);
+        if ($name) {
+            $scoutings = $scoutings->where('name', 'like', '%' . $name . '%');
+        }
+
+        if ($except) {
+            $exceptIds = explode(',', $except);
+            $scoutings = $scoutings->whereNotIn('id',$exceptIds);
+        }
+
+        $scoutings = $scoutings->take(10)->get();
+        return $this->createCollection($scoutings, new ScoutingTransformer());
     }
 }

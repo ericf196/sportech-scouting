@@ -1,12 +1,6 @@
 import {dispatch} from 'mockstate';
-import {globalTimelineActions} from './actions/globalTimelineActions'
-import {inspectorActions} from './actions/inspectorActions'
-export const actions = {
-    playerReady(state, ready){
-        console.log('playerReady');
-        state.playerReady = ready;
-        return ready;
-    },
+
+export const timelineActions = {
     setCanvas(state, instance){
         state.canvas.instance = instance;
         return instance;
@@ -176,8 +170,5 @@ export const actions = {
             state.touchManager.touches.splice(index, 1);
         }
         return touch;
-    },
-    ...inspectorActions,
-    ...globalTimelineActions
+    }
 };
-

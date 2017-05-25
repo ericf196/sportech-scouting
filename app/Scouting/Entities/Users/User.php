@@ -3,6 +3,7 @@ namespace App\Scouting\Entities\Users;
 
 use App\Scouting\Entities\Athletes\Athlete;
 use App\Scouting\Entities\Challenges\Challenge;
+use App\Scouting\Entities\Championships\Championship;
 use App\Scouting\Entities\Invites\Invitation;
 use App\Scouting\Entities\Reports\Report;
 use App\Scouting\Entities\Scoutings\Scouting;
@@ -60,7 +61,7 @@ class User extends Authenticatable implements HasMediaConversions
      * @var array
      */
     protected $fillable = [
-        'username','first_name','last_name', 'email', 'password', 'number_invitations', 'active',
+        'username', 'first_name', 'last_name', 'email', 'password', 'number_invitations', 'active',
     ];
 
     /**
@@ -109,6 +110,16 @@ class User extends Authenticatable implements HasMediaConversions
     public function reports()
     {
         return $this->hasMany(Report::class);
+    }
+
+    public function athletes()
+    {
+        return $this->hasMany(Athlete::class, 'created_by');
+    }
+
+    public function events()
+    {
+        return $this->hasMany(Championship::class, 'created_by');
     }
 
     public function challenges()

@@ -12,8 +12,7 @@ export default {
             "completed_challenges": "Completed Challenges",
             "in_progress_challenges": "Challenges In Progress",
             "not_found": "The Challenge doesn't exist",
-            "accepted_succesffully": "Challenge Accepted",
-
+            "accepted_succesffully": "Challenge Accepted"
         },
         "users": {
             "first_name": "First Name",
@@ -56,16 +55,7 @@ export default {
             "my_profile": "My Profile",
             "level": "Level",
             "suggested_challenge": "Suggested Challenge",
-            "accept_challenge": "Accept Challenge",
-            "invitations" : "Invitations",
-            "invite": "Invite Friends",
-            "invite_google": "Google Contacts",
-            "invite_facebook": "Google Facebook",
-            "btn_invite": "Invite",
-            "sms_invite": "Invitation Sent",
-            "sms_invite_used": "Invitation Used"
-
-
+            "accept_challenge": "Accept Challenge"
         }
     },
     "es": {
@@ -81,8 +71,7 @@ export default {
             "completed_challenges": "Desafios Completados",
             "in_progress_challenges": "Desafios En Progreso",
             "not_found": "El Desafio no existe",
-            "accepted_succesffully": "Desafio Aceptado",
-
+            "accepted_succesffully": "Desafio Aceptado"
         },
         "users": {
             "first_name": "Nombre",
@@ -126,14 +115,7 @@ export default {
             "my_profile": "Mi Perfil",
             "level": "Nivel",
             "suggested_challenge": "Desafio Sugerido",
-            "accept_challenge": "Aceptar Desafio",
-            "invitations" : "Invitaciones",
-            "invite": "Invitar Amigos",
-            "invite_google": "Contactos de Google",
-            "invite_facebook": "Contactos de Facebook",
-            "btn_invite": "Invitar",
-            "sms_invite": "Invitación Enviada",
-            "sms_invite_used": "La Invitación ya fue Utilazada"
+            "accept_challenge": "Aceptar Desafio"
         }
     }
 }

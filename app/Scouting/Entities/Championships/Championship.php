@@ -6,6 +6,7 @@ use App\Scouting\Entities\Clubs\Club;
 use App\Scouting\Entities\Events\Event;
 use App\Scouting\Entities\Locations\Location;
 use App\Scouting\Entities\Sports\Sport;
+use Webpatser\Countries\Countries;
 use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
@@ -49,7 +50,7 @@ class Championship extends Model implements HasMediaConversions
 
     public $translatable = ['name', 'description'];
 
-    protected $fillable = ['location_id', 'sport_id', 'name',
+    protected $fillable = ['created_by', 'location_id', 'country_id', 'sport_id', 'name',
                            'description', 'slug', 'init_date', 'end_date'];
     protected $casts = [
         'location_id' => 'integer',
@@ -91,6 +92,11 @@ class Championship extends Model implements HasMediaConversions
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Countries::class);
     }
 
     public function sport()
