@@ -1,11 +1,9 @@
 <?php
+namespace App\Http\Requests\User;
 
-namespace App\Http\Requests\Scoutings;
-
-use App\Http\Requests\BaseFormRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ScoutingCreateRequest extends BaseFormRequest
+class UserChangePasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +23,9 @@ class ScoutingCreateRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'name'        => 'required',
-            'description' => 'required',
-            'video_src'   => 'required|url'
+            'old_password'              => 'required',
+            'new_password'              => 'required|confirmed',
+            'new_password_confirmation' => 'required',
         ];
     }
 }

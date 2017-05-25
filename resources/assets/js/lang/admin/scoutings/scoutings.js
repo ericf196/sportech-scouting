@@ -27,6 +27,7 @@ export default {
             "toogle_inspector": "Toogle Inspector",
             "inspector": "Inspector",
             "timeline": "Timeline",
+            "globaltimeline": "Global Timeline",
             "end_action": "End Acción",
             "pause": "Pause",
             "play": "Play",

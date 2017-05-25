@@ -57,7 +57,7 @@ class Event extends Model implements HasMediaConversions
 
     public $translatable = ['name', 'description'];
     protected $fillable = [
-        'championship_id', 'category_id', 'specialty_id', 'event_type_id', 'event_reach_id', 'name',
+        'created_by', 'championship_id', 'category_id', 'specialty_id', 'event_type_id', 'event_reach_id', 'name',
         'description', 'slug', 'gender', 'init_date', 'end_date'
     ];
 

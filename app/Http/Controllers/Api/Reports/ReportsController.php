@@ -36,18 +36,21 @@ class ReportsController extends Controller
     public function store(ReportsStoreRequest $request, JWTAuth $jwt)
     {
         $user = $jwt->parseToken()->authenticate();
-
-        $data = [];
-        $scoutingsIds = $request->get('scoutings');
+        $scoutings = collect($request->get('scoutings'));
+        $data = $request->all();
         DB::beginTransaction();
         try {
-            $data['name'] = $request->get('translation')['name'];
-            $data['description'] = $request->get('translation')['description'];
-            $data['description']['es'] = $data['description']['en'];
-            $data['name']['es'] = $data['name']['en'];
+            $data['name'] = ['es' => $data['name'], 'en' => $data['name']];
+            if (array_key_exists('description', $data)) {
+                $data['description'] = ['es' => $data['description'], 'en' => $data['description']];
+            }
             /** @var Report $report */
+            $scoutingsIds = collect();
+            $scoutings->each(function ($scouting) use (&$scoutingsIds) {
+                $scoutingsIds->push($scouting['scouting']['id']);
+            });
             $report = $user->reports()->create($data);
-            $report->scoutings()->sync($scoutingsIds);
+            $report->scoutings()->sync($scoutingsIds->toArray());
             $reportData = (new ReportDataGenerator($report))->generate();
             $report->data = $reportData['data'];
             $report->data_offensive = $reportData['data_offensive'];

@@ -22,7 +22,8 @@ Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::get('password/email', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail');
 
     Route::get('auth/user', 'Api\Auth\AuthController@user');
-    Route::put('user', 'Api\Users\UserController@update');
+    Route::post('user', 'Api\Users\UserController@update');
+    Route::post('user/change-password', 'Api\Users\UserController@changePassword');
 
     Route::get('user/statistics/summary', 'Api\Users\UserStatisticsController@summary');
     Route::get('user/challenges/completed', 'Api\Users\UserChallengeController@completed');
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
 
     Route::get('ranking', 'Api\Ranking\RankingController@index');
 
+    Route::get('/scoutings/search', 'Api\Scoutings\ScoutingsController@search');
     Route::get('/scoutings/latest', 'Api\Scoutings\ScoutingsController@latest');
     Route::get('/scoutings/app', 'Api\Scoutings\ScoutingsController@app');
     Route::get('/scoutings/results', 'Api\Scoutings\ScoutingsController@results');
@@ -51,8 +53,10 @@ Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::get('/reports/{id}', 'Api\Reports\ReportsController@show');
     Route::post('/reports', 'Api\Reports\ReportsController@store');
 
+    Route::post('/athletes/{id}', 'Api\Athletes\AthletesController@update');
     Route::resource('/athletes', 'Api\Athletes\AthletesController');
 
+    Route::post('/championships/{id}', 'Api\Championships\ChampionshipsController@update');
     Route::get('/championships/{id}/events', ['uses' => 'Api\Championships\ChampionshipsController@events', 'as' => 'api.championships.events']);
     Route::get('/championships/datatable', ['uses' => 'Api\Championships\ChampionshipsController@datatable', 'as' => 'api.championships.datatable']);
     Route::resource('/championships', 'Api\Championships\ChampionshipsController');

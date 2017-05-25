@@ -42,7 +42,12 @@ class AthletesController extends Controller
     public function index(Request $request)
     {
         $except = $request->get('except');
-        return Datatables::of($this->athleteRepository->datatable($except))
+        $user = $this->loggedInUser();
+        return Datatables::of($this->athleteRepository->datatable($except)->where('created_by', $user->id))
+            ->filterColumn('name', function ($query, $keyword) {
+                $sql = "CONCAT(athletes.first_name,'-',athletes.last_name)  like ?";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->setTransformer(new AthleteTransformer())
             ->make(true);
     }
@@ -50,15 +55,16 @@ class AthletesController extends Controller
     public function store(AthleteStoreRequest $request)
     {
         $data = $request->all();
-        $events = collect($request->get('events'));
-
+        $data['gender'] = $data['gender']['gender'];
+        $user = \Auth::user();
+        $data['created_by'] = $user->id;
         try {
             $athlete = $this->athleteRepository->create($data);
-            if ($request->file('profile_picture'))
-                $athlete->addMedia($request->file('profile_picture'))->preservingOriginal()->toCollection('profile');
-            if ($events->count()) {
-                $events = $events->pluck('id');
-                $athlete->events()->sync($events->toArray());
+            if ($request->hasFile('image')) {
+                $athlete->clearMediaCollection('profile');
+                $athlete->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('profile');
+            } elseif ($request->has('removeImage')) {
+                $athlete->clearMediaCollection('profile');
             }
         } catch (Exception $e) {
             return response()->make($e->getMessage(), 404);
@@ -71,22 +77,15 @@ class AthletesController extends Controller
     public function update(AthleteUpdateRequest $request, $id)
     {
         $data = $request->all();
-        $events = collect($request->get('events'));
+        $data['gender'] = $data['gender']['gender'];
         try {
             $athlete = $this->athleteRepository->update($data, $id);
-
-            if ($events->count()) {
-                $events = $events->pluck('id');
-                $athlete->events()->sync($events->toArray());
+            if ($request->hasFile('image')) {
+                $athlete->clearMediaCollection('profile');
+                $athlete->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('profile');
+            } elseif ($request->has('removeImage')) {
+                $athlete->clearMediaCollection('profile');
             }
-
-            if ($request->hasFile('profile_picture')) {
-                if ($athlete->getMedia('profile')->count()) {
-                    $athlete->getMedia('profile')->first()->delete();
-                }
-                $athlete->addMedia($request->file('profile_picture'))->preservingOriginal()->toCollection('profile');
-            }
-
         } catch (Exception $e) {
             return response()->make($e->getMessage(), 404);
         }

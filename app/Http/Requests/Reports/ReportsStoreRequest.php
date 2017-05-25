@@ -13,8 +13,8 @@ class ReportsStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'translation' => 'required',
-            'scoutings'   => 'required',
+            'name'      => 'required',
+            'scoutings' => 'required',
         ];
     }
 }

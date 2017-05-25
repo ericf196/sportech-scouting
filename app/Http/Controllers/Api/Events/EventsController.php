@@ -52,6 +52,8 @@ class EventsController extends Controller
     public function store(EventStoreRequest $request)
     {
         $data = $request->all();
+        $user = \Auth::user();
+        $data['created_by'] = $user->id;
         try {
             $data['end_date'] = Carbon::parse($data['end_date']);
             $data['init_date'] = Carbon::parse($data['init_date']);

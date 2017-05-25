@@ -15,4 +15,6 @@ return [
     'infantil y10'   => 'Infantil Y10',
     'infantil y12'   => 'Infantil Y12',
     'infantil y14'   => 'Infantil Y14',
+    'infantil y16'   => 'Infantil Y16',
+
 ];

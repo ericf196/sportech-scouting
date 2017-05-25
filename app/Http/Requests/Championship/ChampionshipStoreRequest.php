@@ -14,10 +14,11 @@ class ChampionshipStoreRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'translation' => 'required',
-            'sport_id'    => 'required',
-            'init_date'   => 'required',
-            'end_date'    => 'required',
+            'name'       => 'required',
+            'country_id' => 'required',
+            'sport_id'   => 'required',
+            'init_date'  => 'required',
+            'end_date'   => 'required',
         ];
     }
 

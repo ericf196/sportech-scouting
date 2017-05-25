@@ -25,49 +25,6 @@ class ScoutingRepositoryEloquent extends BaseRepository implements ScoutingRepos
         return Scouting::class;
     }
 
-    public function create(array $attributes)
-    {
-        $hasTranslation = array_key_exists('translation', $attributes);
-        $name = $hasTranslation ? $attributes['translation']['name'] : $attributes['name'];
-        $description = $hasTranslation ? $attributes['translation'] : $attributes;
-        $description = array_key_exists('description', $description) ? $description['description'] : null;
-        $user = JWTAuth::parseToken()->authenticate();
-
-        $attributes = [
-            'scouter_id'       => $user->id,
-            'name'             => $name,
-            'description'      => $description,
-            'video_src'        => $attributes['videoSrc'],
-            'championship_id'  => $attributes['championship']['id'],
-            'event_id'         => $attributes['event']['id'],
-            'left_athlete_id'  => $attributes['leftAthlete']['id'],
-            'right_athlete_id' => $attributes['rightAthlete']['id'],
-        ];
-
-        return parent::create($attributes);
-    }
-
-    public function update(array $attributes, $id)
-    {
-        $hasTranslation = array_key_exists('translation', $attributes);
-        $name = $hasTranslation ? $attributes['translation']['name'] : $attributes['name'];
-        $description = $hasTranslation ? $attributes['translation'] : $attributes;
-        $description = array_key_exists('description', $description) ? $description['description'] : null;
-        $user = JWTAuth::parseToken()->authenticate();
-
-        $attributes = [
-            'scouter_id'       => $user->id,
-            'name'             => $name,
-            'description'      => $description,
-            'video_src'        => $attributes['videoSrc'],
-            'championship_id'  => $attributes['championship']['id'],
-            'event_id'         => $attributes['event']['id'],
-            'left_athlete_id'  => $attributes['leftAthlete']['id'],
-            'right_athlete_id' => $attributes['rightAthlete']['id'],
-        ];
-        return parent::update($attributes, $id);
-    }
-
     public function latest()
     {
         return $this->model->newQuery()->orderBy('created_at','desc')->first();

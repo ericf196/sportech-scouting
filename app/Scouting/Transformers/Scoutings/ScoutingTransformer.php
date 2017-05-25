@@ -37,11 +37,12 @@ class ScoutingTransformer extends TransformerAbstract
             'id'          => (int)$model->id,
             'name'        => $model->name,
             'description' => $model->description,
-            'videoSrc'    => $model->video_src,
+            'video_src'   => $model->video_src,
             'translation' => [
                 'name'        => $model->getTranslations('name'),
                 'description' => $model->getTranslations('description')
-            ]
+            ],
+            'created_at'  => $model->created_at->format('d/m/Y')
         ];
     }
 

@@ -47,9 +47,20 @@ class AthleteTransformer extends TransformerAbstract
             'weight'          => $model->weight,
             'ranking'         => $model->ranking,
             'active'          => $model->active ? true : false,
-            'image'           => $model->getFirstMediaUrl('profile', 'medium') ?: url('/images/missing/athlete/missing.png'),
+            'image'           => $model->getFirstMediaUrl('profile', 'medium') ?: url('images/missing/athlete/missing.png'),
             'medal'           => $model->medal ? '/images/medals/' . $model->medal . '.png' : null,
-            'event'           => $model->event ?: ''
+            'event'           => $model->event ?: '',
+            'country_id'      => $model->country_id,
+            'sport_id'        => $model->sport_id,
+            'specialty_id'    => $model->specialty_id,
+            'category_id'     => $model->category_id,
+            'image_formatted' => [
+                'thumbnail'  => $model->getFirstMediaUrl('profile', 'thumb') ? url($model->getFirstMediaUrl('profile', 'thumb')) : url('images/missing/athlete/missing.png'),
+                'source'     => $model->getFirstMediaUrl('profile', 'medium') ? url($model->getFirstMediaUrl('profile', 'medium')) : url('images/missing/athlete/missing.png'),
+                'title'      => $model->first_name . ' ' . $model->last_name,
+                'notDefault' => $model->getFirstMediaUrl('profile', 'medium') ? true : false
+            ],
+
         ];
     }
 

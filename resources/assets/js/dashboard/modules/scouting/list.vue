@@ -120,7 +120,7 @@
                 return [
                     {data: 'name', name: 'name', title: 'Name'},
                     {data: 'description', name: 'description', title: 'Description'},
-                    {data: 'videoSrc', name: 'video_src', title: 'Video Source'},
+                    {data: 'video_src', name: 'video_src', title: 'Video Source'},
                     {
                         title: 'Actions',
                         orderable: false,
