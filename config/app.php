@@ -178,7 +178,6 @@ return [
         Spatie\Translatable\TranslatableServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
 
         //
 
