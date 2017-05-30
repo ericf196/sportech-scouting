@@ -33,9 +33,14 @@ class UserTransformer extends TransformerAbstract
             'first_name'      => $model->first_name,
             'last_name'       => $model->last_name,
             'email'           => $model->email,
-            'image'           => $model->getFirstMediaUrl('profile', 'medium') ?: '/images/missing/athlete/missing.png',
+            'image'           => url($model->getFirstMediaUrl('profile', 'medium')) ?: url('/images/missing/athlete/missing.png'),
             'superUser'       => $model->id == 1 ? true : false,
-
+            'image_formatted' => [
+                'thumbnail'  => url($model->getFirstMediaUrl('profile', 'thumb')) ?: url('/images/missing/athlete/missing.png'),
+                'source'     => url($model->getFirstMediaUrl('profile', 'medium')) ?: url('/images/missing/athlete/missing.png'),
+                'title'      => $model->first_name . ' ' . $model->last_name,
+                'notDefault' => $model->getFirstMediaUrl('profile', 'medium') ? true : false
+            ],
         ];
     }
 
