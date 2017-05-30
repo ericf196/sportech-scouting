@@ -60,11 +60,11 @@ class ScoutingsController extends Controller
     {
         $except = $request->get('except');
         $query = Scouting::query();
-
+        $user = $this->loggedInUser();
         if ($except) {
             $query = $query->whereNotIn('id', explode(',', $except));
         }
-        return Datatables::of($query)
+        return Datatables::of($query->where('scouter_id', $user->id))
             ->setTransformer(new ScoutingTransformer())
             ->make(true);
     }
@@ -187,7 +187,7 @@ class ScoutingsController extends Controller
 
         if ($except) {
             $exceptIds = explode(',', $except);
-            $scoutings = $scoutings->whereNotIn('id',$exceptIds);
+            $scoutings = $scoutings->whereNotIn('id', $exceptIds);
         }
 
         $scoutings = $scoutings->take(10)->get();
