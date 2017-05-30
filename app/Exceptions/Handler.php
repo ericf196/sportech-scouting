@@ -48,26 +48,25 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($exception instanceof TokenExpiredException) {
-            return response()->json(['token_expired'], $e->getStatusCode());
+            return response()->json(['token_expired'], $exception->getStatusCode());
         } else if ($exception instanceof TokenInvalidException) {
-            return response()->json(['token_invalid'], $e->getStatusCode());
+            return response()->json(['token_invalid'], $exception->getStatusCode());
         }
 
-        if (!($exception instanceof ValidationException))
-            if ($request->ajax() || $request->wantsJson()) {
-                $json = [
-                    'success' => false,
-                    'error'   => [
-                        'code'    => $exception->getCode(),
-                        'message' => $exception->getMessage(),
-                        'file'    => $exception->getFile(),
-                        'line'    => $exception->getLine(),
-                        'trace'   => $exception->getTraceAsString()
-                    ],
-                ];
+        if (!($exception instanceof ValidationException)) {
+            $json = [
+                'success' => false,
+                'error'   => [
+                    'code'    => $exception->getCode(),
+                    'message' => $exception->getMessage(),
+                    'file'    => $exception->getFile(),
+                    'line'    => $exception->getLine(),
+                    'trace'   => $exception->getTraceAsString()
+                ],
+            ];
 
-                return response()->json($json, 400);
-            }
+            return response()->json($json, 400);
+        }
         return parent::render($request, $exception);
     }
 
