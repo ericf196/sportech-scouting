@@ -166,18 +166,19 @@ return [
         /*
          * Package Service Providers...
          */
-        Barryvdh\Cors\ServiceProvider::class,
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
         Kodeine\Acl\AclServiceProvider::class,
         Spatie\MediaLibrary\MediaLibraryServiceProvider::class,
         Webpatser\Countries\CountriesServiceProvider::class,
         Spatie\Translatable\TranslatableServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
         //
 
