@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Barryvdh\Cors\HandleCors;
 use Clockwork\Support\Laravel\ClockworkMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 use Kodeine\Acl\Middleware\HasPermission;
@@ -23,8 +24,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         ClockworkMiddleware::class,
-        \Barryvdh\Cors\HandleCors::class
-
+        HandleCors::class
     ];
 
     /**
