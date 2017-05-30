@@ -169,7 +169,6 @@ return [
         Laracasts\Utilities\JavaScript\JavaScriptServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Barryvdh\Cors\ServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
         Kodeine\Acl\AclServiceProvider::class,
@@ -178,6 +177,7 @@ return [
         Spatie\Translatable\TranslatableServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
         //
 
