@@ -24,7 +24,8 @@
     "spatie/laravel-translatable": "^1.1",
     "yajra/laravel-datatables-oracle": "~6.0",
     "mcamara/laravel-localization": "^1.1",
-    "laravel/browser-kit-testing": "^1.0"
+    "laravel/browser-kit-testing": "^1.0",
+    "aws/aws-sdk-php": "~3.0"
   },
   "require-dev": {
     "fzaninotto/faker": "~1.4",
