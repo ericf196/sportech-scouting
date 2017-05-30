@@ -13,9 +13,12 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('auth/login', 'Api\Auth\AuthController@login');
+Route::group(['middleware' => []], function () {
+
+    Route::post('auth/login', 'Api\Auth\AuthController@login');
+    Route::post('accept', 'Api\Invites\InviteController@accept');
+});
 //Route::post('user/create', 'Api\Users\UserController@create');
-Route::post('accept', 'Api\Invites\InviteController@accept');
 
 Route::group(['middleware' => 'jwt.auth'], function () {
     Route::post('auth/logout', 'Api\Auth\AuthController@logout');
