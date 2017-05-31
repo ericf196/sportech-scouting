@@ -45,7 +45,7 @@ class ReportDataGenerator
      */
     public function generate()
     {
-        $this->report->load(['scoutings.scoutingTouches.actions.leftTags', 'scoutings.scoutingTouches.actions.rightTags', 'scoutings.leftAthlete', 'scoutings.rightAthlete']);
+        $this->report->load(['scoutings.scoutingTouches.actions.leftTags', 'scoutings.scoutingTouches.actions.rightTags']);
         $this->report->scoutings->each(
             function ($scouting) {
                 $this->data->push((new PointsVsTimeDataGenerator())->analyze($scouting));
