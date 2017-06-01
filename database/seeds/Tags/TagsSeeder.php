@@ -112,13 +112,6 @@ class TagsSeeder extends Seeder
                 ])
             ],
             [
-                'name'     => ['es' => 'Contratiempo', 'en' => 'Counter-time'],
-                'abbr'     => 'CTP',
-                'dropdown' => false,
-                'category' => ['es' => 'Ofensivas', 'en' => 'Offensive'],
-                'color'    => 'green',
-            ],
-            [
                 'name'     => ['es' => 'Parada', 'en' => 'Parry'],
                 'abbr'     => 'PRY',
                 'dropdown' => true,
@@ -179,6 +172,22 @@ class TagsSeeder extends Seeder
                         'value' => 'CH'
                     ]
                 ])
+            ], [
+                'name'     => ['es' => 'Contratiempo', 'en' => 'Counter-time'],
+                'abbr'     => 'CTP',
+                'dropdown' => true,
+                'category' => ['es' => 'Ofensivas', 'en' => 'Offensive'],
+                'color'    => 'green',
+                'options'  => collect([
+                    [
+                        'name'  => ['es' => 'Con Parada', 'en' => 'With Parry'],
+                        'value' => 'CPY',
+                    ],
+                    [
+                        'name'  => ['es' => 'Con Contraataque', 'en' => 'With Counter-attack'],
+                        'value' => 'CCT',
+                    ],
+                ])
             ],
             [
                 'name'     => ['es' => 'Cierre', 'en' => 'Close'],
@@ -187,21 +196,6 @@ class TagsSeeder extends Seeder
                 'category' => ['es' => 'Contraofensivas', 'en' => 'Counter-offensive'],
                 'color'    => 'red',
 
-            ],
-            [
-                'name'     => ['es' => 'Con Parada', 'en' => 'With Parry'],
-                'abbr'     => 'CPY',
-                'dropdown' => false,
-                'category' => ['es' => 'Contratiempo', 'en' => 'Counter-time'],
-                'color'    => 'purple',
-
-            ],
-            [
-                'name'     => ['es' => 'Con Contraataque', 'en' => 'With Counter-attack'],
-                'abbr'     => 'CCT',
-                'dropdown' => false,
-                'category' => ['es' => 'Contratiempo', 'en' => 'Counter-time'],
-                'color'    => 'purple',
             ],
             [
                 'name'     => ['es' => 'Punta en Linea', 'en' => 'Point in Line'],

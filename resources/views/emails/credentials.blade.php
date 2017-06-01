@@ -14,12 +14,17 @@
 @component('mail::subcopy')
 # Hi, Welcome to Scouting37
 
-{{$user->first_name}} {{$user->last_name}} ({{$user->email}}) Has invited you to Register in Scouting37.
+We are glad to announce the official launch of scouting37, your platform for fencing data analisys
+CONGRTULATIONS!!! You have been selected to try the platform in our closed BETA.
 
-To register please click in the next link:
+Your log in credentials are:
+@component('mail::panel')
+Email: {{$user->email}}.
+Password: {{$password}}.
+@endcomponent
 
-@component('mail::button', ['url' => '','color' => 'red'])
-Register
+@component('mail::button', ['url' => config('app.url'),'color' => 'red'])
+Log In
 @endcomponent
 Thanks,<br>
 Scouting37

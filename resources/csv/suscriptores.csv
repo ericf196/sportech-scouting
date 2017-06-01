@@ -1,0 +1,274 @@
+id,name,email,weapon,country,country_id
+65,Florencia,flor_arg@hotmail.com,sabre,Argentina,32
+205,Florencia,florgarcia_arg@hotmail.com,sabre,Argentina,32
+241,VÍCTOR SERGIO GROUPIERRE,groupierre@ciudad.com.ar,epee,Argentina,32
+107,Avery Roddam,Van.diemen.fencing.club@gmail.com,epee,Australia,36
+108,Jo,mtfoilist@gmail.com,epee,Australia,36
+142,Paggy,p.klingerstorff@hotmail.com,foil,Austria,40
+225,Dominik Wang,dominik.wang@vhs.at,foil,Austria,40
+12,Ale,patinoven18@hotmail.com,sabre,Bolivia,68
+77,ROSIO GOZALES,rosio.gonzales@endetransmision.bo,foil,Bolivia,68
+139,Dragica kunstek,dragi.kunstek105@gmail.com,foil,Bolivia,68
+204,Gabi ramos,gabiramoss13@gmail.com,sabre,Bolivia,68
+218,Adriana Montano,adriana.montaniv@gmail.com,foil,Bolivia,68
+251,Eudis,eudisespinosalopez@gmail.com,sabre,Bolivia,68
+78,PACHECO,pachecor@uol.com.br,foil,Brazil,76
+83,Ana Beatriz Bulcao,anabulcao@hotmail.com,foil,Brazil,76
+98,Clarisse,clarissemenezes@hotmail.com,epee,Brazil,76
+261,SEINI BRA,leandroseini10@gmail.com,epee,Brazil,76
+254,Asahrin Haziq,scorpion-2111@hotmail.com,sabre,Brunei Darussalam,96
+34,Manuel Belmonte,sofencing@shaw.ca,foil,Canada,124
+109,Carlos Agreda,cagreda.ininca@gmail.com,foil,Canada,124
+162,E.,elya@gladiators.ca,foil,Canada,124
+86,F,ningbofencing@163.com,foil,China,156
+134,carolpbruja@hotmail.com,carolpbruja@hotmail.com,sabre,Colombia,170
+138,camilo andres rengifo lombana,camrenlom@hotmail.com,sabre,Colombia,170
+213,Abril,abrilcanoc@gmail.com,sabre,Colombia,170
+262,Cristian Carrasco,cristian.cuentas@hotmail.com,sabre,Dominican Republic,214
+15,Jose De Sousa,josealeds@gmail.com,epee,Ecuador,218
+229,Abdelrahman,abdrahman.essa@gmail.com,epee,Egypt,818
+259,Omar magdy,omar_95magdi@hotmail.com,epee,Egypt,818
+246,Erika,erikakirpu@mail.ru,epee,Estonia,233
+157,oona,oona.sohlberg@edu.espoo.fi,epee,Finland,246
+88,leveque,beti.leveque@orange.fr,sabre,France,250
+245,Daninthe,daninthesarah@yahoo.fr,epee,France,250
+253,Daninthe,sc_daninthe@hotmail.com,epee,France,250
+47,Cirotteau,vincent.cirotteau@gmail.com,foil,"France, Metropolitan",250
+85,Grit,meier@tzd.tz-dd.de,epee,Germany,276
+149,wild ernst,ernstunduschiwild@gmail.com,sabre,Germany,276
+161,Malte Hasse,malte.hasse@shg-hi.de,foil,Germany,276
+244,Tarik ruiz,tkruizs@gmail.com,sabre,Germany,276
+174,andreas,andouvis@yahoo.gr,sabre,Greece,300
+67,Andrew Wong,aw@fencing.hk,foil,Hong Kong,344
+79,Eric,ericyip2009@gmail.com,epee,Hong Kong,344
+80,Viv,viviankong18@gmail.com,epee,Hong Kong,344
+105,Andrew Wong,aw@fencing.org.hk,foil,Hong Kong,344
+231,Jess,info@hkfco.org,foil,Hong Kong,344
+249,Andy Luk,alukwin@gmail.com,foil,Hong Kong,344
+188,David Losonczi,nyunyug@gmail.com,epee,Hungary,348
+69,Archish,archish123456@gmail.com,foil,India,356
+199,Ravinder,foilraveen@gmil.com,foil,India,356
+62,Zicho,zichonugroho@gmail.com,epee,Indonesia,360
+70,Anggono,widisabre01@gmail.com,sabre,Indonesia,360
+127,Rammer,rammermahram@gmail.com,epee,Indonesia,360
+155,Sherina,shafiratuzzahro@gmail.com,sabre,Indonesia,360
+201,vea,veachristiani@gmail.com,foil,Indonesia,360
+202,vea,veafencerfoil@gmail.com,foil,Indonesia,360
+217,Mohammad zulfikar,atok_91@yahoo.com,foil,Indonesia,360
+258,Chamim,cha.ulied@gmail.com,sabre,Indonesia,360
+2,Carlos Javier Pineda Cordero,carlos.pineda@sportech37.com,foil,Ireland,372
+21,Gerard Madden,gbmadden01@gmail.com,epee,Ireland,372
+23,Dawid Kulka,kulka.dawid@gmail.com,epee,Ireland,372
+97,Emilia,olgavelma@gmail.com,foil,Ireland,372
+22,Ido Ajzenstadt,ajzenstadt@gmail.com,epee,Israel,376
+45,Matteo Pio di Bari,mattbarr3000@gmail.com,epee,Italy,380
+76,Lapo Novellini,lapox71@yahoo.it,sabre,Italy,380
+158,Simo,simone.sardy26@gmail.com,foil,Italy,380
+186,Aldo,aldomontano@yahoo.it,sabre,Italy,380
+190,Aiello Tommaso,aiello.alessandro@gmail.com,foil,Italy,380
+203,Lucia,giannutrideep@gmail.com,sabre,Italy,380
+263,Bianca Del Carretto,delca85@gmail.com,epee,Italy,380
+270,Fiore dei Liberi,fioredeiliberi@gmail.com,epee,Italy,380
+178,Kurt Schmick,coaches@jamaicanfencing.org,foil,Jamaica,388
+230,Vitaly,vitalijs.kuceba@gmail.com,foil,Latvia,428
+232,Baiba,miks@rocketmail.com,foil,Latvia,428
+137,Ahmed,ahmedm.9669@gmail.com,epee,Malaysia,458
+273,Camelot Esgrima,camelotesgrima@gmail.com,epee,Mexico,484
+3,NULL,cjpinedac@gmail.com,NULL,NULL,
+24,NULL,rodrigotanco@gmail.com,NULL,NULL,
+25,NULL,bastidasjavier@gmail.com,NULL,NULL,
+27,NULL,vlarha@hotmail.com,NULL,NULL,
+32,NULL,mgeshrima@hotmail.com,NULL,NULL,
+39,NULL,onalismejia16@gmail.com,NULL,NULL,
+55,NULL,javier.bastidas@ngncloud.net,NULL,NULL,
+59,NULL,javier.bastidas@dncomputing.com,NULL,NULL,
+71,NULL,cleliann.arg@gmail.com,NULL,NULL,
+72,NULL,HarrisonHue@yahoi.com,NULL,NULL,
+74,NULL,bosko.jolic@arz.hr,NULL,NULL,
+81,NULL,Gabrielamayer@sympatico.ca,NULL,NULL,
+91,NULL,fdamas@mdanet.net,NULL,NULL,
+99,NULL,acherskov13@gmail.com,NULL,NULL,
+106,NULL,irwincruz.tc@gmail.com,NULL,NULL,
+112,NULL,jessica.aponte@sportech37.com,NULL,NULL,
+124,NULL,pinogtriana@gmail.com,NULL,NULL,
+140,NULL,joseggodoyh99@hotmail.com,NULL,NULL,
+152,NULL,helenapena.11@hotmail.com,NULL,NULL,
+159,NULL,josueadilio@gmail.com,NULL,NULL,
+166,NULL,jamito0718@gmail.com,NULL,NULL,
+181,NULL,mary.hightower@gmail.com,NULL,NULL,
+182,NULL,david.rofer@yahoo.es,NULL,NULL,
+191,NULL,ashley.yw.park@gmail.com,NULL,NULL,
+197,NULL,alfonsreyes@gmail.com,NULL,NULL,
+208,NULL,victor.conk@gmail.com,NULL,NULL,
+212,NULL,andrew865horne@btinternet.com,NULL,NULL,
+214,NULL,bc6g15@soton.ac.uk,NULL,NULL,
+222,NULL,franszaz@xs4all.nl,NULL,NULL,
+237,NULL,remills333@aol.com,NULL,NULL,
+239,NULL,Guy.lonsdale@hotmail.co.uk,NULL,NULL,
+248,NULL,angelito_negro5@hotmail.com,NULL,NULL,
+257,NULL,puchar-zubrow@wp.pl,NULL,NULL,
+260,NULL,nitsireivilo@gmail.com,NULL,NULL,
+264,NULL,crskarolinko@gmail.com,NULL,NULL,
+267,NULL,ksand29@hotmail.com,NULL,NULL,
+272,NULL,mlobaton.social@gmail.com,NULL,NULL,
+58,Ali,whiteodssy@yahoo.com,epee,Pakistan,586
+46,Minerva Rabi,minerva.rabi@gmail.com,foil,Paraguay,600
+167,Doris santaria,jamiro0718@gmail.com,epee,Peru,604
+168,Andrés,andres20372@gmail.com,epee,Peru,604
+126,PETER SO,viciousbrainiacfencing@gmail.com,sabre,Philippines,608
+87,Olga,olga.mizera@gmail.com,epee,Poland,616
+33,Marco,mgesgrima@hotmail.com,foil,Portugal,620
+51,Álvaro,alvarofgmonteiro@gmail.com,foil,Portugal,620
+93,Ricardo Candeias,ricardo.candeias@sapo.pt,epee,Portugal,620
+50,Rafael,westernrd22@aol.com,sabre,Puerto Rico,630
+147,Hipolito Vazquez,vazquezhipolito@yahoo.com,epee,Puerto Rico,630
+156,Elinette Diaz,elinettediaz@gmail.com,epee,Puerto Rico,630
+185,Eivar Javier Mendoza,eivarjavier@gmail.com,sabre,Puerto Rico,630
+209,Veronica,jannette.veronica@gmail.com,epee,Puerto Rico,630
+243,Kyle José  Hernandez-Rivera,jocyjm@yahoo.com,sabre,Puerto Rico,630
+84,Alex,kaskas2@ya.ru,epee,Russian Federation,643
+179,DMITRY SUSHCHIKH,9228768@gmail.com,foil,Russian Federation,643
+192,Rigin Dmitry,rigdim@gmail.com,foil,Russian Federation,643
+143,marija,mjovanovic83@gmail.com,epee,Serbia,688
+144,Milica,arandjelovicmilica96@gmail.com,epee,Serbia,688
+145,Danilo Santrač,danilosantrac96@gmail.com,epee,Serbia,688
+250,Michala,michala.cellerova@gmail.com,foil,Slovakia,703
+7,Isidro,isidromn@gmail.com,foil,Spain,724
+13,Marniee Arteaga,elnegris0411@gmail.com,epee,Spain,724
+61,David,muchofari@gmail.com,foil,Spain,724
+75,Fernando Casares,casaresfesp@gmail.com,sabre,Spain,724
+89,Paula López de la Pena,plopezdelapena@gmail.com,epee,Spain,724
+90,María Ventura Jorquera,mavenjor@gmail.com,sabre,Spain,724
+96,Iván Carabaño Rubianes,ivan-car@hotmail.es,foil,Spain,724
+100,Lucía,luc978984@gmail.com,epee,Spain,724
+173,Andrés del Arco,ardelarco@gmail.com,foil,Spain,724
+176,Manel,Villadoniga@yahoo.es,foil,Spain,724
+183,Javier Marín Rodríguez,marinrodj26@gmail.com,epee,Spain,724
+211,Jaume Amorós,jaume.amoros.martinez@gmail.com,epee,Spain,724
+216,Alberto Jesús González Hernández,albertojesusglez@yahoo.es,epee,Spain,724
+223,Víctor Valcárcel,victorvalcarcel4eso@gmail.com,epee,Spain,724
+236,Xavier Padilla Pujol,xavierpadillapujol@gmail.com,foil,Spain,724
+242,Yann Breteau,ybreteau@hotmail.com,foil,Spain,724
+271,Javier,jalpikhyt@gmail.com,foil,Spain,724
+82,Peter,peter@touche.se,epee,Sweden,752
+247,Benjamin Steffen,Mail@benisteffen.ch,epee,Switzerland,
+49,Yi Han LIN,linyihan013@gmail.com,sabre,Taiwan,158
+200,Mark Epee,epeemark01112@gmail.com,epee,Taiwan,158
+224,Nour mami,nour27mami@gmail.com,epee,Tunisia,788
+234,Ahmed,sdraw33@gmail.com,sabre,Tunisia,788
+53,Erkan,erkansaygac@klemsan.com.tr,foil,Turkey,792
+54,Erkan,erkansaygac@hotmail.com,foil,Turkey,792
+256,Ankara Foil Sport Culb,ankaraflore@gmail.com,foil,Turkey,792
+92,Jess Gundry,jess.gundy@hotmail.co.uk,epee,United Kingdom,826
+104,Elliott Grover,elliott.grover@yahoo.co.uk,epee,United Kingdom,826
+220,Chris Green,chris@epeefencing.com,epee,United Kingdom,826
+227,George,george.s.harris@gmail.com,foil,United Kingdom,826
+228,Dan Kew,dan@epee.me,epee,United Kingdom,826
+233,Chris,c-clarkey@hotmail.co.uk,epee,United Kingdom,826
+238,Stephen,stephengoodman1984@gmail.com,sabre,United Kingdom,826
+240,Noah,happyseb100@gmail.com,epee,United Kingdom,826
+252,Piero Steiner,roberto.steiner@kcl.ac.uk,epee,United Kingdom,826
+255,Steve Wallace,steve@southboroughadvisors.com,epee,United Kingdom,826
+56,L Stacy Eddy,director@baystatefencers.com,epee,United States,840
+73,1111111111,a@a.com,sabre,United States,840
+102,Dennis Kolakowski,DWKolakowski@gmail.com,sabre,United States,840
+103,Lindsey,lblindsey99@gmail.com,foil,United States,840
+119,Rafael S,rafael_2000ad@hotmail.com,foil,United States,840
+141,Zak,lizybard@gmail.com,epee,United States,840
+153,Jason Rogers,jason@betterfencer.com,sabre,United States,840
+154,Kate Sierra,sabregrrrl@gmail.com,sabre,United States,840
+189,Timothy Frank,frankt@catlin.edu,epee,United States,840
+196,John A Lartz,Lartzlaw@gmail.com,epee,United States,840
+215,Jerry Heilpern,falconfencingacademy@gmail.com,foil,United States,840
+219,Walter G. Green III,wgreen@sallegreen.com,epee,United States,840
+221,Carter Hodges,carterhodgesfencing@gmail.com,foil,United States,840
+235,Piper Cooper,ellacoop@me.com,foil,United States,840
+265,Kieran Stewart-Phillips,ljphillips09@gmail.com,epee,United States,840
+266,Daniel Bucur,coachdaniel7@gmail.com,epee,United States,840
+268,Sheryl,slkstewart@gmail.com,epee,United States,840
+269,Kieran,kcstewart100@gmail.com,epee,United States,840
+1,Pedro,pedro.gorrin@dncomputing.com,sabre,Venezuela,862
+4,Daniel,chacon.daniel@gmail.com,sabre,Venezuela,862
+5,Luis,luissalazar999@gmail.com,sabre,Venezuela,862
+6,Pedro,pedrosoto280@hotmail.com,foil,Venezuela,862
+8,Alfredo Ovalles,alfredo_ovalles@hotmail.com,sabre,Venezuela,862
+9,Cesar Bru,cbru26@hotmail.com,foil,Venezuela,862
+10,Adrianny torres,adtt_17@hotmail.com,sabre,Venezuela,862
+11,Vladimir prieto,vladimir__prieto@hotmail.com,foil,Venezuela,862
+14,Gerardo,gerardo49@gmail.com,foil,Venezuela,862
+16,Eduardo figueroa,figueroaedo@gmail.com,epee,Venezuela,862
+17,Hiler Suárez,hilersuarez_115@hotmail.com,sabre,Venezuela,862
+18,marlene,marlene-heredia@hotmail.com,sabre,Venezuela,862
+19,Eliana,elianalugo@hormail.com,epee,Venezuela,862
+20,Sebastian Pargas,calupargas@gmail.com,sabre,Venezuela,862
+26,Alejandro Tovat,tovarven@gmail.com,epee,Venezuela,862
+28,CESAR AGUIRRE,cesar_aguirre.barbera_ven@hotmail.com,foil,Venezuela,862
+29,Miguel Angel Arevalo,esgrimamiranda@hotmail.com,sabre,Venezuela,862
+30,Juan Cordero,juancorderovet@gmail.com,epee,Venezuela,862
+31,Miguel Angel Arevalo Ovalles,miguel1990m2011@gmail.com,sabre,Venezuela,862
+35,Miguel Angel Arevalo Ovalles,esgrimaventa3000@gmail.com,sabre,Venezuela,862
+36,Crisber,crisbermarrondon07@gmail.com,epee,Venezuela,862
+37,Liz,lairoskate@hotmail.com,foil,Venezuela,862
+38,Federación de esgrima,federaciondeesgrima@gmail.com,foil,Venezuela,862
+40,dauben cupido,dauben_cupido@hotmail.com,epee,Venezuela,862
+41,daibelys riera,falcon1fve@yahoo.es,sabre,Venezuela,862
+42,Darwin,darwin_cordero@hotmail.com,foil,Venezuela,862
+43,Marianela,nelagarcia31@gmail.com,epee,Venezuela,862
+44,ROBERTO AUDAIN,audainestaba@gmail.com,sabre,Venezuela,862
+48,Francisco Marín Alvarez,arzengel2000@yahoo.es,sabre,Venezuela,862
+52,anabella,aniacurero13@gmail.com,foil,Venezuela,862
+57,Pedro,gorrin.pedro@gmail.com,sabre,Venezuela,862
+60,Pedro,shinji91@gmail.com,sabre,Venezuela,862
+63,Grendys perez,perezgrendys94@gmail.com,epee,Venezuela,862
+64,Aarón,aaronjimenez1881@gmail.com,epee,Venezuela,862
+66,Luis Castillo,castilloluis2005@gmail.com,epee,Venezuela,862
+68,Jose,josestonek@hotmail.com,epee,Venezuela,862
+94,pablo lacruz,lacruz_ven@yahoo.es,foil,Venezuela,862
+95,Alejandra Benitez Romero,benitezven@yahoo.com,sabre,Venezuela,862
+101,Miguel Camacaro,miguelcamacaro@hotmail.com,foil,Venezuela,862
+110,mauricio,mauricinis@hotmail.com,sabre,Venezuela,862
+111,Fernandezven@hotmail.com,fernandezven@hotmail.com,epee,Venezuela,862
+113,Miguel Guevara,miguel_guevara14@hotmail.com,foil,Venezuela,862
+114,Ronald Camacho,ronaldeduardo_123@hotmail.com,sabre,Venezuela,862
+115,Fernando Falcon,fernandofalconv@gmail.com,epee,Venezuela,862
+116,Antonio Melo,antoniomelo21@gmail.com,sabre,Venezuela,862
+117,william,william_002@hotmail.com,sabre,Venezuela,862
+118,soraima petit,soraimapetit@hotmail.com,foil,Venezuela,862
+120,Gabriel,tabastaven@gmail.com,epee,Venezuela,862
+121,Dayana Martinez,dayana47@hotmail.com,epee,Venezuela,862
+122,Moises,moisesjimenezortiz1@gmail.com,epee,Venezuela,862
+123,Ronny,ronny_parra@hotmail.com,epee,Venezuela,862
+125,Luis Arias,castielarias@gmail.com,epee,Venezuela,862
+128,andreina,payper25@hotmail.com,epee,Venezuela,862
+129,Andrea,celmeno.andreina@gmail.com,epee,Venezuela,862
+130,Miguel blanchardt,blanchardtmj@gmail.com,epee,Venezuela,862
+131,ronal,ronalchirinos@hotmail.com,sabre,Venezuela,862
+132,geiser tomoche,geiser.t@hotmail.com,epee,Venezuela,862
+133,Jesús carvajal,jcarvaja_1995@hotmail.com,sabre,Venezuela,862
+135,elias fuentes,eliasfuentes1985@gmail.com,sabre,Venezuela,862
+136,Gian piero Docchio,foild13@gmail.com,foil,Venezuela,862
+146,Jenny,jennychirimelli@gmail.com,epee,Venezuela,862
+148,Lizze,liz_ea1488@hotmail.com,epee,Venezuela,862
+150,johan mora,joanbriston_elgato@hotmail.com,foil,Venezuela,862
+151,Fabiola Ramos,secasoesgrimaanzoategui@outlook.com,foil,Venezuela,862
+160,ROBERT ROBNELL,audainmorenorobert@gmail.com,sabre,Venezuela,862
+163,Danny,dannesca@gmail.com,sabre,Venezuela,862
+164,Germán Chávez,germanz327@gmail.com,epee,Venezuela,862
+165,Yuruani Hidalgo,ydhh_1994@hotmail.com,sabre,Venezuela,862
+169,Benry,mbenry@gmail.com,epee,Venezuela,862
+170,Luymar Jose,luymarjose@gmail.com,epee,Venezuela,862
+171,Jornely Velasquez,jyvelasquezg@gmail.com,sabre,Venezuela,862
+172,anthony,Anthonybastardoisaba@gmail.com,sabre,Venezuela,862
+175,Juan Carlos Corde,juan_cordero_91@hotmail.com,foil,Venezuela,862
+177,yanet lopez,yanet_lopez@hotmail.es,epee,Venezuela,862
+180,yessica coromoto fernandez perez,fernandezyessicac@gmail.com,foil,Venezuela,862
+184,crisbermar,crisbermarrondon@07gmail.com,epee,Venezuela,862
+187,Andres,floresmandres@hotmail.com,foil,Venezuela,862
+193,Alejandra Falcón,alejandrafalcongrillet@gmail.com,epee,Venezuela,862
+194,Moises Requena,moisesrequena@hotmail.com,foil,Venezuela,862
+195,Jose,josestonek@gmail.com,epee,Venezuela,862
+198,dauben cupido,dauben.cupido@gmail.com,epee,Venezuela,862
+206,rafael guerrero,pinchoven@hotmail.com,epee,Venezuela,862
+207,Daniel,danielgood20@hotmail.com,epee,Venezuela,862
+210,pedro sanchez,pewill@gmail.com,foil,Venezuela,862
+226,ayrlen loyo,ayrlen40@gmail.com,epee,Venezuela,862
