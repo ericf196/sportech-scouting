@@ -177,7 +177,6 @@ return [
         Webpatser\Countries\CountriesServiceProvider::class,
         Spatie\Translatable\TranslatableServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
         //
 
