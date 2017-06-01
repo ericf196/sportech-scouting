@@ -178,7 +178,7 @@ return [
         Spatie\Translatable\TranslatableServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
-
+        Maatwebsite\Excel\ExcelServiceProvider::class,
         //
 
         /*
@@ -241,7 +241,7 @@ return [
         'JWTFactory'          => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Countries'           => Webpatser\Countries\CountriesFacade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
-
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
