@@ -18,10 +18,6 @@ class GenderController extends Controller
                 'gender' => 'w',
                 'name'   => trans('admin/athletes/athletes.w')
             ],
-            [
-                'gender' => 'n',
-                'name'   => trans('admin/athletes/athletes.n')
-            ],
         ]);
     }
 }

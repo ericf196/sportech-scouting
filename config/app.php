@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Scouting37',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,8 +177,12 @@ return [
         Webpatser\Countries\CountriesServiceProvider::class,
         Spatie\Translatable\TranslatableServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
+<<<<<<< HEAD
         Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+=======
+
+>>>>>>> 82f43e116388fbd85dfea49415455aec94a10e6c
         //
 
         /*

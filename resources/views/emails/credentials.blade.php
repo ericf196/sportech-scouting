@@ -6,15 +6,6 @@
 @endcomponent
 @endslot
 
-<<<<<<< HEAD
-<p>Te han invitado a Registrarte en Scouting37.</p>
-<div class="">
-    <img width="300px" src="assets/img/logo.png" alt="">
-    <h1>Data analytics for fencers</h1>
-</div>
-
-<a href="{{ url('http://localhost:4200/register?token='.$invite->token) }}">Click</a>  para registrarse!!
-=======
 {{-- Body --}}
 <!-- Body here -->
 
@@ -44,4 +35,3 @@ Scouting37
 @endcomponent
 @endslot
 @endcomponent
->>>>>>> 82f43e116388fbd85dfea49415455aec94a10e6c

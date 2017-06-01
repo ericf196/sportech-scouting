@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Scouting\Entities\Users\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -11,16 +12,23 @@ use App\Scouting\Entities\Invites\Invite;
 class InviteCreated extends Mailable
 {
     use Queueable, SerializesModels;
+    /**
+     * @var User
+     */
+    private $user;
 
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param Invite $invite
+     * @param User $user
      */
-    public function __construct(Invite $invite)
+    public function __construct(Invite $invite, User $user)
     {
         $this->invite = $invite;
+        $this->user = $user;
     }
+
     /**
      * Build the message.
      *
@@ -28,7 +36,7 @@ class InviteCreated extends Mailable
      */
     public function build()
     {
-        return $this->from('contact@scouting37.com')->subject('Invitación Scouting')
-        ->view('emails.invite')->with('invite',$this->invite);
+        return $this->from(env('MAIL_SEND_ADDRESS'))->subject('You has been invited to scouting37!')
+            ->markdown('emails.invite')->with('url',url())->with('image', url('/images/logo_small_white.png'))->with('invite', $this->invite)->with('user', $this->user);
     }
 }
