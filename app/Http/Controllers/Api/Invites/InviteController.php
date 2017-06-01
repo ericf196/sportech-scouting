@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\Invites;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Scouting\Entities\Invites\Invite;
@@ -38,7 +39,7 @@ class InviteController extends Controller
                     'token' => $token
                 ]);
             }
-            Mail::to($request->get('email'))->send(new InviteCreated($invite));
+            Mail::to($request->get('email'))->send(new InviteCreated($invite, $this->loggedInUser()));
             $this->updateNumberInvitations($user);
         } catch (ModelNotFoundException $e) {
             //response()->make(trans('admin/users/users.sms_invite'), 404);
