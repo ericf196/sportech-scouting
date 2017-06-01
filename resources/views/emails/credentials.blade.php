@@ -15,6 +15,7 @@
 # Hi, Welcome to Scouting37
 
 We are glad to announce the official launch of scouting37, your platform for fencing data analisys
+<br><br>
 CONGRTULATIONS!!! You have been selected to try the platform in our closed BETA.
 
 Your log in credentials are:
@@ -23,7 +24,7 @@ Email: {{$user->email}}.
 Password: {{$password}}.
 @endcomponent
 
-@component('mail::button', ['url' => config('app.url'),'color' => 'red'])
+@component('mail::button', ['url' => env('FRONTEND_URL','http://scouting37.com/app'),'color' => 'red'])
 Log In
 @endcomponent
 Thanks,<br>

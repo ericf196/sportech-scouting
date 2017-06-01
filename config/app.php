@@ -177,14 +177,9 @@ return [
         Webpatser\Countries\CountriesServiceProvider::class,
         Spatie\Translatable\TranslatableServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
-<<<<<<< HEAD
-        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-=======
-
->>>>>>> 82f43e116388fbd85dfea49415455aec94a10e6c
+        // Maatwebsite\Excel\ExcelServiceProvider::class,
         //
-
+        Laravel\Tinker\TinkerServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -245,7 +240,7 @@ return [
         'JWTFactory'          => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Countries'           => Webpatser\Countries\CountriesFacade::class,
         'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Excel'               => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
