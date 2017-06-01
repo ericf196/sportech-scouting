@@ -1,5 +1,6 @@
 <?php
 use App\Scouting\Entities\Athletes\Athlete;
+use App\Scouting\Entities\Sports\Sport;
 use App\Scouting\Entities\Users\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,12 +22,6 @@ class AdminSeeder extends Seeder
             'email'      => 'admin@admin.com',
             'active'     => 1,
             'password'   => bcrypt('password'),
-        ]);
-
-        $athlete = Athlete::create([
-            'created_by' => $user->id,
-            'first_name' => 'admin',
-            'last_name'  => 'admin',
         ]);
 
         $roleAdmin = Role::where('slug', 'admin')->first();
