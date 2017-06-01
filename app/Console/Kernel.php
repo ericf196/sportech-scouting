@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\Commands\MakeEntityCommand;
 use App\Console\Commands\MakeRepositoryCommand;
+use App\Console\Commands\SendCredentials;
 use App\Console\Commands\TranslationExportCommand;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -18,7 +19,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         MakeEntityCommand::class,
         MakeRepositoryCommand::class,
-        TranslationExportCommand::class
+        TranslationExportCommand::class,
+        SendCredentials::class
     ];
 
     /**
