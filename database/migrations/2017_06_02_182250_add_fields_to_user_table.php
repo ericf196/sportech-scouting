@@ -16,7 +16,6 @@ class AddFieldsToUserTable extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->integer('specialty_id')->nullable()->after('id');
             $table->integer('sport_id')->nullable()->after('id');
-            $table->integer('country_id')->nullable()->after('id');
         });
     }
 
