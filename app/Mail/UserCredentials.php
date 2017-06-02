@@ -41,7 +41,7 @@ class UserCredentials extends Mailable
     public function build()
     {
         return $this->from(env('MAIL_SEND_ADDRESS'))->subject('scouting37 is live!')
-            ->markdown('emails.credentials')->with('url', url())->with('image', url('/images/logo_small_white.png'))
+            ->markdown('emails.credentials')->with('url', url())->with('image', url('/api/images/logo_small_white.png'))
             ->with('user', $this->user)->with('password', $this->password);
     }
 }
