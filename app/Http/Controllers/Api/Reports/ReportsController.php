@@ -28,7 +28,9 @@ class ReportsController extends Controller
 
     public function index()
     {
-        return Datatables::of($this->repository->datatable())
+        $user = $this->loggedInUser();
+
+        return Datatables::of(Report::where('user_id', $user->id)->select('reports.*'))
             ->setTransformer(new ReportTransformer())
             ->make(true);
     }
