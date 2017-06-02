@@ -67,6 +67,11 @@ class SendCredentials extends Command
                             $lastName = count($name) > 1 ? $name[1] : '';
                         }
                         $count++;
+                        if ($row->weapon == 'sabre') {
+                            $specialty = Specialty::where('name->en', 'Saber')->first();
+                        } else {
+                            $specialty = Specialty::where('name->en', ucfirst($row->weapon))->first();
+                        }
                         $password = str_random(8);
                         $user = new User;
                         $user->username = str_slug($firstName . ' ' . $lastName);
@@ -75,24 +80,12 @@ class SendCredentials extends Command
                         $user->email = $row->email;
                         $user->password = bcrypt($password);
                         $user->number_invitations = '10';
+                        $user->country_id = $row->country_id;
+                        $user->sport_id = $fencing->id;
+                        $user->specialty_id = $specialty->id;
+                        $user->gender = 'm';
                         $user->active = '1';
                         $user->save();
-                        if ($row->weapon == 'sabre') {
-                            $specialty = Specialty::where('name->en', 'Saber')->first();
-                        } else {
-                            $specialty = Specialty::where('name->en', ucfirst($row->weapon))->first();
-                        }
-                        $athlete = Athlete::create([
-                            'created_by'   => $user->id,
-                            'user_id'      => $user->id,
-                            'first_name'   => $firstName,
-                            'last_name'    => $lastName,
-                            'country_id'   => $row->country_id,
-                            'sport_id'     => $fencing->id,
-                            'category_id'  => $category->id,
-                            'specialty_id' => $specialty->id,
-                            'gender'       => 'm',
-                        ]);
                         Mail::to($row->email)->send(new UserCredentials($user, $password));
                     } else {
                         $this->info('Usuario existente ' . $row->email);

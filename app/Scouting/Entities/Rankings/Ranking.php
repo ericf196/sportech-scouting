@@ -13,6 +13,17 @@ use Prettus\Repository\Traits\TransformableTrait;
  *
  * @property-read \App\Scouting\Entities\Users\User $user
  * @mixin \Eloquent
+ * @property int $id
+ * @property int $user_id
+ * @property int $points
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Rankings\Ranking getWithRowNumber($columns = array(), $paginate = null)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Rankings\Ranking whereCreatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Rankings\Ranking whereId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Rankings\Ranking wherePoints($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Rankings\Ranking whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Rankings\Ranking whereUserId($value)
  */
 class Ranking extends Model implements Transformable
 {

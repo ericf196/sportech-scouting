@@ -68,6 +68,8 @@ use Webpatser\Countries\Countries;
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Athletes\Athlete whereUserId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Athletes\Athlete whereWeight($value)
  * @mixin \Eloquent
+ * @property int $created_by
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Athletes\Athlete whereCreatedBy($value)
  */
 class Athlete extends Model implements HasMediaConversions
 {

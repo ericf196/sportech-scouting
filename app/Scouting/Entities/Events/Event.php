@@ -50,6 +50,8 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereSpecialtyId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $created_by
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Events\Event whereCreatedBy($value)
  */
 class Event extends Model implements HasMediaConversions
 {

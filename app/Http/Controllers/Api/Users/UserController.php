@@ -22,32 +22,16 @@ class UserController extends Controller
     {
         /** @var User $user */
         $user = $jwt->parseToken()->authenticate();
-        $user->load('athlete');
-        $athlete = $user->athlete;
         $data = $request->all();
-        $athleteData = $request->get('athlete');
-        $athleteData['first_name'] = $request->get('first_name');
-        $athleteData['last_name'] = $request->get('last_name');
-        $athleteData['created_by'] = $user->id;
-        $athleteData['gender'] = $data['gender']['gender'];
-        unset($athleteData['ranking']);
+        $data['gender'] = $data['gender']['gender'];
         $user->fill($data);
         $user->save();
 
-        if ($athlete) {
-            $user->athlete()->update($athleteData);
-        } else {
-            $athlete = $user->athlete()->create($athleteData);
-        }
-
         if ($request->hasFile('image')) {
-            $athlete->clearMediaCollection('profile');
             $user->clearMediaCollection('profile');
             $user->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('profile');
-            $athlete->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('profile');
         } elseif ($request->has('removeImage')) {
             $user->clearMediaCollection('profile');
-            $athlete->clearMediaCollection('profile');
         }
         return response()->json(['message' => trans('admin/users/users.updated_successfully')]);
     }

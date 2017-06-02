@@ -4,6 +4,9 @@ namespace App\Scouting\Transformers\User;
 
 use App\Scouting\Entities\Users\User;
 use App\Scouting\Transformers\Athletes\AthleteTransformer;
+use App\Scouting\Transformers\Locations\CountryTransformer;
+use App\Scouting\Transformers\Sports\SpecialtyTransformer;
+use App\Scouting\Transformers\Sports\SportTransformer;
 use League\Fractal\TransformerAbstract;
 use App\Scouting\Entities\Sports\Sport;
 
@@ -16,6 +19,9 @@ class UserTransformer extends TransformerAbstract
 
     protected $availableIncludes = [
         'athlete',
+        'country',
+        'sport',
+        'specialty'
     ];
 
     /**
@@ -41,6 +47,10 @@ class UserTransformer extends TransformerAbstract
                 'title'      => $model->first_name . ' ' . $model->last_name,
                 'notDefault' => $model->getFirstMediaUrl('profile', 'medium') ? true : false
             ],
+            'gender'          => ['gender' => $model->gender, 'name' => trans('admin/athletes/athletes.' . $model->gender)],
+            'country_id'      => $model->country_id,
+            'sport_id'        => $model->sport_id,
+            'specialty_id'    => $model->specialty_id,
         ];
     }
 
@@ -50,4 +60,25 @@ class UserTransformer extends TransformerAbstract
             return $this->item($model->athlete, new AthleteTransformer(), 'parent');
     }
 
+    public function includeSport(User $model)
+    {
+        if ($model->sport) {
+            return $this->item($model->sport, new SportTransformer(), 'parent');
+        }
+    }
+
+
+    public function includeSpecialty(User $model)
+    {
+        if ($model->specialty) {
+            return $this->item($model->specialty, new SpecialtyTransformer(), 'parent');
+        }
+    }
+
+    public function includeCountry(User $model)
+    {
+        if ($model->country) {
+            return $this->item($model->country, new CountryTransformer(), 'parent');
+        }
+    }
 }

@@ -7,12 +7,15 @@ use App\Scouting\Entities\Championships\Championship;
 use App\Scouting\Entities\Invites\Invitation;
 use App\Scouting\Entities\Reports\Report;
 use App\Scouting\Entities\Scoutings\Scouting;
+use App\Scouting\Entities\Sports\Specialty;
+use App\Scouting\Entities\Sports\Sport;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Kodeine\Acl\Models\Eloquent\Permission;
 use Kodeine\Acl\Traits\HasRole;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
+use Webpatser\Countries\Countries;
 
 
 /**
@@ -50,6 +53,21 @@ use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Challenges\Challenge[] $inProgressChallenges
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Reports\Report[] $reports
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Scoutings\Scouting[] $scoutings
+ * @property int $country_id
+ * @property int $sport_id
+ * @property int $specialty_id
+ * @property int $number_invitations
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Athletes\Athlete[] $athletes
+ * @property-read \Webpatser\Countries\Countries $country
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Scouting\Entities\Championships\Championship[] $events
+ * @property-read \App\Scouting\Entities\Sports\Specialty $specialty
+ * @property-read \App\Scouting\Entities\Sports\Sport $sport
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereNumberInvitations($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereSpecialtyId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereSportId($value)
+ * @property string $gender
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereGender($value)
  */
 class User extends Authenticatable implements HasMediaConversions
 {
@@ -61,7 +79,9 @@ class User extends Authenticatable implements HasMediaConversions
      * @var array
      */
     protected $fillable = [
-        'username', 'first_name', 'last_name', 'email', 'password', 'number_invitations', 'active',
+        'username', 'first_name', 'last_name',
+        'email', 'password', 'number_invitations', 'active',
+        'sport_id', 'specialty_id', 'country_id', 'gender'
     ];
 
     /**
@@ -146,9 +166,25 @@ class User extends Authenticatable implements HasMediaConversions
         return $this->completedChallenges()->sum('points');
     }
 
-    public function invitations()
+    /*  public function invitations()
+      {
+          return $this->hasMany(Invitation::class, 'user_id');
+      }*/
+
+    public function sport()
     {
-        return $this->hasMany(Invitation::class, 'user_id');
+        return $this->belongsTo(Sport::class);
     }
 
+    public function specialty()
+    {
+        return $this->belongsTo(Specialty::class);
+
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Countries::class);
+
+    }
 }

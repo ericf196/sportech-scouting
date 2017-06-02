@@ -43,6 +43,11 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Championships\Championship whereSportId($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Championships\Championship whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $created_by
+ * @property int $country_id
+ * @property-read \Webpatser\Countries\Countries $country
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Championships\Championship whereCountryId($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Championships\Championship whereCreatedBy($value)
  */
 class Championship extends Model implements HasMediaConversions
 {
