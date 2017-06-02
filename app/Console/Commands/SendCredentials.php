@@ -20,7 +20,7 @@ class SendCredentials extends Command
      *
      * @var string
      */
-    protected $signature = 'credentials:send';
+    protected $signature = 'credentials:send {file}';
 
     /**
      * The console command description.
@@ -46,7 +46,9 @@ class SendCredentials extends Command
      */
     public function handle()
     {
-        Excel::load(resource_path() . '/csv/suscriptores2.csv', function ($reader) {
+        $file = $this->argument('file');
+
+        Excel::load(resource_path() . '/csv/' . $file . '.csv', function ($reader) {
             $count = 0;
             $excel = $reader->get();
             $fencing = Sport::where('name->en', 'Fencing')->first();
