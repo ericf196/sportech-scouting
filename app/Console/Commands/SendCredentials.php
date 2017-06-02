@@ -68,7 +68,7 @@ class SendCredentials extends Command
                         }
                         $count++;
                         if ($row->weapon == 'sabre') {
-                            $specialty = Specialty::where('name->en', 'Saber')->first();
+                            $specialty = Specialty::where('name->en', 'Sabre')->first();
                         } else {
                             $specialty = Specialty::where('name->en', ucfirst($row->weapon))->first();
                         }
