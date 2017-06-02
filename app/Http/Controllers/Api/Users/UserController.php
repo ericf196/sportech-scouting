@@ -29,6 +29,7 @@ class UserController extends Controller
         $athleteData['first_name'] = $request->get('first_name');
         $athleteData['last_name'] = $request->get('last_name');
         $athleteData['created_by'] = $user->id;
+        $athleteData['gender'] = $data['gender']['gender'];
         unset($athleteData['ranking']);
         $user->fill($data);
         $user->save();
