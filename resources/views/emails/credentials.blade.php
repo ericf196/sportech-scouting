@@ -20,8 +20,8 @@ CONGRTULATIONS!!! You have been selected to try the platform in our closed BETA.
 
 Your log in credentials are:
 @component('mail::panel')
-Email: {{$user->email}}.
-Password: {{$password}}.
+Email: {{$user->email}}
+Password: {{$password}}
 @endcomponent
 
 @component('mail::button', ['url' => env('FRONTEND_URL','http://scouting37.com/app'),'color' => 'red'])
