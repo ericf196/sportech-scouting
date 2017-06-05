@@ -68,6 +68,8 @@ use Webpatser\Countries\Countries;
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereSportId($value)
  * @property string $gender
  * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereGender($value)
+ * @property \Carbon\Carbon $last_login
+ * @method static \Illuminate\Database\Query\Builder|\App\Scouting\Entities\Users\User whereLastLogin($value)
  */
 class User extends Authenticatable implements HasMediaConversions
 {
@@ -81,7 +83,7 @@ class User extends Authenticatable implements HasMediaConversions
     protected $fillable = [
         'username', 'first_name', 'last_name',
         'email', 'password', 'number_invitations', 'active',
-        'sport_id', 'specialty_id', 'country_id', 'gender'
+        'sport_id', 'specialty_id', 'country_id', 'gender', 'last_login'
     ];
 
     /**
@@ -95,6 +97,10 @@ class User extends Authenticatable implements HasMediaConversions
 
     protected $casts = [
         'active' => 'boolean'
+    ];
+
+    protected $dates = [
+        'last_login'
     ];
 
     public function registerMediaConversions()

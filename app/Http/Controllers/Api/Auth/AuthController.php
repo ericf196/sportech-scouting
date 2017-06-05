@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Scouting\Transformers\User\UserTransformer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\JWTAuth;
@@ -37,6 +38,8 @@ class AuthController extends Controller
             return response()->json(['error' => 'could_not_create_token ' . $e->getMessage() . $e->getTraceAsString()], 500);
         }
         // if no errors are encountered we can return a JWT
+        $user->last_login = Carbon::now();
+        $user->save();
         return response()->json(compact('token'))->header('Authorization', 'Bearer ' . $token);
     }
 

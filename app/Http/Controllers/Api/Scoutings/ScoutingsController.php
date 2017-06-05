@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Scoutings\ScoutingCreateRequest;
 use App\Http\Requests\Scoutings\ScoutingUpdateRequest;
 use App\Http\Requests;
+use App\Scouting\Entities\Reports\Report;
 use App\Scouting\Entities\Scoutings\Scouting;
 use App\Scouting\Repositories\Contracts\Athletes\AthleteRepository;
 use App\Scouting\Repositories\Contracts\Championships\ChampionshipRepository;
@@ -121,7 +122,9 @@ class ScoutingsController extends Controller
         $rightAthlete = null;
         $data['name'] = ['es' => $data['name'], 'en' => $data['name']];
         $data['description'] = ['es' => $data['description'], 'en' => $data['description']];
-        $scouting = $this->repository->update($data, $id);
+        $scouting = Scouting::find($id);
+        $scouting->fill($data);
+        $scouting->save();
 
         return $this->createItem($scouting, new ScoutingTransformer(), 'data', ['message' => trans('admin/scoutings/scoutings.updated_successfully')]);
     }

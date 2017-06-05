@@ -26,7 +26,6 @@ class ScoutingCreateRequest extends BaseFormRequest
     {
         return [
             'name'        => 'required',
-            'description' => 'required',
             'video_src'   => 'required|url'
         ];
     }
