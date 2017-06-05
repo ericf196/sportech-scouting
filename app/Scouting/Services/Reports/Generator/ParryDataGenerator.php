@@ -45,7 +45,9 @@ class ParryDataGenerator implements GlobalDataGeneratorContract
             $ending = \DB::table('scoutings_touches_actions_left_tags')->where('scouting_action_id', $parry->scouting_action_id)->where('tag_id', $endTag->id)->first();
             if ($ending) {
                 $ending = \DB::table('tags_options')->find($ending->tag_option_id);
-                $this->parries[$ending->value] = $this->parries[$ending->value] + 1;
+                if ($ending) {
+                    $this->parries[$ending->value] = $this->parries[$ending->value] + 1;
+                }
             }
         });
 

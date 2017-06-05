@@ -70,6 +70,19 @@ return [
             'strict' => true,
             'engine' => null,
         ],
+        'mysql-maqueta' => [
+            'driver' => 'mysql',
+            'host' => env('DB_MAQUETA_HOST', 'localhost'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_MAQUETA_DATABASE', 'forge'),
+            'username' => env('DB_MAQUETA_USERNAME', 'forge'),
+            'password' => env('DB_MAQUETA_PASSWORD', ''),
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
 
         'pgsql' => [
             'driver' => 'pgsql',
