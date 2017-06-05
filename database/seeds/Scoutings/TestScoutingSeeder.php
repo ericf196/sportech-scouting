@@ -3,6 +3,8 @@
 use App\Scouting\Entities\Scoutings\Scouting;
 use App\Scouting\Entities\Scoutings\ScoutingTouch;
 use App\Scouting\Entities\Scoutings\ScoutingTouchAction;
+use App\Scouting\Entities\Scoutings\Tag;
+use App\Scouting\Entities\Scoutings\TagOption;
 use App\Scouting\Entities\Users\User;
 use Illuminate\Database\Seeder;
 
@@ -40,13 +42,64 @@ class TestScoutingSeeder extends Seeder
                         /** @var ScoutingTouch $newTouch */
                         $newAction = $newTouch->actions()->save($newAction);
                         $action->leftTags->each(function ($leftTag) use ($newAction) {
-                            /** @var ScoutingTouchAction $newAction */
-                            $newAction->leftTags()->attach($leftTag->id, ['tag_option_id' => $leftTag->tag_option_id]);
+                            /** @var Tag $tagMaqueta */
+                            $tagOptionMaqueta = null;
+                            $tagOptionId = null;
+                            $tag = null;
+                            $tagMaqueta = Tag::on('mysql-maqueta')->find($leftTag->id);
+                            if ($leftTag->tag_option_id) {
+                                $tagOptionMaqueta = TagOption::on('mysql-maqueta')->find($leftTag->tag_option_id);
+                            }
+                            $abbr = $tagMaqueta->abbr;
+                            if ($abbr == 'CCT') {
+                                $tag = Tag::on('mysql')->where('abbr', 'CTP')->first();
+                                $tagOptionId = TagOption::on('mysql')->where('tag_id', $tag->id)->where('value', 'CCT')->first();
+                                $tagOptionId = $tagOptionId->id;
+                            } else if ($abbr == 'CPY') {
+                                $tag = Tag::on('mysql')->where('abbr', 'CTP')->first();
+                                $tagOptionId = TagOption::on('mysql')->where('tag_id', $tag->id)->where('value', 'CPY')->first();
+                                $tagOptionId = $tagOptionId->id;
+                            } else if ($abbr != 'CTP') {
+                                $tag = Tag::on('mysql')->where('abbr', $tagMaqueta->abbr)->first();
+                                if ($tagOptionMaqueta) {
+                                    $tagOptionId = TagOption::on('mysql')->where('value', $tagOptionMaqueta->value)->first();
+                                    $tagOptionId = $tagOptionId->id;
+                                }
+                            }
+                            if ($tag) {
+                                /** @var ScoutingTouchAction $newAction */
+                                $newAction->leftTags()->attach($tag->id, ['tag_option_id' => $tagOptionId]);
+                            }
                         });
 
                         $action->rightTags->each(function ($leftTag) use ($newAction) {
-                            /** @var ScoutingTouchAction $newAction */
-                            $newAction->rightTags()->attach($leftTag->id, ['tag_option_id' => $leftTag->tag_option_id]);
+                            $tagOptionMaqueta = null;
+                            $tagOptionId = null;
+                            $tag = null;
+                            $tagMaqueta = Tag::on('mysql-maqueta')->find($leftTag->id);
+                            if ($leftTag->tag_option_id) {
+                                $tagOptionMaqueta = TagOption::on('mysql-maqueta')->find($leftTag->tag_option_id);
+                            }
+                            $abbr = $tagMaqueta->abbr;
+                            if ($abbr == 'CCT') {
+                                $tag = Tag::on('mysql')->where('abbr', 'CTP')->first();
+                                $tagOptionId = TagOption::on('mysql')->where('tag_id', $tag->id)->where('value', 'CCT')->first();
+                                $tagOptionId = $tagOptionId->id;
+                            } else if ($abbr == 'CPY') {
+                                $tag = Tag::on('mysql')->where('abbr', 'CTP')->first();
+                                $tagOptionId = TagOption::on('mysql')->where('tag_id', $tag->id)->where('value', 'CPY')->first();
+                                $tagOptionId = $tagOptionId->id;
+                            } else if ($abbr != 'CTP') {
+                                $tag = Tag::on('mysql')->where('abbr', $tagMaqueta->abbr)->first();
+                                if ($tagOptionMaqueta) {
+                                    $tagOptionId = TagOption::on('mysql')->where('value', $tagOptionMaqueta->value)->first();
+                                    $tagOptionId = $tagOptionId->id;
+                                }
+                            }
+                            if ($tag) {
+                                /** @var ScoutingTouchAction $newAction */
+                                $newAction->rightTags()->attach($tag->id, ['tag_option_id' => $tagOptionId]);
+                            }
                         });
                     });
                 });
