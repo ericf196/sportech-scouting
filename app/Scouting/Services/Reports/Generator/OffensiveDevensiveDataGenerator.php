@@ -48,13 +48,25 @@ class OffensiveDevensiveDataGenerator implements GlobalDataGeneratorContract
         $offesiveCount = \DB::table('scoutings_touches_actions_left_tags')->whereIn('scouting_action_id', $actionsIds->toArray())->whereIn('tag_id', $offensiveTagsIds->toArray())->sum('tag_id');
         $defensiveCount = \DB::table('scoutings_touches_actions_left_tags')->whereIn('scouting_action_id', $actionsIds->toArray())->whereIn('tag_id', $deffensiveTagsIds->toArray())->sum('tag_id');
         $counterOffesiveCount = \DB::table('scoutings_touches_actions_left_tags')->whereIn('scouting_action_id', $actionsIds->toArray())->whereIn('tag_id', $counterOffensiveTagsIds->toArray())->sum('tag_id');
+
+        $offesiveCountRight = \DB::table('scoutings_touches_actions_right_tags')->whereIn('scouting_action_id', $actionsIds->toArray())->whereIn('tag_id', $offensiveTagsIds->toArray())->sum('tag_id');
+        $defensiveCountRight = \DB::table('scoutings_touches_actions_right_tags')->whereIn('scouting_action_id', $actionsIds->toArray())->whereIn('tag_id', $deffensiveTagsIds->toArray())->sum('tag_id');
+        $counterOffesiveCountRight = \DB::table('scoutings_touches_actions_right_tags')->whereIn('scouting_action_id', $actionsIds->toArray())->whereIn('tag_id', $counterOffensiveTagsIds->toArray())->sum('tag_id');
         $totalCount = $offesiveCount + $defensiveCount + $counterOffesiveCount;
+        $totalCountRight = $offesiveCountRight + $defensiveCountRight + $counterOffesiveCountRight;
 
 
         return [
-            'defensive'        => $totalCount ? $defensiveCount / $totalCount * 100 : 0,
-            'offensive'        => $totalCount ? $offesiveCount / $totalCount * 100 : 0,
-            'counterOffensive' => $totalCount ? $counterOffesiveCount / $totalCount * 100 : 0,
+            'left'  => [
+                'defensive'        => $totalCount ? $defensiveCount / $totalCount * 100 : 0,
+                'offensive'        => $totalCount ? $offesiveCount / $totalCount * 100 : 0,
+                'counterOffensive' => $totalCount ? $counterOffesiveCount / $totalCount * 100 : 0,
+            ],
+            'right' => [
+                'defensive'        => $totalCountRight ? $defensiveCountRight / $totalCountRight * 100 : 0,
+                'offensive'        => $totalCountRight ? $offesiveCountRight / $totalCountRight * 100 : 0,
+                'counterOffensive' => $totalCountRight ? $counterOffesiveCountRight / $totalCountRight * 100 : 0,
+            ],
         ];
     }
 }

@@ -56,9 +56,9 @@ class ReportDataGenerator
         $this->dataParry = collect((new ParryDataGenerator())->analyze($this->report->scoutings));
 
         $offensiveDefensiveData = (new OffensiveDevensiveDataGenerator())->analyze($this->report->scoutings);
-        $this->dataOffensive = collect(['data' => $offensiveDefensiveData['offensive']]);
-        $this->dataDefensive = collect(['data' => $offensiveDefensiveData['defensive']]);
-        $this->dataCounterOffensive = collect(['data' => $offensiveDefensiveData['counterOffensive']]);
+        $this->dataOffensive = collect(['data' => ['left' => [$offensiveDefensiveData['left']['offensive']], 'right' => [$offensiveDefensiveData['right']['offensive']]]]);
+        $this->dataDefensive = collect(['data' => ['left' => [$offensiveDefensiveData['left']['defensive']], 'right' => [$offensiveDefensiveData['right']['defensive']]]]);
+        $this->dataCounterOffensive = collect(['data' => ['left' => [$offensiveDefensiveData['left']['counterOffensive']], 'right' => [$offensiveDefensiveData['right']['counterOffensive']]]]);
         $this->dataSummary = collect((new SummaryDataGenerator())->analyze($this->report->scoutings));
 
         return $this->toArray();

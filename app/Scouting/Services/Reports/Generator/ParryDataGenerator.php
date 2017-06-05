@@ -9,13 +9,15 @@ use Illuminate\Support\Collection;
 class ParryDataGenerator implements GlobalDataGeneratorContract
 {
     protected $tagRepository;
-    protected $parries;
+    protected $parriesLeft;
+    protected $parriesRight;
     protected $categories;
 
     public function __construct()
     {
         $this->tagRepository = app()->make(TagRepository::class);
-        $this->parries = [9 => 0, 8 => 0, 7 => 0, 6 => 0, 5 => 0, 4 => 0, 3 => 0, 2 => 0, 1 => 0];
+        $this->parriesLeft = [9 => 0, 8 => 0, 7 => 0, 6 => 0, 5 => 0, 4 => 0, 3 => 0, 2 => 0, 1 => 0];
+        $this->parriesRight = [9 => 0, 8 => 0, 7 => 0, 6 => 0, 5 => 0, 4 => 0, 3 => 0, 2 => 0, 1 => 0];
         $this->categories = ['9', '8', '7', '6', '5', '4', '3', '2', '1'];
     }
 
@@ -40,23 +42,38 @@ class ParryDataGenerator implements GlobalDataGeneratorContract
             }
         );
 
-        $parries = \DB::table('scoutings_touches_actions_left_tags')->whereIn('scouting_action_id', $actionsIds->toArray())->where('tag_id', $parryTag->id)->get();
-        $parries->each(function ($parry) use ($endTag) {
+        $parriesLeft = \DB::table('scoutings_touches_actions_left_tags')->whereIn('scouting_action_id', $actionsIds->toArray())->where('tag_id', $parryTag->id)->get();
+        $parriesLeft->each(function ($parry) use ($endTag) {
             $ending = \DB::table('scoutings_touches_actions_left_tags')->where('scouting_action_id', $parry->scouting_action_id)->where('tag_id', $endTag->id)->first();
             if ($ending) {
                 $ending = \DB::table('tags_options')->find($ending->tag_option_id);
                 if ($ending) {
-                    $this->parries[$ending->value] = $this->parries[$ending->value] + 1;
+                    $this->parriesLeft[$ending->value] = $this->parriesLeft[$ending->value] + 1;
+                }
+            }
+        });
+        $parriesRight = \DB::table('scoutings_touches_actions_right_tags')->whereIn('scouting_action_id', $actionsIds->toArray())->where('tag_id', $parryTag->id)->get();
+        $parriesRight->each(function ($parry) use ($endTag) {
+            $ending = \DB::table('scoutings_touches_actions_right_tags')->where('scouting_action_id', $parry->scouting_action_id)->where('tag_id', $endTag->id)->first();
+            if ($ending) {
+                $ending = \DB::table('tags_options')->find($ending->tag_option_id);
+                if ($ending) {
+                    $this->parriesRight[$ending->value] = $this->parriesRight[$ending->value] + 1;
                 }
             }
         });
 
-        $parryAux = collect();
-        foreach ($this->parries as $bodyzone => $value) {
-            $parryAux->push($value);
+        $parryAuxLeft = collect();
+        $parryAuxRight = collect();
+        foreach ($this->parriesLeft as $bodyzone => $value) {
+            $parryAuxLeft->push($value);
+        }
+
+        foreach ($this->parriesRight as $bodyzone => $value) {
+            $parryAuxRight->push($value);
         }
         return [
-            'data'       => $parryAux->toArray(),
+            'data'       => ['left' => $parryAuxLeft->toArray(), 'right' => $parryAuxRight->toArray()],
             'categories' => $this->categories
         ];
     }
