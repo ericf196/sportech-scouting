@@ -12,3 +12,4 @@ _ide_helper.php
 npm-debug.log
 .phpstorm.meta.php
 resources/csv
+/.well-known

@@ -60,7 +60,7 @@ class ChampionshipsController extends Controller
     public function show($id)
     {
         try {
-            $championship = $this->championshipRepository->find($id);
+            $championship = Championship::where('created_by', $this->loggedInUser()->id)->find($id);
 
         } catch (ModelNotFoundException $e) {
             response()->make(trans('admin/championships/championships.not_found'), 404);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Scoutings;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Http\Requests\Scoutings\ScoutingTouchesUpdateRequest;
+use App\Scouting\Entities\Scoutings\Scouting;
 use App\Scouting\Entities\Scoutings\ScoutingTouchAction;
 use App\Scouting\Repositories\Contracts\Athletes\AthleteRepository;
 use App\Scouting\Repositories\Contracts\Reports\ReportRepository;
@@ -37,14 +38,18 @@ class ScoutingsTouchesController extends Controller
      *
      * @param ScoutingTouchesUpdateRequest $request
      * @param  string $id
+     * @param ReportRepository $reportRepository
      * @return \Illuminate\Http\RedirectResponse|Response
      */
     public function update(ScoutingTouchesUpdateRequest $request, $id, ReportRepository $reportRepository)
     {
-        try{
+        try {
             \DB::beginTransaction();
             $touches = collect($request->get('touches'));
-            $scouting = $this->repository->find($id);
+            $scouting = Scouting::where('scouter_id', $this->loggedInUser()->id)->find($id);
+            if ($scouting) {
+                $this->response->errorForbidden(trans('admin/scoutings/scoutings.not_found'));
+            }
             $dbTouches = $scouting->scoutingTouches()->get();
             $dbTouches->each(function ($touch) {
                 $dbActions = $touch->actions()->get();
@@ -94,7 +99,7 @@ class ScoutingsTouchesController extends Controller
                 $report->data_summary = $reportData['data_summary'];
                 $report->save();
             }
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             \DB::rollBack();
             return response()->make($e->getMessage(), 404);
         }

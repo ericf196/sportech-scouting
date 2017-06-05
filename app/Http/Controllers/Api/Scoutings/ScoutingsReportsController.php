@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Api\Scoutings;
 
 use App\Http\Controllers\Controller;
 use App\Scouting\Entities\Reports\Report;
+use App\Scouting\Entities\Scoutings\Scouting;
 use App\Scouting\Repositories\Contracts\Reports\ReportRepository;
 use App\Scouting\Repositories\Contracts\Scoutings\ScoutingRepository;
 use App\Scouting\Services\Reports\ReportDataGenerator;
@@ -14,18 +15,20 @@ use Tymon\JWTAuth\JWTAuth;
 class ScoutingsReportsController extends Controller
 {
 
-    public function report($id, ReportRepository $reportRepository, JWTAuth $jwt, ScoutingRepository $scoutingRepository)
+    public function report($id)
     {
-        $report = $reportRepository->findWhere(['scouting_id' => $id, 'auto_generated' => true]);
+        $report = Report::whereHas('scouting', function ($q) use ($id) {
+            $q->where('id', $id)->where('scouter_id', $this->loggedInUser()->id);
+        })->where('user_id', $this->loggedInUser()->id)->where('auto_generated', true)->first();
 
-        if ($report->count()) {
-            return $this->createItem($report->first(), new ReportTransformer(), 'data');
+        if ($report) {
+            return $this->createItem($report, new ReportTransformer(), 'data');
         }
 
-        $user = $jwt->parseToken()->authenticate();
+        $user = $this->loggedInUser();
         $data = [];
         $scoutingsIds = [$id];
-        $scouting = $scoutingRepository->find($id);
+        $scouting = Scouting::find($id);
         DB::beginTransaction();
         try {
             $data['name'] = $scouting->getTranslations('name');
@@ -52,7 +55,7 @@ class ScoutingsReportsController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             \Log::error($e->getMessage() . PHP_EOL . ' file:' . $e->getFile() . PHP_EOL . 'line:' . $e->getLine() . PHP_EOL . $e->getTraceAsString());
-            return response()->json(['message' => trans('admin/scoutings/scoutings.error_report')]);
+            $this->response->errorForbidden(['message' => trans('admin/scoutings/scoutings.error_report')]);
         }
 
         DB::commit();

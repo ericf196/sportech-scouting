@@ -52,80 +52,69 @@ class AthletesController extends Controller
             ->make(true);
     }
 
+
+    public function show($id)
+    {
+        $athlete = Athlete::where('created_by', $this->loggedInUser()->id)->find($id);
+        if (!$athlete) {
+            $this->response->errorForbidden(trans('admin/athletes/athletes.not_found'));
+        }
+
+        return $this->createItem($athlete, new AthleteTransformer());
+    }
+
+
     public function store(AthleteStoreRequest $request)
     {
         $data = $request->all();
         $data['gender'] = $data['gender']['gender'];
         $user = \Auth::user();
         $data['created_by'] = $user->id;
-        try {
-            $athlete = $this->athleteRepository->create($data);
-            if ($request->hasFile('image')) {
-                $athlete->clearMediaCollection('profile');
-                $athlete->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('profile');
-            } elseif ($request->has('removeImage')) {
-                $athlete->clearMediaCollection('profile');
-            }
-        } catch (Exception $e) {
-            return response()->make($e->getMessage(), 404);
+        \DB::beginTransaction();
+        $athlete = $this->athleteRepository->create($data);
+        if ($request->hasFile('image')) {
+            $athlete->clearMediaCollection('profile');
+            $athlete->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('profile');
+        } elseif ($request->has('removeImage')) {
+            $athlete->clearMediaCollection('profile');
         }
-
+        \DB::commit();
         return response()->json(['message' => trans('admin/athletes/athletes.created_successfully')]);
-
     }
 
     public function update(AthleteUpdateRequest $request, $id)
     {
         $data = $request->all();
         $data['gender'] = $data['gender']['gender'];
-        try {
-            $athlete = $this->athleteRepository->update($data, $id);
-            if ($request->hasFile('image')) {
-                $athlete->clearMediaCollection('profile');
-                $athlete->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('profile');
-            } elseif ($request->has('removeImage')) {
-                $athlete->clearMediaCollection('profile');
-            }
-        } catch (Exception $e) {
-            return response()->make($e->getMessage(), 404);
+        \DB::beginTransaction();
+        $athlete = $this->athleteRepository->update($data, $id);
+        if ($request->hasFile('image')) {
+            $athlete->clearMediaCollection('profile');
+            $athlete->addMedia($request->file('image'))->preservingOriginal()->toMediaLibrary('profile');
+        } elseif ($request->has('removeImage')) {
+            $athlete->clearMediaCollection('profile');
         }
-
+        \DB::commit();
         return response()->json(['message' => trans('admin/athletes/athletes.updated_successfully')]);
     }
 
     public function destroy($id)
     {
-        try {
-            $this->athleteRepository->delete($id);
-        } catch (ModelNotFoundException $e) {
-            return response()->make(trans('admin/athletes/athletes.not_found'), 404);
-        }
+        \DB::beginTransaction();
+        $this->athleteRepository->delete($id);
+        \DB::commit();
 
         return response()->json(['message' => trans('admin/athletes/athletes.deleted_succesfully')]);
     }
 
-    public function show($id)
-    {
-        try {
-            $athlete = $this->athleteRepository->find($id);
-
-        } catch (ModelNotFoundException $e) {
-            return response()->make(trans('admin/athletes/athletes.not_found'), 404);
-        }
-
-        return $this->createItem($athlete, new AthleteTransformer());
-    }
-
     public function destroyProfilePicture($id)
     {
-        try {
-            $athlete = $this->athleteRepository->find($id);
-            if ($athlete->getMedia('profile')->count()) {
-                $athlete->getMedia('profile')->first()->delete();
-            }
-        } catch (ModelNotFoundException $e) {
-            return response()->make(trans('admin/athletes/athletes.not_found'), 404);
+        \DB::beginTransaction();
+        $athlete = $this->athleteRepository->find($id);
+        if ($athlete->getMedia('profile')->count()) {
+            $athlete->getMedia('profile')->first()->delete();
         }
+        \DB::commit();
         return response()->json(['message' => trans('admin/athletes/athletes.profile_picture_deleted')]);
 
 

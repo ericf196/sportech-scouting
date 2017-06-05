@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Libaries\Fractal\FractalResponses;
 use App\Scouting\Entities\Users\User;
+use Dingo\Api\Routing\Helpers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,7 +12,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FractalResponses;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FractalResponses, Helpers;
     public $loggedUser;
 
     public function loggedInUser():User
@@ -21,4 +22,5 @@ class Controller extends BaseController
         }
         return $this->loggedUser;
     }
+
 }

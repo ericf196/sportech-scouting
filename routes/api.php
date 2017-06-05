@@ -1,5 +1,6 @@
 <?php
 
+use Dingo\Api\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -13,71 +14,76 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['middleware' => []], function () {
+$api = app('Dingo\Api\Routing\Router');
 
-    Route::post('auth/login', 'Api\Auth\AuthController@login');
-    Route::post('accept', 'Api\Invites\InviteController@accept');
-});
-//Route::post('user/create', 'Api\Users\UserController@create');
+$api->version('v1', function ($api) {
+    /** @var Router $api */
+    $api->group(['middleware' => ['api.auth', 'user.active'], 'namespace' => 'App\Http\Controllers'], function ($api) {
+        /** @var Router $api */
+        $api->post('auth/logout', 'Api\Auth\AuthController@logout');
+        $api->get('password/email', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail');
 
-Route::group(['middleware' => 'jwt.auth'], function () {
-    Route::post('auth/logout', 'Api\Auth\AuthController@logout');
-    Route::get('password/email', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail');
+        $api->get('auth/user', 'Api\Auth\AuthController@getUser');
+        $api->post('user', 'Api\Users\UserController@update');
+        $api->post('user/change-password', 'Api\Users\UserController@changePassword');
 
-    Route::get('auth/user', 'Api\Auth\AuthController@user');
-    Route::post('user', 'Api\Users\UserController@update');
-    Route::post('user/change-password', 'Api\Users\UserController@changePassword');
+        $api->get('user/statistics/summary', 'Api\Users\UserStatisticsController@summary');
+        $api->get('user/challenges/completed', 'Api\Users\UserChallengeController@completed');
+        $api->get('user/challenges/in-progress', 'Api\Users\UserChallengeController@inProgress');
+        $api->get('user/challenges/available', 'Api\Users\UserChallengeController@available');
+        $api->get('user/challenges/suggested', 'Api\Users\UserChallengeController@suggested');
+        $api->post('user/challenges/{challengeId}/accept', 'Api\Users\UserChallengeController@accept');
 
-    Route::get('user/statistics/summary', 'Api\Users\UserStatisticsController@summary');
-    Route::get('user/challenges/completed', 'Api\Users\UserChallengeController@completed');
-    Route::get('user/challenges/in-progress', 'Api\Users\UserChallengeController@inProgress');
-    Route::get('user/challenges/available', 'Api\Users\UserChallengeController@available');
-    Route::get('user/challenges/suggested', 'Api\Users\UserChallengeController@suggested');
-    Route::post('user/challenges/{challengeId}/accept', 'Api\Users\UserChallengeController@accept');
+        $api->get('ranking', 'Api\Ranking\RankingController@index');
 
-    Route::get('ranking', 'Api\Ranking\RankingController@index');
+        $api->get('/scoutings/search', 'Api\Scoutings\ScoutingsController@search');
+        $api->get('/scoutings/latest', 'Api\Scoutings\ScoutingsController@latest');
+        $api->get('/scoutings/app', 'Api\Scoutings\ScoutingsController@app');
+        $api->get('/scoutings/results', 'Api\Scoutings\ScoutingsController@results');
+        $api->get('/scoutings/other-sources', 'Api\Scoutings\ScoutingsController@otherSources');
+        $api->get('/scoutings/{scoutingId}/report', 'Api\Scoutings\ScoutingsReportsController@report');
+        $api->put('/scoutings/{scoutingId}/touches', 'Api\Scoutings\ScoutingsTouchesController@update');
+        $api->resource('/scoutings', 'Api\Scoutings\ScoutingsController');
 
-    Route::get('/scoutings/search', 'Api\Scoutings\ScoutingsController@search');
-    Route::get('/scoutings/latest', 'Api\Scoutings\ScoutingsController@latest');
-    Route::get('/scoutings/app', 'Api\Scoutings\ScoutingsController@app');
-    Route::get('/scoutings/results', 'Api\Scoutings\ScoutingsController@results');
-    Route::get('/scoutings/other-sources', 'Api\Scoutings\ScoutingsController@otherSources');
-    Route::get('/scoutings/{scoutingId}/report', 'Api\Scoutings\ScoutingsReportsController@report');
-    Route::put('/scoutings/{scoutingId}/touches', 'Api\Scoutings\ScoutingsTouchesController@update');
-    Route::resource('/scoutings', 'Api\Scoutings\ScoutingsController');
+        $api->get('/reports/latest', 'Api\Reports\ReportsController@latest');
+        $api->get('/reports/{id}/summary', 'Api\Reports\ReportsDataController@summary');
+        $api->get('/reports/{id}/parry', 'Api\Reports\ReportsDataController@parry');
+        $api->get('/reports/{id}/combat-status', 'Api\Reports\ReportsDataController@combatStatus');
+        $api->get('/reports/{id}/point-vs-time', 'Api\Reports\ReportsDataController@pointVsTime');
+        $api->get('/reports/{id}/offensive-defensive', 'Api\Reports\ReportsDataController@offensiveDefensive');
+        $api->get('/reports', 'Api\Reports\ReportsController@index');
+        $api->get('/reports/{id}', 'Api\Reports\ReportsController@show');
+        $api->post('/reports', 'Api\Reports\ReportsController@store');
 
-    Route::get('/reports/latest', 'Api\Reports\ReportsController@latest');
-    Route::get('/reports/{id}/summary', 'Api\Reports\ReportsDataController@summary');
-    Route::get('/reports/{id}/parry', 'Api\Reports\ReportsDataController@parry');
-    Route::get('/reports/{id}/combat-status', 'Api\Reports\ReportsDataController@combatStatus');
-    Route::get('/reports/{id}/point-vs-time', 'Api\Reports\ReportsDataController@pointVsTime');
-    Route::get('/reports/{id}/offensive-defensive', 'Api\Reports\ReportsDataController@offensiveDefensive');
-    Route::get('/reports', 'Api\Reports\ReportsController@index');
-    Route::get('/reports/{id}', 'Api\Reports\ReportsController@show');
-    Route::post('/reports', 'Api\Reports\ReportsController@store');
+        $api->post('/athletes/{id}', 'Api\Athletes\AthletesController@update');
+        $api->resource('/athletes', 'Api\Athletes\AthletesController');
 
-    Route::post('/athletes/{id}', 'Api\Athletes\AthletesController@update');
-    Route::resource('/athletes', 'Api\Athletes\AthletesController');
+        $api->post('/championships/{id}', 'Api\Championships\ChampionshipsController@update');
+        $api->get('/championships/{id}/events', ['uses' => 'Api\Championships\ChampionshipsController@events', 'as' => 'api.championships.events']);
+        $api->get('/championships/datatable', ['uses' => 'Api\Championships\ChampionshipsController@datatable', 'as' => 'api.championships.datatable']);
+        $api->resource('/championships', 'Api\Championships\ChampionshipsController');
 
-    Route::post('/championships/{id}', 'Api\Championships\ChampionshipsController@update');
-    Route::get('/championships/{id}/events', ['uses' => 'Api\Championships\ChampionshipsController@events', 'as' => 'api.championships.events']);
-    Route::get('/championships/datatable', ['uses' => 'Api\Championships\ChampionshipsController@datatable', 'as' => 'api.championships.datatable']);
-    Route::resource('/championships', 'Api\Championships\ChampionshipsController');
+        $api->get('/events/{id}/athletes', ['uses' => 'Api\Events\EventsController@athletes', 'as' => 'api.events.athletes']);
+        $api->get('/events/types', ['uses' => 'Api\Events\EventsController@types', 'as' => 'api.events.types']);
+        $api->get('/events/reaches', ['uses' => 'Api\Events\EventsController@reaches', 'as' => 'api.events.reaches']);
+        $api->resource('/events', 'Api\Events\EventsController');
 
-    Route::get('/events/{id}/athletes', ['uses' => 'Api\Events\EventsController@athletes', 'as' => 'api.events.athletes']);
-    Route::get('/events/types', ['uses' => 'Api\Events\EventsController@types', 'as' => 'api.events.types']);
-    Route::get('/events/reaches', ['uses' => 'Api\Events\EventsController@reaches', 'as' => 'api.events.reaches']);
-    Route::resource('/events', 'Api\Events\EventsController');
+        $api->get('/sports/{id}/specialties', ['uses' => 'Api\Sports\SportsController@specialties', 'as' => 'api.sports.specialties']);
+        $api->get('/sports', ['uses' => 'Api\Sports\SportsController@index', 'as' => 'api.sports']);
+        $api->get('/categories', ['uses' => 'Api\Sports\CategoriesController@index', 'as' => 'api.categories']);
 
-    Route::get('/sports/{id}/specialties', ['uses' => 'Api\Sports\SportsController@specialties', 'as' => 'api.sports.specialties']);
-    Route::get('/sports', ['uses' => 'Api\Sports\SportsController@index', 'as' => 'api.sports']);
-    Route::get('/categories', ['uses' => 'Api\Sports\CategoriesController@index', 'as' => 'api.categories']);
+        $api->get('/genders', 'Api\General\GenderController@index');
+        $api->get('/countries', 'Api\Countries\CountriesController@index');
 
-    Route::get('/genders', 'Api\General\GenderController@index');
-    Route::get('/countries', 'Api\Countries\CountriesController@index');
+        $api->get('/tags', 'Api\Tags\TagsController@index');
 
-    Route::get('/tags', 'Api\Tags\TagsController@index');
+        //$api->get('invite', 'InviteController@invite')->name('invite');
+        $api->post('user/invite/process', 'Api\Invites\InviteController@process');
+    });
 
-    //Route::get('invite', 'InviteController@invite')->name('invite');
-    Route::post('user/invite/process', 'Api\Invites\InviteController@process');
+    $api->group(['middleware' => [], 'namespace' => 'App\Http\Controllers'], function ($api) {
+        /** @var Router $api */
+        $api->post('auth/login', 'Api\Auth\AuthController@login');
+        $api->post('accept', 'Api\Invites\InviteController@accept');
+    });
 });

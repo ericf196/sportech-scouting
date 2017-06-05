@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Events;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Events\EventStoreRequest;
 use App\Http\Requests\Events\EventUpdateRequest;
+use App\Scouting\Entities\Events\Event;
 use App\Scouting\Entities\Events\EventReach;
 use App\Scouting\Entities\Events\EventType;
 use App\Scouting\Repositories\Contracts\Events\EventRepository;
@@ -40,7 +41,7 @@ class EventsController extends Controller
     public function show($id)
     {
         try {
-            $athlete = $this->eventRepository->find($id);
+            $athlete = Event::where('created_by', $this->loggedInUser()->id)->find($id);
 
         } catch (ModelNotFoundException $e) {
             return response()->make(trans('admin/events/events.not_found'), 404);

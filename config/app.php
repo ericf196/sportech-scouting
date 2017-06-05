@@ -180,6 +180,8 @@ return [
         // Maatwebsite\Excel\ExcelServiceProvider::class,
         //
         Laravel\Tinker\TinkerServiceProvider::class,
+        Dingo\Api\Provider\LaravelServiceProvider::class,
+
         /*
          * Application Service Providers...
          */

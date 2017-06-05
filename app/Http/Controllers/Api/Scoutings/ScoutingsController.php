@@ -101,8 +101,10 @@ class ScoutingsController extends Controller
      */
     public function show($id)
     {
-        $scouting = $this->repository->find($id);
-
+        $scouting = Scouting::where('scouter_id', $this->loggedInUser()->id)->find($id);
+        if (!$scouting) {
+            $this->response->errorForbidden(trans('admin/scoutings/scoutings.not_found'));
+        }
         return $this->createItem($scouting, new ScoutingTransformer());
     }
 

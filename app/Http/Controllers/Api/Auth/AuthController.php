@@ -52,7 +52,7 @@ class AuthController extends Controller
         return response()->json(['success' => true]);
     }
 
-    public function user(Request $request, JWTAuth $jwt)
+    public function getUser(Request $request, JWTAuth $jwt)
     {
         $user = $jwt->parseToken()->authenticate();
 
