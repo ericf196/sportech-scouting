@@ -24,6 +24,7 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
     protected $dataAverageRight;
     protected $percentageAverageLeft;
     protected $percentageAverageRight;
+    protected $combatPoints;
 
     public function __construct()
     {
@@ -129,6 +130,13 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
 
             $this->effectiveness($leftPoints, $rightPoints);
             $this->perfection($leftPoints, $rightPoints);
+            if ($leftPoints == $rightPoints) {
+                $this->combatPoints = $leftPoints;
+            } elseif ($leftPoints > $rightPoints) {
+                $this->combatPoints = $leftPoints;
+            } else {
+                $this->combatPoints = $rightPoints;
+            }
         });
 
         $this->dataConsumedTime = $this->consumedTime(true);
@@ -193,12 +201,16 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
         }
     }
 
-    private function average($scoutings, $left = true, $points = 15)
+    private function average($scoutings, $left = true)
     {
         if ($left) {
             /** @var \Illuminate\Database\Eloquent\Collection $scoutings */
             $combatsCount = $scoutings->count();
-            $average = ($this->dataValid['valid'] / ($combatsCount * $points) + $this->dataEffectiveness['victories'] / $combatsCount) / 2;
+            if ($this->combatPoints > 0 && $combatsCount > 0) {
+                $average = ($this->dataValid['valid'] / ($combatsCount * $this->combatPoints) + $this->dataEffectiveness['victories'] / $combatsCount) / 2;
+            } else {
+                $average = 0;
+            }
             $this->dataAverage = [
                 'percentage' => number_format($average * 100, 2),
                 'given'      => $this->dataValid['given'],
@@ -209,7 +221,11 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
         } else {
             /** @var \Illuminate\Database\Eloquent\Collection $scoutings */
             $combatsCount = $scoutings->count();
-            $average = ($this->dataValidRight['valid'] / ($combatsCount * $points) + $this->dataEffectivenessRight['victories'] / $combatsCount) / 2;
+            if ($this->combatPoints > 0 && $combatsCount > 0) {
+                $average = ($this->dataValidRight['valid'] / ($combatsCount * $this->combatPoints) + $this->dataEffectivenessRight['victories'] / $combatsCount) / 2;
+            } else {
+                $average = 0;
+            }
             $this->dataAverageRight = [
                 'percentage' => number_format($average * 100, 2),
                 'given'      => $this->dataValidRight['given'],
