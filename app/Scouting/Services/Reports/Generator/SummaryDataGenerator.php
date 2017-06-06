@@ -168,11 +168,11 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
 
     private function effectiveness($leftPoints, $rightPoints)
     {
-        if ($leftPoints >= $rightPoints) {
+        if ($leftPoints > $rightPoints) {
             $this->dataEffectiveness['victories'] += 1;
             $this->dataEffectivenessRight['defeats'] += 1;
 
-        } else {
+        } elseif ($leftPoints < $rightPoints) {
             $this->dataEffectiveness['defeats'] += 1;
             $this->dataEffectivenessRight['victories'] += 1;
         }
