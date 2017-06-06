@@ -38,6 +38,7 @@ class TagTransformer extends TransformerAbstract
             ]
         ];
 
+
         if ($model->pivot) {
             if ($model->pivot->tag_option_id) {
                 $tagOption = TagOption::find($model->pivot->tag_option_id);

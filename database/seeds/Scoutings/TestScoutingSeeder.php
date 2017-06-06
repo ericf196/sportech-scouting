@@ -14,8 +14,9 @@ class TestScoutingSeeder extends Seeder
     {
         $users = User::whereIn('email', ['pedro.gorrin@dncomputing.com', 'bastidasjavier@gmail.com', 'cjpinedac@gmail.com'])->get();
         $scoutings = Scouting::on('mysql-maqueta')->with(['scoutingTouches.actions.leftTags', 'scoutingTouches.actions.rightTags'])->whereIn('id', [2, 3, 4, 8, 9, 10])->get();
-        $prevScoutings = Scouting::on('mysql')->first();
         DB::beginTransaction();
+        $this->deleteScoutings($users, $scoutings);
+        $prevScoutings = Scouting::on('mysql')->first();
         $users->each(function ($user) use ($scoutings) {
             $scoutings->each(function (Scouting $scouting) use ($user) {
                 $newScouting = new Scouting();
@@ -47,8 +48,8 @@ class TestScoutingSeeder extends Seeder
                             $tagOptionId = null;
                             $tag = null;
                             $tagMaqueta = Tag::on('mysql-maqueta')->find($leftTag->id);
-                            if ($leftTag->tag_option_id) {
-                                $tagOptionMaqueta = TagOption::on('mysql-maqueta')->find($leftTag->tag_option_id);
+                            if ($leftTag->pivot && $leftTag->pivot->tag_option_id) {
+                                $tagOptionMaqueta = TagOption::on('mysql-maqueta')->find($leftTag->pivot->tag_option_id);
                             }
                             $abbr = $tagMaqueta->abbr;
                             if ($abbr == 'CCT') {
@@ -77,8 +78,8 @@ class TestScoutingSeeder extends Seeder
                             $tagOptionId = null;
                             $tag = null;
                             $tagMaqueta = Tag::on('mysql-maqueta')->find($leftTag->id);
-                            if ($leftTag->tag_option_id) {
-                                $tagOptionMaqueta = TagOption::on('mysql-maqueta')->find($leftTag->tag_option_id);
+                            if ($leftTag->pivot && $leftTag->pivot->tag_option_id) {
+                                $tagOptionMaqueta = TagOption::on('mysql-maqueta')->find($leftTag->pivot->tag_option_id);
                             }
                             $abbr = $tagMaqueta->abbr;
                             if ($abbr == 'CCT') {
@@ -107,5 +108,25 @@ class TestScoutingSeeder extends Seeder
         });
 
         DB::commit();
+    }
+
+    private function deleteScoutings($users, $scoutings)
+    {
+        $users->each(function ($user) use ($scoutings) {
+            $scoutings->each(function (Scouting $scouting) use ($user) {
+                $scoutingDB = Scouting::on('mysql')->where('scouter_id', $user->id)->where('name->en', $scouting->getTranslations('description')['en'])->first();
+                if ($scoutingDB) {
+                    $scoutingDB->scoutingTouches->each(function (ScoutingTouch $touch) {
+                        $touch->actions->each(function (ScoutingTouchAction $action) {
+                            $action->leftTags()->detach();
+                            $action->rightTags()->detach();
+                            $action->delete();
+                        });
+                        $touch->delete();
+                    });
+                    $scoutingDB->delete();
+                }
+            });
+        });
     }
 }
