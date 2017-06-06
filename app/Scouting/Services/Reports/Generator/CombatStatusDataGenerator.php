@@ -57,14 +57,6 @@ class CombatStatusDataGenerator implements GlobalDataGeneratorContract
                 } else {
                     $equal++;
                 }
-
-                if ($leftPoints > $rightPoints) {
-                    $upLeft++;
-                } elseif ($leftPoints < $rightPoints) {
-                    $downLeft++;
-                } else {
-                    $equal++;
-                }
             });
         });
 
