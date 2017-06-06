@@ -193,7 +193,7 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
         }
     }
 
-    private function average($scoutings, $left = true, $points)
+    private function average($scoutings, $left = true, $points = 15)
     {
         if ($left) {
             /** @var \Illuminate\Database\Eloquent\Collection $scoutings */
