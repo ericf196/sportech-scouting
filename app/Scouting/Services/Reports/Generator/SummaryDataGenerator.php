@@ -22,6 +22,8 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
     protected $dataPerfectionRight;
     protected $dataConsumedTimeRight;
     protected $dataAverageRight;
+    protected $percentageAverageLeft;
+    protected $percentageAverageRight;
 
     public function __construct()
     {
@@ -59,6 +61,8 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
         ];
         $this->timeConsume = 0;
         $this->timeConsumeRight = 0;
+        $this->percentageAverageLeft = 0;
+        $this->percentageAverageRight = 0;
     }
 
     /**
@@ -103,6 +107,7 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
 
                     $this->timeConsume = $isValid ? $this->timeConsume + $action->duration : $this->timeConsume;
                     $this->timeConsumeRight = $isValidRight ? $this->timeConsumeRight + $action->duration : $this->timeConsumeRight;
+
                     $this->dataValid['valid'] = $isValid ? $this->dataValid['valid'] + 1 : $this->dataValid['valid'];
                     $this->dataValid['noValid'] = $isNoValid ? $this->dataValid['noValid'] + 1 : $this->dataValid['noValid'];
 
@@ -188,12 +193,12 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
         }
     }
 
-    private function average($scoutings, $left = true)
+    private function average($scoutings, $left = true, $points)
     {
         if ($left) {
             /** @var \Illuminate\Database\Eloquent\Collection $scoutings */
             $combatsCount = $scoutings->count();
-            $average = ($this->dataValid['valid'] / ($combatsCount * 5) + $this->dataEffectiveness['victories'] / $combatsCount) / 2;
+            $average = ($this->dataValid['valid'] / ($combatsCount * $points) + $this->dataEffectiveness['victories'] / $combatsCount) / 2;
             $this->dataAverage = [
                 'percentage' => number_format($average * 100, 2),
                 'given'      => $this->dataValid['given'],
@@ -204,7 +209,7 @@ class SummaryDataGenerator implements GlobalDataGeneratorContract
         } else {
             /** @var \Illuminate\Database\Eloquent\Collection $scoutings */
             $combatsCount = $scoutings->count();
-            $average = ($this->dataValidRight['valid'] / ($combatsCount * 5) + $this->dataEffectivenessRight['victories'] / $combatsCount) / 2;
+            $average = ($this->dataValidRight['valid'] / ($combatsCount * $points) + $this->dataEffectivenessRight['victories'] / $combatsCount) / 2;
             $this->dataAverageRight = [
                 'percentage' => number_format($average * 100, 2),
                 'given'      => $this->dataValidRight['given'],

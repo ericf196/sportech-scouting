@@ -30,7 +30,7 @@ class ParryDataGenerator implements GlobalDataGeneratorContract
     public function analyze(Collection $scoutings)
     {
         $parryTag = $this->tagRepository->findWhere(['abbr' => 'PRY'])->first();
-        $endTag = $this->tagRepository->findWhere(['abbr' => 'END'])->first();
+        $endTag = $this->tagRepository->findWhere(['abbr' => 'PRL'])->first();
         $actionsIds = collect();
         $scoutings->each(
             function ($scouting) use (&$actionsIds) {
