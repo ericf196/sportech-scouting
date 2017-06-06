@@ -38,6 +38,8 @@ class ReportDataGenerator
         $this->dataOffensive = collect();
         $this->dataDefensive = collect();
         $this->dataCounterOffensive = collect();
+        $this->dataSummary = collect();
+        $this->global = collect();
     }
 
     /**
@@ -49,18 +51,27 @@ class ReportDataGenerator
         $this->report->scoutings->each(
             function ($scouting) {
                 $this->data->push((new PointsVsTimeDataGenerator())->analyze($scouting));
+                $scoutingCollection = collect([$scouting]);
+                $this->dataCombatStatus->push((new CombatStatusDataGenerator())->analyze($scoutingCollection));
+                $this->dataParry->push((new ParryDataGenerator())->analyze($scoutingCollection));
+                $offensiveDefensiveData = (new OffensiveDevensiveDataGenerator())->analyze($scoutingCollection);
+                $this->dataOffensive->push(['data' => ['left' => [$offensiveDefensiveData['left']['offensive']], 'right' => [$offensiveDefensiveData['right']['offensive']]]]);
+                $this->dataDefensive->push(['data' => ['left' => [$offensiveDefensiveData['left']['defensive']], 'right' => [$offensiveDefensiveData['right']['defensive']]]]);
+                $this->dataCounterOffensive->push(['data' => ['left' => [$offensiveDefensiveData['left']['counterOffensive']], 'right' => [$offensiveDefensiveData['right']['counterOffensive']]]]);
+                $this->dataSummary->push((new SummaryDataGenerator())->analyze($scoutingCollection));
             }
         );
 
-        $this->dataCombatStatus = collect((new CombatStatusDataGenerator())->analyze($this->report->scoutings));
-        $this->dataParry = collect((new ParryDataGenerator())->analyze($this->report->scoutings));
+        if ($this->report->scoutings->count() > 1) {
+            $this->global->push(collect(['dataCombatStatus' => (new CombatStatusDataGenerator())->analyze($this->report->scoutings)]));
+            $this->global->push(collect(['dataParry' => (new ParryDataGenerator())->analyze($this->report->scoutings)]));
 
-        $offensiveDefensiveData = (new OffensiveDevensiveDataGenerator())->analyze($this->report->scoutings);
-        $this->dataOffensive = collect(['data' => ['left' => [$offensiveDefensiveData['left']['offensive']], 'right' => [$offensiveDefensiveData['right']['offensive']]]]);
-        $this->dataDefensive = collect(['data' => ['left' => [$offensiveDefensiveData['left']['defensive']], 'right' => [$offensiveDefensiveData['right']['defensive']]]]);
-        $this->dataCounterOffensive = collect(['data' => ['left' => [$offensiveDefensiveData['left']['counterOffensive']], 'right' => [$offensiveDefensiveData['right']['counterOffensive']]]]);
-        $this->dataSummary = collect((new SummaryDataGenerator())->analyze($this->report->scoutings));
-
+            $offensiveDefensiveData = (new OffensiveDevensiveDataGenerator())->analyze($this->report->scoutings);
+            $this->global->push(collect(['dataOffensive' => ['data' => ['left' => [$offensiveDefensiveData['left']['offensive']], 'right' => [$offensiveDefensiveData['right']['offensive']]]]]));
+            $this->global->push(collect(['dataDefensive' => ['data' => ['left' => [$offensiveDefensiveData['left']['defensive']], 'right' => [$offensiveDefensiveData['right']['defensive']]]]]));
+            $this->global->push(collect(['dataCounterOffensive' => ['data' => ['left' => [$offensiveDefensiveData['left']['counterOffensive']], 'right' => [$offensiveDefensiveData['right']['counterOffensive']]]]]));
+            $this->global->push(collect(['dataSummary' => (new ParryDataGenerator())->analyze($this->report->scoutings)]));
+        }
         return $this->toArray();
     }
 
@@ -74,6 +85,7 @@ class ReportDataGenerator
             'data_parry'            => $this->dataParry->toArray(),
             'data_combat_status'    => $this->dataCombatStatus->toArray(),
             'data_summary'          => $this->dataSummary->toArray(),
+            'global'                => $this->global->toArray(),
         ];
     }
 }

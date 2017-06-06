@@ -61,7 +61,8 @@ class PointsVsTimeDataGenerator implements DataGeneratorContract
             'rightAthlete' => 'Right' . ' ' . 'Athlete',
             'left'         => $this->leftData->toArray(),
             'right'        => $this->rightData->toArray(),
-            'time'         => $this->timeData->toArray()
+            'time'         => $this->timeData->toArray(),
+            'name'         => $scouting->getTranslations('name')
         ];
     }
 }
