@@ -47,7 +47,7 @@ class ScoutingsTouchesController extends Controller
             \DB::beginTransaction();
             $touches = collect($request->get('touches'));
             $scouting = Scouting::where('scouter_id', $this->loggedInUser()->id)->find($id);
-            if ($scouting) {
+            if (!$scouting) {
                 $this->response->errorForbidden(trans('admin/scoutings/scoutings.not_found'));
             }
             $dbTouches = $scouting->scoutingTouches()->get();
