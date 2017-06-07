@@ -17,9 +17,12 @@ Route::post('auth/login', 'Api\Auth\AuthController@login');
 //Route::post('user/create', 'Api\Users\UserController@create');
 Route::post('accept', 'Api\Invites\InviteController@accept');
 
+Route::post('password/email', 'Api\Auth\ForgotPasswordController@getResetToken');//agregadas para recuperar contrasena
+Route::post('password/reset/{token}', 'Api\Auth\ResetPasswordController@reset'); //agregadas para recuperar contrasena
+
 Route::group(['middleware' => 'jwt.auth', 'cors'], function () {
     Route::post('auth/logout', 'Api\Auth\AuthController@logout');
-    Route::get('password/email', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail');
+    //Route::get('password/email', 'Api\Auth\ForgotPasswordController@sendResetLinkEmail');
 
     Route::get('auth/user', 'Api\Auth\AuthController@user');
     Route::post('user', 'Api\Users\UserController@update');
