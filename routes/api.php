@@ -14,9 +14,12 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function ($api) {
+
+
     /** @var Router $api */
     $api->group(['middleware' => ['api.auth', 'user.active'], 'namespace' => 'App\Http\Controllers'], function ($api) {
         /** @var Router $api */
@@ -85,5 +88,9 @@ $api->version('v1', function ($api) {
         /** @var Router $api */
         $api->post('auth/login', 'Api\Auth\AuthController@login');
         $api->post('accept', 'Api\Invites\InviteController@accept');
+        
+        $api->post('password/email', 'Api\Auth\ForgotPasswordController@getResetToken');//agregadas para recuperar contrasena
+        $api->post('password/reset/{token}', 'Api\Auth\ResetPasswordController@reset'); //agregadas para recuperar contrasena
     });
+
 });
