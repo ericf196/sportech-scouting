@@ -1,8 +1,6 @@
 <?php
 
 use Dingo\Api\Routing\Router;
-use Illuminate\Support\Facades\Route;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 /*
 |--------------------------------------------------------------------------
