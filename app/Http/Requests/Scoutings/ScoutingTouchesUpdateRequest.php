@@ -24,7 +24,7 @@ class ScoutingTouchesUpdateRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'touches' => 'required'
+
         ];
     }
 }
