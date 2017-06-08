@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
+
     use SendsPasswordResetEmails;
 
     /**
@@ -28,8 +29,7 @@ class ForgotPasswordController extends Controller
         $this->middleware('guest');
     }
 
-
-    public function getResetToken(Request $request)
+   /* public function getResetToken(Request $request)
     {
         $request_prueba=$request->only('email_recover');
         if ($request_prueba) {
@@ -37,7 +37,7 @@ class ForgotPasswordController extends Controller
 
             try {
                 if (!$user) {
-                    return response()->make(trans('admin/events/events.not_found'), 404); // modifcar trans
+                    return response()->json(['message' => 'Mail not sent']);
                 }else{
                     $token = str_random();
                     $reset_password = PasswordReset::create([
@@ -48,9 +48,40 @@ class ForgotPasswordController extends Controller
 
                 }
             } catch (Exception $e) {
-                echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+                return response()->json(['message' => 'Mail not sent verify connection']);
             }
-            return response()->json(['message' => 'MAIL SENT']);
+            return response()->json(['message' => 'Mail sent']);
+        }
+
+    }*/
+
+    public function getResetToken(Request $request)
+    {
+        $isToken=true;
+        $request_prueba=$request->only('email_recover');
+        if ($request_prueba) {
+            $user = User::where('email', $request['email_recover'])->first();
+            try {
+                if (!$user) {
+                    return response()->json(['message' => 'Mail not sent']);
+                }else{
+                    while ($isToken){
+                        $token = str_random();
+                        $affectedRows = PasswordReset::where('token', $token)->first();
+                        if($affectedRows==0){
+                            $isToken=false;
+                            $reset_password = PasswordReset::create([
+                                'email' => $request['email_recover'],
+                                'token' => $token
+                            ]);
+                            Mail::to($request['email_recover'])->send(new ResetPassword($reset_password));
+                        }
+                    }
+                }
+            } catch (Exception $e) {
+                return response()->json(['message' => 'Mail not sent verify connection']);
+            }
+            return response()->json(['message' => 'Mail sent']);
         }
 
     }

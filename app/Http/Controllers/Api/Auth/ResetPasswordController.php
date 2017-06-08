@@ -16,19 +16,20 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-
     public function reset(Request $request, $token)
     {
+
         $user = PasswordReset::where('token', $token)->first();
 
         if(!$user){
-
-            return response()->make(trans('admin/events/events.not_found'), 404); // modifcar trans
+            return response()->json(['message' => 'Your password has not been changed']);
         }else{
-            $affectedRows = User::where('email', $user->email)->update(array('password' => bcrypt($request->new_password)));
-            if($affectedRows>0)
-                return response()->make(trans('admin/events/events.not_found'), 404); // modifcar trans
-            //echo $affectedRows;
+
+           // echo $request->password;
+            $affectedRows = User::where('email', $user->email)->update(array('password' => bcrypt($request->password)));
+            if($affectedRows>0){
+                return response()->json(['message' => 'Your password has been changed']);
+            }
         }
 
     }
